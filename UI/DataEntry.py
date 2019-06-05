@@ -1,10 +1,11 @@
 import tkinter as tk     
 from UI import StartPage
 from UI import DataApp
+from UI import MetaHandler_Sample
 
 
 class DataEntry:
-    SCREENS = (StartPage.StartPage, DataApp.DataApp)
+    SCREENS = (StartPage.StartPage, DataApp.DataApp, MetaHandler_Sample.MetaHandler_Sample)
 
     MINIMUM_HEIGHT = 650
     MINIMUM_WIDTH = 1200
