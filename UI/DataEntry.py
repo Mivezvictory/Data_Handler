@@ -1,15 +1,18 @@
-import tkinter as tk     # python 2
-import StartPage
-import DataApp
+import tkinter as tk     
+from UI import StartPage
+from UI import DataApp
+from UI import MetaHandler_Sample
 
 
 class DataEntry:
-    SCREENS = (StartPage.StartPage, DataApp.DataApp)
+    SCREENS = (StartPage.StartPage, DataApp.DataApp, MetaHandler_Sample.MetaHandler_Sample)
 
     MINIMUM_HEIGHT = 650
     MINIMUM_WIDTH = 1200
 
     def __init__(self, parent):
+        """This Screen will be used to allow switching between screens.
+            Other screens will be placed within its frame."""
         self.parent = parent
         #height = 650
         #width = 1200

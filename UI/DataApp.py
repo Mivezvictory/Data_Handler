@@ -1,6 +1,5 @@
 import tkinter as tk
-from tkinter import *
-import BuildMenu
+
 
 class DataApp():
     label_width = 0.15
@@ -18,26 +17,11 @@ class DataApp():
         #self.menuBar = BuildMenu.BuildMenu(parent)
         #self.menuBar.build_menu()
         #self.build_menu()
-        self.master = parent
-        menubar = Menu(self.master)
-        filemenu = Menu(menubar, tearoff=0)
-        filemenu.add_command(label="New")
-        filemenu.add_command(label="Open")
-        filemenu.add_command(label="Save")
-        filemenu.add_command(label="Save as...")
-        filemenu.add_command(label="Close")
-
-        filemenu.add_separator()
-
-        filemenu.add_command(label="Exit")
-        menubar.add_cascade(label="File")
-        self.master.config(menu=menubar)
         height = 650
         width = 1200
         #self.minsize(width, height)
-
+        self.master = parent
         self.my_frame = tk.Frame(self.master, bg='#d9d9d9')
-        #self.my_frame.pack(fill=tk.BOTH, expand=True)
         self.my_frame.place(relwidth=1, relheight=1)
         self.build_template()
 
