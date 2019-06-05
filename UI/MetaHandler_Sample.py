@@ -17,7 +17,8 @@ class MetaHandler_Sample:
         # This frame will be used to hold the scrollable frame.
         # Make the frame extend to the left and right edge and expand as needed.
         self.my_frame = tkinter.Frame(self.parent, bg="pink")
-        self.my_frame.pack(fill=tkinter.BOTH, expand=True, padx=1, pady=1)
+        # No need to pack, since it is going to be managed by another parent frame
+        #self.my_frame.pack(fill=tkinter.BOTH, expand=True, padx=1, pady=1)
 
         # Make the scrollable frame, and place it in the highest level frame created previously.
         # Pack it to fill both left and right edges.
