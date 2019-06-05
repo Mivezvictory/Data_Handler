@@ -1,6 +1,6 @@
-import tkinter as tk     # python 2
-import StartPage
-import DataApp
+import tkinter as tk     
+from UI import StartPage
+from UI import DataApp
 
 
 class DataEntry:

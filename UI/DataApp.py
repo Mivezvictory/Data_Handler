@@ -22,8 +22,7 @@ class DataApp():
         #self.minsize(width, height)
         self.master = parent
         self.my_frame = tk.Frame(self.master, bg='blue')
-        self.my_frame.pack(fill=tk.BOTH, expand=True)
-        #self.my_frame.place(relwidth=1, relheight=1)
+        self.my_frame.place(relwidth=1, relheight=1)
         self.build_template()
 
     # builds both a label and data entry box
