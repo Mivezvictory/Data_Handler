@@ -10,6 +10,8 @@ class DataEntry:
     MINIMUM_WIDTH = 1200
 
     def __init__(self, parent):
+        """This Screen will be used to allow switching between screens.
+            Other screens will be placed within its frame."""
         self.parent = parent
         #height = 650
         #width = 1200
