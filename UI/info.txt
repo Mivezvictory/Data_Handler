@@ -1,0 +1,1 @@
+All UI screens need to have a my_frame variable within them for them to be loaded unto the DataEntry controller.
