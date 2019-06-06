@@ -58,11 +58,11 @@ class MetaHandler_Sample:
                     #command=(lambda e=ents: self.fetch(e)))
 
         #TODO: Remove this later on this is just for testing the scrolling functionality
-        for row in range(4,100):
+        #for row in range(4,100):
             #tkinter.Label(self.mainframe, text="%s" % row, width=3, borderwidth="1",
                      #relief="solid").grid(row=row, column=0)
-            t = "this is the second column for row"
-            tkinter.Button(self.mainframe, text=t).grid(row=row, column=0)
+           # t = "this is the second column for row"
+            #tkinter.Button(self.mainframe, text=t).grid(row=row, column=0)
 
         tkinter.Button(self.mainframe, text="Back", bg="red", command=lambda: self.controller.show_frame("StartPage")).grid(row=101, column=0)
 
