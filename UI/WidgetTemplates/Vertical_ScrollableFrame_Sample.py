@@ -3,7 +3,7 @@ import tkinter as tk
 
 class V_ScrollableFrame_Sample(tk.Frame):
     """A pure Tkinter scrollable frame that actually works!
-    * Use the 'interior' attribute to place widgets inside the scrollable frame
+    * Use the 'interior_frame' attribute to place widgets inside the scrollable frame
     * Construct and pack/place/grid normally
     * This frame only allows vertical scrolling
     """
