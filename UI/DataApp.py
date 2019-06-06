@@ -176,7 +176,7 @@ class DataApp():
             self.build_entry(ctd_width, final_column_x + (ctd_width * 2), y_axis[i])
 
         button_x = middle_row_x * 1.5
-        self.back_button = tk.Button(self.my_frame, text="Back", bg="red", fg="#34495E",
+        self.back_button = tk.Button(self.my_frame, text="Back", bg="#ff0000", fg="#34495E",
                                               font=10, command=lambda: self.my_controller.show_frame("StartPage"))
         self.back_button.place(relx=button_x, rely=y_axis[33], relwidth=DataApp.label_width/2, relheight=DataApp.label_height)
 
