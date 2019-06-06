@@ -8,19 +8,56 @@ class Menu_Sample:
         # Master GUI handler
         self.master = master
         # A frame is an invisible box that we put stuff into. In this case it belongs to self.master
-        self.build_toolmenu()
+        self.build_menu()
 
-    def build_toolmenu(self):
-        # Create a menu object for the top of the window
+    def build_menu(self):
         menu = tkinter.Menu(self.master)
-        (self.master).config(menu=menu)
+        self.master.config(menu=menu)
 
-        # Add a drop-down menu for the File option
+        self.build_file_menu(menu)
+        self.build_edit_menu(menu)
+        self.build_insert_menu(menu)
+        self.build_help_menu(menu)
+
+        return
+
+    def build_file_menu(self, menu):
         file_menu = tkinter.Menu(menu)
-        file_menu.add_command(label="Export as Json", command = self.make_json)
-        file_menu.add_command(label="Export into Csv", command = self.make_csv)
+
+        file_menu.add_command(label='New window', command='__main__')
+        file_menu.add_command(label='Open')
+        file_menu.add_command(label='Save')
+        file_menu.add_command(label='Save As...')
+        file_menu.add_command(label="Export as Json", command=self.make_json)
+        file_menu.add_command(label="Export into Csv", command=self.make_csv)
+
+        file_menu.add_command(label='Exit', command=self.client_exit)
         menu.add_cascade(label="File", menu=file_menu)
         return
+
+    def build_edit_menu(self, menu):
+        edit = tkinter.Menu(menu)
+
+        edit.add_command(label='Undo')
+        edit.add_command(label='redo')
+        edit.add_command(label='find')
+        edit.add_command(label='find & replace')
+        menu.add_cascade(label='Edit', menu=edit)
+
+    def build_insert_menu(self, menu):
+        insert = tkinter.Menu(menu)
+
+        insert.add_command(label='Text box')
+        menu.add_cascade(label='Insert', menu=insert)
+
+    def build_help_menu(self, menu):
+        help = tkinter.Menu(menu)
+
+        help.add_command(label='Help')
+        menu.add_cascade(label='Help', menu=help)
+
+    def client_exit(self):
+        exit()
 
     def make_json(self):
         print("I will be used to make a json file for the metadata...")

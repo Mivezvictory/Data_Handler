@@ -42,7 +42,7 @@ class MetaHandler_Sample:
         # Build the toolbar menu at the top of the screen that has ("File, Edit...etc")
         # It needs to be hoked on the parent, because this is not in a regular frame.
         self.toolMenu = Menu_Sample.Menu_Sample(self.controller.parent)
-        self.toolMenu.build_toolmenu()
+        #self.toolMenu.build_toolmenu()
 
 
         self.make_dropdown(['Ice mass buoy', 'Ice beacon data', 'Physical Ice Sampling'])
@@ -63,6 +63,8 @@ class MetaHandler_Sample:
                      #relief="solid").grid(row=row, column=0)
             t = "this is the second column for row"
             tkinter.Button(self.mainframe, text=t).grid(row=row, column=0)
+
+        tkinter.Button(self.mainframe, text="Back", bg="red", command=lambda: self.controller.show_frame("StartPage")).grid(row=101, column=0)
 
     def build_grid(self):
         """ We generally need to use a grid to put stuff together, so this function will let us build that grid."""

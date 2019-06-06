@@ -1,19 +1,19 @@
 import tkinter as tk
-
+from tkinter import *
 
 class DataApp():
     label_width = 0.15
     label_height = 0.0325
 
     entry_width = 0.07
-    entry_height = 0.0325
+    entry_height = 0.03
     entry_boldness = 1
     label_font = ("", 12)
     label_color = "white"
     entry_color = "white"
 
     def __init__(self, parent, controller):
-        #self.controller = controller
+
         #self.menuBar = BuildMenu.BuildMenu(parent)
         #self.menuBar.build_menu()
         #self.build_menu()
@@ -21,6 +21,7 @@ class DataApp():
         width = 1200
         #self.minsize(width, height)
         self.master = parent
+        self.my_controller = controller
         self.my_frame = tk.Frame(self.master, bg='#d9d9d9')
         self.my_frame.place(relwidth=1, relheight=1)
         self.build_template()
@@ -65,6 +66,10 @@ class DataApp():
         entry = tk.Entry(self.my_frame, bg="white", bd=DataApp.entry_boldness)
         entry.place(relx=x_pos, rely=y_pos, relwidth=entry_width, relheight=entry_height)
 
+    def build_note_text(self, x_pos, y_pos):
+        note = Text(self.my_frame)
+        note.place(relx=x_pos, rely=y_pos, relwidth=DataApp.entry_width * 5.25, relheight=DataApp.entry_height * 3)
+
     def build_template(self):
         init_x = 0
         init_y = 0
@@ -100,7 +105,7 @@ class DataApp():
         self.build_data_entry(" Bottom Bottle ID: ", init_x, y_axis[26])
 
         self.build_label("Notes: ", fourth_row_x, init_x, y_axis[28])
-        #self.build_note_entry(DataApp.entry_width + 0.08, 0.14, ctd_width, y_axis[25])
+        self.build_note_text(init_x + DataApp.label_width, y_axis[28])
 
         # second column
         middle_row_x = DataApp.label_width + DataApp.entry_width + DataApp.label_width/2
@@ -132,8 +137,7 @@ class DataApp():
         self.build_data_entry(" Cloudy (10 tenths)", middle_row_x, y_axis[25])
         self.build_data_entry(" Beaufort Wind Scale", middle_row_x, y_axis[26])
 
-
-        # 3rd column
+        # third column
         final_column_x = middle_row_x + DataApp.label_width + DataApp.entry_width + DataApp.label_width / 2
         self.build_data_entry("Latitude: ", final_column_x, init_y)
 
@@ -170,3 +174,13 @@ class DataApp():
             self.build_label(par_values[i - 13], ctd_width, final_column_x, y_axis[i])
             self.build_entry(ctd_width, final_column_x + ctd_width, y_axis[i])
             self.build_entry(ctd_width, final_column_x + (ctd_width * 2), y_axis[i])
+
+        button_x = middle_row_x * 1.5
+        self.back_button = tk.Button(self.my_frame, text="Back", bg="red", fg="#34495E",
+                                              font=10, command=lambda: self.my_controller.show_frame("StartPage"))
+        self.back_button.place(relx=button_x, rely=y_axis[33], relwidth=DataApp.label_width/2, relheight=DataApp.label_height)
+
+        self.forward_button = tk.Button(self.my_frame, text="Forward", bg="green", fg="#34495E",font=10)
+        # command=lambda: self.my_controller.show_frame("StartPage"))
+        self.forward_button.place(relx=button_x + 0.01 + DataApp.label_width/2, rely=y_axis[33], relwidth=DataApp.label_width / 2,
+                               relheight=DataApp.label_height)
