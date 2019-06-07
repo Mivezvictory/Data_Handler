@@ -64,7 +64,8 @@ class MetaHandler_Sample:
            # t = "this is the second column for row"
             #tkinter.Button(self.mainframe, text=t).grid(row=row, column=0)
 
-        tkinter.Button(self.mainframe, text="Back", bg="red", command=lambda: self.controller.show_frame("StartPage")).grid(row=101, column=0)
+        tkinter.Button(self.mainframe, text="Back", bg="red", command=lambda: self.controller.show_frame("StartPage"))\
+            .grid(row=101, column=0)
 
     def build_grid(self):
         """ We generally need to use a grid to put stuff together, so this function will let us build that grid."""
