@@ -1,5 +1,6 @@
 import tkinter
-
+from tkFileDialog import askopenfilename
+import os
 """We generally need to build grids so it we'll have a function for that"""
 
 
@@ -8,6 +9,7 @@ class Menu_Sample:
         # Master GUI handler
         self.master = master
         # A frame is an invisible box that we put stuff into. In this case it belongs to self.master
+        print os.name
         self.build_menu()
 
     def build_menu(self):
@@ -25,7 +27,7 @@ class Menu_Sample:
         file_menu = tkinter.Menu(menu)
 
         file_menu.add_command(label='New window', command='__main__')
-        file_menu.add_command(label='Open')
+        file_menu.add_command(label='Open', command=self.open_file)
         file_menu.add_command(label='Save')
         file_menu.add_command(label='Save As...')
         file_menu.add_command(label="Export as Json", command=self.make_json)
@@ -55,6 +57,18 @@ class Menu_Sample:
 
         help.add_command(label='Help')
         menu.add_cascade(label='Help', menu=help)
+
+    def open_file(self):
+        if os.name == 'nt':
+            file = askopenfilename(initialdir="C:\\", title="Select file",
+                                           filetypes=(("csv files", "*.csv"), ("all files", "*.*")))
+        else:
+            file = askopenfilename(initialdir="/", title="Select file",
+                                   filetypes=(("csv files", "*.csv"), ("all files", "*.*")))
+            #TODO: upon opening a file, first check the file to see if it is a format we can open, before opening it
+        #print self.master.file
+        return
+
 
     def client_exit(self):
         exit()
