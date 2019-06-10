@@ -2,10 +2,11 @@ import tkinter as tk
 from UI import StartPage
 from UI import DataApp
 from UI import MetaHandler_Sample
+from UI import CustomPage
 
 
 class DataEntry:
-    SCREENS = (StartPage.StartPage, DataApp.DataApp, MetaHandler_Sample.MetaHandler_Sample)
+    SCREENS = (StartPage.StartPage, DataApp.DataApp, MetaHandler_Sample.MetaHandler_Sample, CustomPage.CustomPage)
 
     MINIMUM_HEIGHT = 650
     MINIMUM_WIDTH = 1200
@@ -18,7 +19,7 @@ class DataEntry:
         #width = 1200
         self.parent.minsize(DataEntry.MINIMUM_WIDTH, DataEntry.MINIMUM_HEIGHT)
 
-        self.my_container_frame = tk.Frame(parent, bg="red")
+        self.my_container_frame = tk.Frame(parent)
         self.my_container_frame.pack(side=tk.TOP, fill=tk.BOTH, expand=True)
         self.my_container_frame.grid_rowconfigure(0, weight=1)
         self.my_container_frame.grid_columnconfigure(0, weight=1)

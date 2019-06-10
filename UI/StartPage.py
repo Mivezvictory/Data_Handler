@@ -1,4 +1,6 @@
 import tkinter as tk
+import tkinter.ttk as tttk
+from tkinter import messagebox
 
 
 class StartPage:
@@ -17,7 +19,7 @@ class StartPage:
         self.my_frame = tk.Frame(self.parent, bg="white")
         self.my_frame.pack(fill=tk.BOTH, expand=True)
 
-        self.label = tk.Label(self.my_frame, text="Welcome to CEOS data & metadata collector", font=12)
+        self.label = tk.Label(self.my_frame, text="Welcome to CEOS's data & metadata collector", font=12)
         self.label.pack(pady=10, padx=10)
 
         # Make the button in the middle, and assign the command argument to load a different page.
@@ -26,12 +28,37 @@ class StartPage:
         """ TODO: Make this more modular instead of using 'DataApp' and 'MetaDataHandler_Sample' as literals,
             have them as constants in their respective classes and just import them and use class.Variable containing 
             the name to get it."""
+
+        self.template_names = {"Template 1: Team A field template for lake moon moon tapioca": "DataApp", "Template 2":
+            "CustomPage"}
         init_x = 0.25
         init_y = 0.3
-        self.build_button("Load a template", "DataApp", init_x, init_y)
-        self.build_button("Load Metadata Handler", "MetaHandler_Sample", init_x, init_y + 0.01 + StartPage.button_height)
-        about_botton_y =  init_y + 0.02 + (StartPage.button_height * 2)
-        self.build_button("About","dummy", init_x, about_botton_y)
+
+        set1_y = init_y - 0.005 - StartPage.button_height
+        self.drop_down_menu = tk.StringVar()
+        self.drop_down_menu.set('select a template')  # set the default option
+
+        self.set_options = tk.OptionMenu(self.my_frame, self.drop_down_menu, "Template 1: Team A field template for lake moon moon tapioca",
+                                  "Template 2")
+        self.set_options.configure(font=("", 12), fg="#34495E")
+        self.set_options.place(relx=init_x, rely=set1_y, relwidth=StartPage.button_width,
+                                relheight=StartPage.button_height)
+
+        self.build_customised_buttons("Load a template", init_x + init_x/2, init_y, StartPage.button_width/2,
+                          StartPage.button_height, self.load_template)
+
+        metaHandler_y = init_y + 0.01 + (StartPage.button_height * 2)
+        self.build_button("Load Metadata Handler", "MetaHandler_Sample", init_x, metaHandler_y)
+        about_botton_y =  metaHandler_y + 0.01 + StartPage.button_height
+        self.build_button("Build a template", "CustomPage", init_x, about_botton_y)
+
+    def load_template(self):
+        value = self.drop_down_menu.get()
+        if value == 'select a template':
+            messagebox.showinfo("Title", "Please select a template")
+        else:
+            template_name = self.template_names[value]
+            self.my_controller.show_frame(template_name)
 
     def build_button(self, text, command, x_pos, y_pos):
         self.load_template_button = tk.Button(self.my_frame, text=text, bg="#EAECEE", fg="#34495E",
@@ -40,6 +67,9 @@ class StartPage:
                                         relheight=StartPage.button_height)
         self.load_template_button.config(highlightbackground="black")
 
-
-
-        #load_template.pack()
+    def build_customised_buttons(self, text, x_pos, y_pos, width, height, command):
+        self.load_template_button = tk.Button(self.my_frame, text=text, bg="#EAECEE", fg="#34495E",
+                                              font=10, command=command)
+        self.load_template_button.place(relx=x_pos, rely=y_pos, relwidth=width,
+                                        relheight=height)
+        self.load_template_button.config(highlightbackground="black")
