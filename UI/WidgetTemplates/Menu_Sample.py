@@ -8,8 +8,7 @@ class Menu_Sample:
     def __init__(self, master):
         # Master GUI handler
         self.master = master
-        # A frame is an invisible box that we put stuff into. In this case it belongs to self.master
-        print os.name
+        # A frame is an invisible box that we put stuff into. In this case it belongs to self.maste
         self.build_menu()
 
     def build_menu(self):
@@ -60,13 +59,13 @@ class Menu_Sample:
 
     def open_file(self):
         if os.name == 'nt':
-            file = askopenfilename(initialdir="C:\\", title="Select file",
-                                           filetypes=(("csv files", "*.csv"), ("all files", "*.*")))
+            opened_file = askopenfilename(initialdir="C:\\", title="Select file",
+                                   filetypes=(("csv files", "*.csv"), ("all files", "*.*")))
         else:
-            file = askopenfilename(initialdir="/", title="Select file",
+            opened_file = askopenfilename(initialdir="/", title="Select file",
                                    filetypes=(("csv files", "*.csv"), ("all files", "*.*")))
             #TODO: upon opening a file, first check the file to see if it is a format we can open, before opening it
-        #print self.master.file
+        print opened_file
         return
 
 

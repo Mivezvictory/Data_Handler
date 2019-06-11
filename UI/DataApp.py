@@ -1,6 +1,8 @@
 import tkinter as tk
 from tkinter import *
 from DataGenerators import DataAppProcessing
+#TODO: rename template to match with other templates once constructed
+#TODO: give each template a unique ID, for identification when opening files
 
 class DataApp():
     label_width = 0.15
@@ -25,7 +27,7 @@ class DataApp():
         self.my_controller = controller
         self.my_frame = tk.Frame(self.master, bg='#d9d9d9')
         self.my_frame.place(relwidth=1, relheight=1)
-        self.data_processor = DataAppProcessing.DataAppProcessing()
+        #self.data_processor = DataAppProcessing.DataAppProcessing()
         self.build_template()
 
     # builds both a label and data entry box
