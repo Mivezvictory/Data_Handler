@@ -1,4 +1,4 @@
-import tkinter
+import Tkinter
 from tkFileDialog import askopenfilename
 import os
 """We generally need to build grids so it we'll have a function for that"""
@@ -12,7 +12,7 @@ class Menu_Sample:
         self.build_menu()
 
     def build_menu(self):
-        menu = tkinter.Menu(self.master)
+        menu = Tkinter.Menu(self.master)
         self.master.config(menu=menu)
 
         self.build_file_menu(menu)
@@ -23,7 +23,7 @@ class Menu_Sample:
         return
 
     def build_file_menu(self, menu):
-        file_menu = tkinter.Menu(menu)
+        file_menu = Tkinter.Menu(menu)
 
         file_menu.add_command(label='New window', command='__main__')
         file_menu.add_command(label='Open', command=self.open_file)
@@ -37,7 +37,7 @@ class Menu_Sample:
         return
 
     def build_edit_menu(self, menu):
-        edit = tkinter.Menu(menu)
+        edit = Tkinter.Menu(menu)
 
         edit.add_command(label='Undo')
         edit.add_command(label='redo')
@@ -46,13 +46,13 @@ class Menu_Sample:
         menu.add_cascade(label='Edit', menu=edit)
 
     def build_insert_menu(self, menu):
-        insert = tkinter.Menu(menu)
+        insert = Tkinter.Menu(menu)
 
         insert.add_command(label='Text box')
         menu.add_cascade(label='Insert', menu=insert)
 
     def build_help_menu(self, menu):
-        help = tkinter.Menu(menu)
+        help = Tkinter.Menu(menu)
 
         help.add_command(label='Help')
         menu.add_cascade(label='Help', menu=help)
@@ -65,7 +65,7 @@ class Menu_Sample:
             opened_file = askopenfilename(initialdir="/", title="Select file",
                                    filetypes=(("csv files", "*.csv"), ("all files", "*.*")))
             #TODO: upon opening a file, first check the file to see if it is a format we can open, before opening it
-        print opened_file
+        #print opened_file
         return
 
 

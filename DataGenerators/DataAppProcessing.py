@@ -1,5 +1,5 @@
-import tkinter as tk
-from tkinter import *
+import Tkinter as tk
+from Tkinter import *
 #from UI import DataApp
 
 class DataAppProcessing:

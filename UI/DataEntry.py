@@ -1,4 +1,4 @@
-import tkinter as tk     
+import Tkinter as tk
 from UI import StartPage
 from UI import DataApp
 from UI import MetaHandler_Sample

@@ -1,5 +1,5 @@
-import tkinter as tk
-from tkinter import *
+import Tkinter as tk
+from Tkinter import *
 from DataGenerators import DataAppProcessing
 #TODO: rename template to match with other templates once constructed
 #TODO: give each template a unique ID, for identification when opening files
@@ -248,3 +248,15 @@ class DataApp():
             self.build_label(par_values[i - 13], ctd_width, final_column_x, y_axis[i])
             self.build_entry(ctd_width, final_column_x + ctd_width, y_axis[i])
             self.build_entry(ctd_width, final_column_x + (ctd_width * 2), y_axis[i])
+
+        button_x = middle_row_x * 1.5
+        self.back_button = tk.Button(self.my_frame, text="Back", bg="#ff0000", fg="#34495E",
+                                     font=10, command=lambda: self.my_controller.show_frame("StartPage"))
+        self.back_button.place(relx=button_x, rely=y_axis[33], relwidth=DataApp.label_width / 2,
+                               relheight=DataApp.label_height)
+
+        self.forward_button = tk.Button(self.my_frame, text="Forward", bg="green", fg="#34495E", font=10)
+        # command=lambda: self.my_controller.show_frame("StartPage"))
+        self.forward_button.place(relx=button_x + 0.01 + DataApp.label_width / 2, rely=y_axis[33],
+                                  relwidth=DataApp.label_width / 2,
+                                  relheight=DataApp.label_height)

@@ -1,6 +1,5 @@
-import tkinter as tk
-import tkinter.ttk as tttk
-from tkinter import messagebox
+import Tkinter as tk
+import tkMessageBox
 
 
 class StartPage:
@@ -55,21 +54,22 @@ class StartPage:
     def load_template(self):
         value = self.drop_down_menu.get()
         if value == 'select a template':
-            messagebox.showinfo("Title", "Please select a template")
+            tkMessageBox.showinfo("Title", "Please select a template")
+
         else:
             template_name = self.template_names[value]
             self.my_controller.show_frame(template_name)
 
     def build_button(self, text, command, x_pos, y_pos):
-        self.load_template_button = tk.Button(self.my_frame, text=text, bg="#EAECEE", fg="#34495E",
+        self.load_template_button = tk.Button(self.my_frame, text=text, bg="#C0C0C0", fg="#34495E",
                                               font=10, command=lambda: self.my_controller.show_frame(command))
         self.load_template_button.place(relx=x_pos, rely=y_pos, relwidth=StartPage.button_width,
                                         relheight=StartPage.button_height)
-        self.load_template_button.config(highlightbackground="black")
+        #self.load_template_button.config(highlightbackground="black")
 
     def build_customised_buttons(self, text, x_pos, y_pos, width, height, command):
         self.load_template_button = tk.Button(self.my_frame, text=text, bg="#EAECEE", fg="#34495E",
                                               font=10, command=command)
         self.load_template_button.place(relx=x_pos, rely=y_pos, relwidth=width,
                                         relheight=height)
-        self.load_template_button.config(highlightbackground="black")
+        #self.load_template_button.config(highlightbackground="black")
