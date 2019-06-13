@@ -1,6 +1,13 @@
 import Tkinter
 from tkFileDialog import askopenfilename
+import Tkinter, Tkconstants, tkFileDialog
+from UI import DataApp
 import os
+import tkMessageBox
+
+#from Tkinter import *
+
+
 """We generally need to build grids so it we'll have a function for that"""
 
 
@@ -8,7 +15,9 @@ class Menu_Sample:
     def __init__(self, master):
         # Master GUI handler
         self.master = master
+       # self.controller = controller
         # A frame is an invisible box that we put stuff into. In this case it belongs to self.maste
+        self.file_name = ''
         self.build_menu()
 
     def build_menu(self):
@@ -25,10 +34,10 @@ class Menu_Sample:
     def build_file_menu(self, menu):
         file_menu = Tkinter.Menu(menu)
 
-        file_menu.add_command(label='New window', command='__main__')
+        file_menu.add_command(label='New window', command=self.new_window)
         file_menu.add_command(label='Open', command=self.open_file)
-        file_menu.add_command(label='Save')
-        file_menu.add_command(label='Save As...')
+        file_menu.add_command(label='Save', command=self.save_file)
+        file_menu.add_command(label='Save As...', command=self.save_file_as)
         file_menu.add_command(label="Export as Json", command=self.make_json)
         file_menu.add_command(label="Export into Csv", command=self.make_csv)
 
@@ -57,6 +66,9 @@ class Menu_Sample:
         help.add_command(label='Help')
         menu.add_cascade(label='Help', menu=help)
 
+    def new_window(self):
+        execfile('app.py')
+
     def open_file(self):
         if os.name == 'nt':
             opened_file = askopenfilename(initialdir="C:\\", title="Select file",
@@ -65,9 +77,27 @@ class Menu_Sample:
             opened_file = askopenfilename(initialdir="/", title="Select file",
                                    filetypes=(("csv files", "*.csv"), ("all files", "*.*")))
             #TODO: upon opening a file, first check the file to see if it is a format we can open, before opening it
-        #print opened_file
+        #print (opened_file)
         return
 
+    def save_file(self):
+        if self.file_name:  # ensures the save as procedure is only executed if a file name is entered and saved.
+            try:
+                f = open(self.file_name, "w+")
+                DataApp.DataApp.handle_forward_button(self.file_name)
+                f.close()
+            except IOError:
+                tkMessageBox.showinfo("Title", "please close file before saving new changes")
+        else:
+            self.save_file_as()
+
+    def save_file_as(self):
+        self.file_name = tkFileDialog.asksaveasfilename(initialdir="C:\\", title="Select file",
+                                                        filetypes=(("csv files", "*.csv"), ("all files", "*.*")))
+
+        if self.file_name:  # ensures the save as procedure is only executed if a file name is entered and saved.
+            DataApp.DataApp.handle_forward_button(self.file_name)
+            tkMessageBox.showinfo("Title", "File saved")
 
     def client_exit(self):
         exit()
