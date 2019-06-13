@@ -77,21 +77,24 @@ class Menu_Sample:
             opened_file = askopenfilename(initialdir="/", title="Select file",
                                    filetypes=(("csv files", "*.csv"), ("all files", "*.*")))
             #TODO: upon opening a file, first check the file to see if it is a format we can open, before opening it
-        #print (opened_file)
+
         return
 
     def save_file(self):
         if self.file_name:  # ensures the save as procedure is only executed if a file name is entered and saved.
+
             try:
                 f = open(self.file_name, "w+")
                 DataApp.DataApp.handle_forward_button(self.file_name)
                 f.close()
-            except IOError:
+            except IOError:  # files cannot be saved to while they are open on users device
                 tkMessageBox.showinfo("Title", "please close file before saving new changes")
-        else:
+                # inform users to close file they are trying to save to, if file is currently opened
+        else:  # if current changes have not been saved to the device, open the dialogue and get the user to save file
             self.save_file_as()
 
     def save_file_as(self):
+        #  opens a dialogue to get the name and file type from the user
         self.file_name = tkFileDialog.asksaveasfilename(initialdir="C:\\", title="Select file",
                                                         filetypes=(("csv files", "*.csv"), ("all files", "*.*")))
 

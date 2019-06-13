@@ -85,11 +85,6 @@ class DataApp:
         data_processor = DataAppProcessing.DataAppProcessing()
         for key in DataApp.widget_list:
             test[key] = data_processor.get_widget_entry(DataApp.widget_list[key])
-
-        print "this is data app"
-        print test['Station']
-        print "this is not data app"
-
         data_processor.create_csv_file(test, filename)
         return test
 
