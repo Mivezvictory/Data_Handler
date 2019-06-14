@@ -81,13 +81,11 @@ class Menu_Sample:
             #TODO: make sure only csv files are being passed so as to no have some mad error you cant check for
             opened_file_csv = pd.read_csv(opened_file_path)
             if DataApp.DataApp.handle_loading_template(opened_file_csv) == False:
+                # TODO: have a better message box message for christ sake
                 tkMessageBox.showinfo("Title", "please load correct file")
-
-
 
     def save_file(self):
         if self.file_name:  # ensures the save as procedure is only executed if a file name is entered and saved.
-
             try:
                 f = open(self.file_name, "w+")
                 DataApp.DataApp.handle_forward_button(self.file_name)

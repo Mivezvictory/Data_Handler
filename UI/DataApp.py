@@ -89,12 +89,13 @@ class DataApp:
         return test
 
     def test(self):
-        #print DataApp.widget_list
+        # print DataApp.widget_list
         for key in DataApp.widget_list:
             if isinstance(DataApp.widget_list[key], Text):
-                DataApp.widget_list[key].insert(END, "This is an actual note that sadly will not be saved to the csv file, atleast not yet. (SMILLING) while listening to the travelling wilburys")
+                DataApp.widget_list[key].insert(END,
+                                                "This is an actual note that sadly will not be saved to the csv file, atleast not yet. (SMILLING) while listening to the travelling wilburys")
             else:
-                DataApp.widget_list[key].insert(2, "Waterpen Station")
+                DataApp.widget_list[key].insert(0, "Waterpen Station")
 
     @classmethod
     def handle_loading_template(self, csv_file):
@@ -103,7 +104,8 @@ class DataApp:
         file_dict = data_processor.read_file(csv_file)
         if file_dict:
             for key in file_dict:
-
+                # TODO: fix the problem when reading values from files. printing 0 in front of column values
+                # TODO: Error comming from the way value is being read from csv file to dictionary
                 if isinstance(DataApp.widget_list[key], Text):
                     DataApp.widget_list[key].insert(END, file_dict[key])
                 else:

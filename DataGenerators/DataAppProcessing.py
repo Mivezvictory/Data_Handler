@@ -36,7 +36,6 @@ class DataAppProcessing:
             for i in range(0, len(DataAppProcessing.template_labels)):
                 if column_list[i] != DataAppProcessing.template_labels[i]:
                     return False
-
         else:
             return False
 
@@ -47,6 +46,7 @@ class DataAppProcessing:
         value = self.compare_csv_file(csv_file)
         if value:
             for i in range(0, len(DataAppProcessing.template_labels)):
+                # TODO: here lies the stupid error, too tired to fix this today
                 new_dict[DataAppProcessing.template_labels[i]] = csv_file[DataAppProcessing.template_labels[i]]
         else:
             return False
