@@ -103,7 +103,6 @@ class DataApp:
         file_dict = data_processor.read_file(csv_file)
         if file_dict:
             for key in file_dict:
-                file_dict[key].split()
 
                 if isinstance(DataApp.widget_list[key], Text):
                     DataApp.widget_list[key].insert(END, file_dict[key])
