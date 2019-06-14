@@ -4,8 +4,7 @@ import Tkinter, Tkconstants, tkFileDialog
 from UI import DataApp
 import os
 import tkMessageBox
-
-#from Tkinter import *
+import pandas as pd
 
 
 """We generally need to build grids so it we'll have a function for that"""
@@ -71,14 +70,20 @@ class Menu_Sample:
 
     def open_file(self):
         if os.name == 'nt':
-            opened_file = askopenfilename(initialdir="C:\\", title="Select file",
+            opened_file_path = askopenfilename(initialdir="C:\\", title="Select file",
                                    filetypes=(("csv files", "*.csv"), ("all files", "*.*")))
         else:
-            opened_file = askopenfilename(initialdir="/", title="Select file",
+            opened_file_path = askopenfilename(initialdir="/", title="Select file",
                                    filetypes=(("csv files", "*.csv"), ("all files", "*.*")))
             #TODO: upon opening a file, first check the file to see if it is a format we can open, before opening it
 
-        return
+        if opened_file_path:
+            #TODO: make sure only csv files are being passed so as to no have some mad error you cant check for
+            opened_file_csv = pd.read_csv(opened_file_path)
+            if DataApp.DataApp.handle_loading_template(opened_file_csv) == False:
+                tkMessageBox.showinfo("Title", "please load correct file")
+
+
 
     def save_file(self):
         if self.file_name:  # ensures the save as procedure is only executed if a file name is entered and saved.

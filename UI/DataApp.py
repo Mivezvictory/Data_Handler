@@ -96,6 +96,23 @@ class DataApp:
             else:
                 DataApp.widget_list[key].insert(2, "Waterpen Station")
 
+    @classmethod
+    def handle_loading_template(self, csv_file):
+        retrun_val = False
+        data_processor = DataAppProcessing.DataAppProcessing()
+        file_dict = data_processor.read_file(csv_file)
+        if file_dict:
+            for key in file_dict:
+                file_dict[key].split()
+
+                if isinstance(DataApp.widget_list[key], Text):
+                    DataApp.widget_list[key].insert(END, file_dict[key])
+                else:
+                    DataApp.widget_list[key].insert(2, file_dict[key])
+            retrun_val = True
+
+        return retrun_val
+
     def build_template(self):
         init_x = 0
         init_y = 0

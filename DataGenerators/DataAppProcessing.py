@@ -29,3 +29,27 @@ class DataAppProcessing:
         df = df[DataAppProcessing.template_labels]  # Re-orders the column of the csv file to match the template labels
         df.to_csv(file_name, index=None, header=True)
 
+    def compare_csv_file(self, csv_file):
+        new_dict = {}
+        column_list = csv_file.columns.values
+        if len(column_list) == len(DataAppProcessing.template_labels):
+            for i in range(0, len(DataAppProcessing.template_labels)):
+                if column_list[i] != DataAppProcessing.template_labels[i]:
+                    return False
+
+        else:
+            return False
+
+        return True
+
+    def read_file(self, csv_file):
+        new_dict = {}
+        value = self.compare_csv_file(csv_file)
+        if value:
+            for i in range(0, len(DataAppProcessing.template_labels)):
+                new_dict[DataAppProcessing.template_labels[i]] = csv_file[DataAppProcessing.template_labels[i]]
+        else:
+            return False
+
+        return new_dict
+
