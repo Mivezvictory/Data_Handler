@@ -1,7 +1,6 @@
 import Tkinter as tk
 import tkMessageBox
 
-
 class StartPage:
     button_width = 0.5
     button_height = 0.05
@@ -10,6 +9,7 @@ class StartPage:
         # The parent will be the main frame of the DataEntry Object (DataEntry.my_containter_frame),
         # which this will be placed into.
         # The controller argument is the DataEntry object itself
+
         self.parent = parent
         self.my_controller = controller
 
@@ -28,8 +28,9 @@ class StartPage:
             have them as constants in their respective classes and just import them and use class.Variable containing 
             the name to get it."""
 
-        self.template_names = {"Template 1: Team A field template for lake moon moon tapioca": "DataApp", "Template 2":
-            "CustomPage"}
+        self.template_names = {"Template 1: Team A field template for lake moon moon tapioca": "DataApp",
+                               "Template 2: readings from the great pyramid of giza, writtings of Pharaoh Ramseys II":
+                               "CustomPage"}
         init_x = 0.25
         init_y = 0.3
 
@@ -38,7 +39,7 @@ class StartPage:
         self.drop_down_menu.set('select a template')  # set the default option
 
         self.set_options = tk.OptionMenu(self.my_frame, self.drop_down_menu, "Template 1: Team A field template for lake moon moon tapioca",
-                                  "Template 2")
+                                  "Template 2: readings from the great pyramid of giza, writtings of Pharaoh Ramseys II")
         self.set_options.configure(font=("", 12), fg="#34495E")
         self.set_options.place(relx=init_x, rely=set1_y, relwidth=StartPage.button_width,
                                 relheight=StartPage.button_height)

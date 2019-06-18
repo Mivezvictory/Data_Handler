@@ -1,7 +1,6 @@
-import Tkinter
 from tkFileDialog import askopenfilename
-import Tkinter, Tkconstants, tkFileDialog
-from UI import DataApp
+import Tkinter, tkFileDialog
+from UI.DataTemplates import Template_1
 import os
 import tkMessageBox
 import pandas as pd
@@ -47,6 +46,7 @@ class Menu_Sample:
     def build_edit_menu(self, menu):
         edit = Tkinter.Menu(menu)
 
+        edit.add_command(label='Clear template', command=self.clear_template)
         edit.add_command(label='Undo')
         edit.add_command(label='redo')
         edit.add_command(label='find')
@@ -68,6 +68,9 @@ class Menu_Sample:
     def new_window(self):
         execfile('app.py')
 
+    def clear_template(self):
+        Template_1.DataApp.handle_clearing_template()
+
     def open_file(self):
         if os.name == 'nt':
             opened_file_path = askopenfilename(initialdir="C:\\", title="Select file",
@@ -80,7 +83,7 @@ class Menu_Sample:
         if opened_file_path:
             #TODO: make sure only csv files are being passed so as to no have some mad error you cant check for
             opened_file_csv = pd.read_csv(opened_file_path)
-            if DataApp.DataApp.handle_loading_template(opened_file_csv) == False:
+            if Template_1.DataApp.handle_loading_template(opened_file_csv) == False:
                 # TODO: have a better message box message for christ sake
                 tkMessageBox.showinfo("Title", "please load correct file")
 
@@ -88,7 +91,7 @@ class Menu_Sample:
         if self.file_name:  # ensures the save as procedure is only executed if a file name is entered and saved.
             try:
                 f = open(self.file_name, "w+")
-                DataApp.DataApp.handle_forward_button(self.file_name)
+                Template_1.DataApp.handle_forward_button(self.file_name)
                 f.close()
             except IOError:  # files cannot be saved to while they are open on users device
                 tkMessageBox.showinfo("Title", "please close file before saving new changes")
@@ -102,7 +105,7 @@ class Menu_Sample:
                                                         filetypes=(("csv files", "*.csv"), ("all files", "*.*")))
 
         if self.file_name:  # ensures the save as procedure is only executed if a file name is entered and saved.
-            DataApp.DataApp.handle_forward_button(self.file_name)
+            Template_1.DataApp.handle_forward_button(self.file_name)
             tkMessageBox.showinfo("Title", "File saved")
 
     def client_exit(self):

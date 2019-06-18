@@ -2,6 +2,8 @@ import Tkinter as tk
 from Tkinter import *
 from pandas import DataFrame
 from DataGenerators import DataAppProcessing
+
+
 #TODO: rename template to match with other templates once constructed
 #TODO: give each template a unique ID, for identification when opening files
 
@@ -78,6 +80,26 @@ class DataApp:
         note.place(relx=x_pos, rely=y_pos, relwidth=DataApp.entry_width * 5.25, relheight=DataApp.entry_height * 3)
         DataApp.widget_list.update({"Notes": note})
 
+    def test(self):
+        self.handle_clearing_template()
+        # TODO: should clear the current contents of the entry boxes before populating it
+        # print DataApp.widget_list
+        for key in DataApp.widget_list:
+            if isinstance(DataApp.widget_list[key], Text):
+                DataApp.widget_list[key].insert(END,
+                                                "This is an actual note that sadly will not be saved to the csv file, "
+                                                "atleast not yet. (SMILLING)while listening to the travelling wilburys")
+            else:
+                DataApp.widget_list[key].insert(0, "Waterpen Station")
+
+    @classmethod
+    def populate_template(self, key, string):
+        # print DataApp.widget_list
+        if isinstance(DataApp.widget_list[key], Text):
+            DataApp.widget_list[key].insert(END, string)
+        else:
+            DataApp.widget_list[key].insert(0, string)
+
     #  a
     @classmethod
     def handle_forward_button(cls, filename):
@@ -88,31 +110,28 @@ class DataApp:
         data_processor.create_csv_file(test, filename)
         return test
 
-    def test(self):
-        # print DataApp.widget_list
-        for key in DataApp.widget_list:
-            if isinstance(DataApp.widget_list[key], Text):
-                DataApp.widget_list[key].insert(END,
-                                                "This is an actual note that sadly will not be saved to the csv file, atleast not yet. (SMILLING) while listening to the travelling wilburys")
-            else:
-                DataApp.widget_list[key].insert(0, "Waterpen Station")
-
     @classmethod
-    def handle_loading_template(self, csv_file):
+    def handle_loading_template(cls, csv_file):
+        cls.handle_clearing_template()
         retrun_val = False
         data_processor = DataAppProcessing.DataAppProcessing()
         file_dict = data_processor.read_file(csv_file)
         if file_dict:
             for key in file_dict:
-                # TODO: fix the problem when reading values from files. printing 0 in front of column values
-                # TODO: Error comming from the way value is being read from csv file to dictionary
                 if isinstance(DataApp.widget_list[key], Text):
                     DataApp.widget_list[key].insert(END, file_dict[key])
                 else:
-                    DataApp.widget_list[key].insert(2, file_dict[key])
+                    DataApp.widget_list[key].insert(0, file_dict[key])
             retrun_val = True
-
         return retrun_val
+
+    @classmethod
+    def handle_clearing_template(cls):
+        for key in DataApp.widget_list:
+            if isinstance(DataApp.widget_list[key], Text):
+                DataApp.widget_list[key].delete(1.0, END)
+            else:
+                DataApp.widget_list[key].delete(0, END)
 
     def build_template(self):
         init_x = 0

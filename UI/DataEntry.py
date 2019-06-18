@@ -1,12 +1,11 @@
 import Tkinter as tk
 from UI import StartPage
-from UI import DataApp
+from UI.DataTemplates import Template_1, Template_2
 from UI import MetaHandler_Sample
-from UI import CustomPage
 
 
 class DataEntry:
-    SCREENS = (StartPage.StartPage, DataApp.DataApp, MetaHandler_Sample.MetaHandler_Sample, CustomPage.CustomPage)
+    SCREENS = (StartPage.StartPage, Template_1.DataApp, MetaHandler_Sample.MetaHandler_Sample, Template_2.CustomPage)
 
     MINIMUM_HEIGHT = 650
     MINIMUM_WIDTH = 1200
@@ -25,16 +24,6 @@ class DataEntry:
         self.my_container_frame.grid_columnconfigure(0, weight=1)
 
         self.frames = {}
-
-        # Create a menu bar at the top.
-        menu_bar = tk.Menu(self.my_container_frame)
-        file = tk.Menu(menu_bar, tearoff=0)
-        file.add_command(label='New window')
-        file.add_command(label='Open')
-        file.add_command(label='Save')
-        file.add_command(label='Save As...')
-        file.add_command(label='Exit')
-        menu_bar.add_cascade(label='File', menu=file)
 
         """Loop through all the screens provided,
            Make an instance of each screen,

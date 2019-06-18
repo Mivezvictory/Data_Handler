@@ -6,11 +6,18 @@ from pandas import DataFrame
 
 
 class DataAppProcessing:
-    template_labels = ["Station", "ChemID", "Bottle#", "Date", "Latitude", "Longitude", "Arrival time", "Departure",
+    template_1_labels = ["Station", "ChemID", "Bottle#", "Date", "Latitude", "Longitude", "Arrival time", "Departure",
                         "Depth(m)", "Lowe depth(m)", "Lowe temp(c)", "Analyst Name", "Flurometer depth(m)", "Time on",
                          "Time off", "Serial No.", "Secchi Depth", "Air temperature", "Surface temperature", "Surface sample time",
                         "Bottle temperature", "Bottle sample depth", "Bottom bottle ID", "Phytoplankton sample",
                         "Zooplankton depth(m)", "Formalin added", "Vodka added", "Wave Ht(m)", "CBM sample"]
+
+    template_2_labels = ["Station", "ChemID", "Bottle#", "Date", "Latitude", "Longitude", "Arrival time", "Departure",
+                         "Depth(m)", "Lowe depth(m)", "Lowe temp(c)", "Analyst Name", "Flurometer depth(m)", "Time on",
+                         "Time off", "Serial No.", "Secchi Depth", "Air temperature", "Surface temperature",
+                         "Surface sample time",
+                         "Bottle temperature", "Bottle sample depth", "Bottom bottle ID", "Phytoplankton sample",
+                         "Zooplankton depth(m)", "Formalin added", "Vodka added", "Wave Ht(m)", "CBM sample"]
 
     def get_widget_entry(self, widget):
         if isinstance(widget, Text):
@@ -22,19 +29,19 @@ class DataAppProcessing:
     # Also writes the csv file to the location/dir passed along with the file name
     def create_csv_file(self, options, file_name):
         new_list = {}
-        for i in range(0, len(DataAppProcessing.template_labels)):
-            new_list[DataAppProcessing.template_labels[i]] = options[DataAppProcessing.template_labels[i]]
+        for i in range(0, len(DataAppProcessing.template_1_labels)):
+            new_list[DataAppProcessing.template_1_labels[i]] = options[DataAppProcessing.template_1_labels[i]]
         df = pd.DataFrame(new_list, index=[0])
 
-        df = df[DataAppProcessing.template_labels]  # Re-orders the column of the csv file to match the template labels
+        df = df[DataAppProcessing.template_1_labels]  # Re-orders the column of the csv file to match the template labels
         df.to_csv(file_name, index=None, header=True)
 
     def compare_csv_file(self, csv_file):
         new_dict = {}
         column_list = csv_file.columns.values
-        if len(column_list) == len(DataAppProcessing.template_labels):
-            for i in range(0, len(DataAppProcessing.template_labels)):
-                if column_list[i] != DataAppProcessing.template_labels[i]:
+        if len(column_list) == len(DataAppProcessing.template_1_labels):
+            for i in range(0, len(DataAppProcessing.template_1_labels)):
+                if column_list[i] != DataAppProcessing.template_1_labels[i]:
                     return False
         else:
             return False
@@ -45,9 +52,8 @@ class DataAppProcessing:
         new_dict = {}
         value = self.compare_csv_file(csv_file)
         if value:
-            for i in range(0, len(DataAppProcessing.template_labels)):
-                # TODO: here lies the stupid error, too tired to fix this today
-                new_dict[DataAppProcessing.template_labels[i]] = csv_file[DataAppProcessing.template_labels[i]]
+            for i in range(0, len(DataAppProcessing.template_1_labels)):
+                new_dict[DataAppProcessing.template_1_labels[i]] = csv_file.iloc[0][DataAppProcessing.template_1_labels[i]]
         else:
             return False
 
