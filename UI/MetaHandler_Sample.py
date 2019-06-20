@@ -41,9 +41,6 @@ class MetaHandler_Sample:
 
         # Build the toolbar menu at the top of the screen that has ("File, Edit...etc")
         # It needs to be hoked on the parent, because this is not in a regular frame.
-        self.toolMenu = Menu_Sample.Menu_Sample(self.controller.parent)
-        #self.toolMenu.build_toolmenu()
-
 
         self.make_dropdown(['Ice mass buoy', 'Ice beacon data', 'Physical Ice Sampling'])
         fields = ["Station ID", "Year", "Personnel", "Notes"]

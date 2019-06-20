@@ -1,50 +1,41 @@
 from tkFileDialog import askopenfilename
-import Tkinter, tkFileDialog
-from UI.DataTemplates import Template_1
-import os
+import tkinter, tkFileDialog
+from DataGenerators import DataAppProcessing
 import tkMessageBox
-import pandas as pd
-
-
 """We generally need to build grids so it we'll have a function for that"""
 
 
 class Menu_Sample:
-    def __init__(self, master):
+    def __init__(self, master, page_identifier):
         # Master GUI handler
         self.master = master
-       # self.controller = controller
-        # A frame is an invisible box that we put stuff into. In this case it belongs to self.maste
+        self.page_identifier = page_identifier
+        self.data_processor = DataAppProcessing.DataAppProcessing()
+        # A frame is an invisible box that we put stuff into. In this case it belongs to self.master
         self.file_name = ''
-        self.build_menu()
 
     def build_menu(self):
-        menu = Tkinter.Menu(self.master)
+        menu = tkinter.Menu(self.master)
         self.master.config(menu=menu)
-
-        self.build_file_menu(menu)
-        self.build_edit_menu(menu)
-        self.build_insert_menu(menu)
-        self.build_help_menu(menu)
-
-        return
+        if self.page_identifier != "StartPage":
+            self.build_file_menu(menu)
+            self.build_edit_menu(menu)
 
     def build_file_menu(self, menu):
-        file_menu = Tkinter.Menu(menu)
+        # Create a menu object for the top of the window
 
-        file_menu.add_command(label='New window', command=self.new_window)
-        file_menu.add_command(label='Open', command=self.open_file)
-        file_menu.add_command(label='Save', command=self.save_file)
-        file_menu.add_command(label='Save As...', command=self.save_file_as)
+        # Add a drop-down menu for the File option
+        file_menu = tkinter.Menu(menu)
+        file_menu.add_command(label="Open", command=self.make_json)
+        file_menu.add_cascade(label="Save")
         file_menu.add_command(label="Export as Json", command=self.make_json)
         file_menu.add_command(label="Export into Csv", command=self.make_csv)
-
-        file_menu.add_command(label='Exit', command=self.client_exit)
+        file_menu.add_command(label="Exit", command=self.client_exit)
         menu.add_cascade(label="File", menu=file_menu)
         return
 
     def build_edit_menu(self, menu):
-        edit = Tkinter.Menu(menu)
+        edit = tkinter.Menu(menu)
 
         edit.add_command(label='Clear template', command=self.clear_template)
         edit.add_command(label='Undo')
@@ -53,68 +44,21 @@ class Menu_Sample:
         edit.add_command(label='find & replace')
         menu.add_cascade(label='Edit', menu=edit)
 
-    def build_insert_menu(self, menu):
-        insert = Tkinter.Menu(menu)
-
-        insert.add_command(label='Text box')
-        menu.add_cascade(label='Insert', menu=insert)
-
-    def build_help_menu(self, menu):
-        help = Tkinter.Menu(menu)
-
-        help.add_command(label='Help')
-        menu.add_cascade(label='Help', menu=help)
-
-    def new_window(self):
-        execfile('app.py')
-
     def clear_template(self):
-        Template_1.DataApp.handle_clearing_template()
+        self.data_processor.handle_clearing_template(self.page_identifier)
 
     def open_file(self):
-        if os.name == 'nt':
-            opened_file_path = askopenfilename(initialdir="C:\\", title="Select file",
-                                   filetypes=(("csv files", "*.csv"), ("all files", "*.*")))
-        else:
-            opened_file_path = askopenfilename(initialdir="/", title="Select file",
-                                   filetypes=(("csv files", "*.csv"), ("all files", "*.*")))
-            #TODO: upon opening a file, first check the file to see if it is a format we can open, before opening it
-
-        if opened_file_path:
-            #TODO: make sure only csv files are being passed so as to no have some mad error you cant check for
-            opened_file_csv = pd.read_csv(opened_file_path)
-            if Template_1.DataApp.handle_loading_template(opened_file_csv) == False:
-                # TODO: have a better message box message for christ sake
-                tkMessageBox.showinfo("Title", "please load correct file")
-
-    def save_file(self):
-        if self.file_name:  # ensures the save as procedure is only executed if a file name is entered and saved.
-            try:
-                f = open(self.file_name, "w+")
-                Template_1.DataApp.handle_forward_button(self.file_name)
-                f.close()
-            except IOError:  # files cannot be saved to while they are open on users device
-                tkMessageBox.showinfo("Title", "please close file before saving new changes")
-                # inform users to close file they are trying to save to, if file is currently opened
-        else:  # if current changes have not been saved to the device, open the dialogue and get the user to save file
-            self.save_file_as()
-
-    def save_file_as(self):
-        #  opens a dialogue to get the name and file type from the user
-        self.file_name = tkFileDialog.asksaveasfilename(initialdir="C:\\", title="Select file",
-                                                        filetypes=(("csv files", "*.csv"), ("all files", "*.*")))
-
-        if self.file_name:  # ensures the save as procedure is only executed if a file name is entered and saved.
-            Template_1.DataApp.handle_forward_button(self.file_name)
-            tkMessageBox.showinfo("Title", "File saved")
-
-    def client_exit(self):
-        exit()
+        print("I will be used to open a file for the template...")
+        return
 
     def make_json(self):
+        #if self.page_identifier == 0:
         print("I will be used to make a json file for the metadata...")
         return
 
     def make_csv(self):
         print("I will be used to make a csv file for the metadata...")
         return
+
+    def client_exit(self):
+        exit()

@@ -1,7 +1,8 @@
 import Tkinter as tk
 from Tkinter import *
 from pandas import DataFrame
-from DataGenerators import DataAppProcessing
+#from DataGenerators import DataAppProcessing
+#from UI.WidgetTemplates import Menu_Sample
 
 
 #TODO: rename template to match with other templates once constructed
@@ -20,6 +21,7 @@ class DataApp:
     label_font = ("", 12)
     label_color = "white"
     entry_color = "white"
+    template_identifier = 0
 
     # list of all widgets created on each page
     # helps with collecting information from each UI. And easy use of loop to get all widget entries
@@ -30,7 +32,9 @@ class DataApp:
         self.my_controller = controller
         self.my_frame = tk.Frame(self.master, bg='#d9d9d9')  # creates a frame for this UI
         self.my_frame.place(relwidth=1, relheight=1)
-        self.data_processor = DataAppProcessing.DataAppProcessing()
+        #self.data_processor = DataAppProcessing.DataAppProcessing()
+        #self.toolMenu = Menu_Sample.Menu_Sample(self.my_controller.parent, DataApp.template_identifier)
+        #self.toolMenu.build_menu()
         self.build_template()  # builds the template
 
     # builds both a label and data entry box
@@ -100,6 +104,8 @@ class DataApp:
         else:
             DataApp.widget_list[key].insert(0, string)
 
+
+    """
     #  a
     @classmethod
     def handle_forward_button(cls, filename):
@@ -124,6 +130,7 @@ class DataApp:
                     DataApp.widget_list[key].insert(0, file_dict[key])
             retrun_val = True
         return retrun_val
+        """
 
     @classmethod
     def handle_clearing_template(cls):

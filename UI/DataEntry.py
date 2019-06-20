@@ -2,6 +2,7 @@ import Tkinter as tk
 from UI import StartPage
 from UI.DataTemplates import Template_1, Template_2
 from UI import MetaHandler_Sample
+from UI.WidgetTemplates import Menu_Sample
 
 
 class DataEntry:
@@ -14,8 +15,6 @@ class DataEntry:
         """This Screen will be used to allow switching between screens.
             Other screens will be placed within its frame."""
         self.parent = parent
-        #height = 650
-        #width = 1200
         self.parent.minsize(DataEntry.MINIMUM_WIDTH, DataEntry.MINIMUM_HEIGHT)
 
         self.my_container_frame = tk.Frame(parent)
@@ -29,6 +28,7 @@ class DataEntry:
            Make an instance of each screen,
            Make a dictionary with all their names as keys and frame objects as values
            Set their position on the grid."""
+
         for current_screen in self.SCREENS:
             page_name = current_screen.__name__
             frame = current_screen(parent=self.my_container_frame, controller=self)
@@ -42,3 +42,6 @@ class DataEntry:
         """Given the name of a screen it will show that screen."""
         frame = self.frames[page_name]
         frame.my_frame.tkraise()
+        self.toolMenu = Menu_Sample.Menu_Sample(self.parent, page_name)
+        self.toolMenu.build_menu()
+

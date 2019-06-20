@@ -1,9 +1,11 @@
 import Tkinter as tk
 import tkMessageBox
+from UI.WidgetTemplates import Menu_Sample
 
 class StartPage:
     button_width = 0.5
     button_height = 0.05
+    template_identifier = 1
     def __init__(self, parent, controller):
 
         # The parent will be the main frame of the DataEntry Object (DataEntry.my_containter_frame),
@@ -12,6 +14,7 @@ class StartPage:
 
         self.parent = parent
         self.my_controller = controller
+
 
         # A frame is an invisible box that we put stuff into.
         # Pack the frame up and place a label

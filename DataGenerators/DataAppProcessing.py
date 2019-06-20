@@ -1,6 +1,6 @@
 import Tkinter as tk
 from Tkinter import *
-#from UI import DataApp
+from UI.DataTemplates import Template_1, Template_2
 import pandas as pd
 from pandas import DataFrame
 
@@ -18,7 +18,6 @@ class DataAppProcessing:
                          "Surface sample time",
                          "Bottle temperature", "Bottle sample depth", "Bottom bottle ID", "Phytoplankton sample",
                          "Zooplankton depth(m)", "Formalin added", "Vodka added", "Wave Ht(m)", "CBM sample"]
-
     def get_widget_entry(self, widget):
         if isinstance(widget, Text):
             return widget.get("1.0", "end-1c")
@@ -58,4 +57,13 @@ class DataAppProcessing:
             return False
 
         return new_dict
+
+    def handle_clearing_template(self, page_name):
+        if page_name == "DataApp":
+            Template_1.DataApp.handle_clearing_template()
+        elif page_name == "CustomPage":
+            Template_2.CustomPage.handle_clearing_template()
+
+
+
 
