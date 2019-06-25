@@ -33,7 +33,7 @@ class StartPage:
 
         self.template_names = {"Template 1: Team A field template for lake moon moon tapioca": "DataApp",
                                "Template 2: readings from the great pyramid of giza, writtings of Pharaoh Ramseys II":
-                               "CustomPage"}
+                               "CustomPage", "Template 3: The joker finally meets the thief": "Template_3"}
         init_x = 0.25
         init_y = 0.3
 
@@ -42,7 +42,8 @@ class StartPage:
         self.drop_down_menu.set('select a template')  # set the default option
 
         self.set_options = tk.OptionMenu(self.my_frame, self.drop_down_menu, "Template 1: Team A field template for lake moon moon tapioca",
-                                  "Template 2: readings from the great pyramid of giza, writtings of Pharaoh Ramseys II")
+                                  "Template 2: readings from the great pyramid of giza, writtings of Pharaoh Ramseys II",
+                                         "Template 3: The joker finally meets the thief")
         self.set_options.configure(font=("", 12), fg="#34495E")
         self.set_options.place(relx=init_x, rely=set1_y, relwidth=StartPage.button_width,
                                 relheight=StartPage.button_height)

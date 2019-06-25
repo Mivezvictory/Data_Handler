@@ -1,8 +1,8 @@
 import Tkinter as tk
 from Tkinter import *
 from pandas import DataFrame
-#from DataGenerators import DataAppProcessing
-#from UI.WidgetTemplates import Menu_Sample
+from DataGenerators import TemplateDataProcessor
+from UI.WidgetTemplates import Menu_Sample
 
 
 #TODO: rename template to match with other templates once constructed
@@ -21,7 +21,7 @@ class DataApp:
     label_font = ("", 12)
     label_color = "white"
     entry_color = "white"
-    template_identifier = 0
+    template_identifier = "DataApp"
 
     # list of all widgets created on each page
     # helps with collecting information from each UI. And easy use of loop to get all widget entries
@@ -32,9 +32,8 @@ class DataApp:
         self.my_controller = controller
         self.my_frame = tk.Frame(self.master, bg='#d9d9d9')  # creates a frame for this UI
         self.my_frame.place(relwidth=1, relheight=1)
-        #self.data_processor = DataAppProcessing.DataAppProcessing()
-        #self.toolMenu = Menu_Sample.Menu_Sample(self.my_controller.parent, DataApp.template_identifier)
-        #self.toolMenu.build_menu()
+        self.data_processor = TemplateDataProcessor.TemplateDataProcessor()
+
         self.build_template()  # builds the template
 
     # builds both a label and data entry box
@@ -104,6 +103,9 @@ class DataApp:
         else:
             DataApp.widget_list[key].insert(0, string)
 
+    def printV(self):
+        print("this is a test")
+
 
     """
     #  a
@@ -115,7 +117,7 @@ class DataApp:
             test[key] = data_processor.get_widget_entry(DataApp.widget_list[key])
         data_processor.create_csv_file(test, filename)
         return test
-
+    
     @classmethod
     def handle_loading_template(cls, csv_file):
         cls.handle_clearing_template()
@@ -132,13 +134,9 @@ class DataApp:
         return retrun_val
         """
 
-    @classmethod
-    def handle_clearing_template(cls):
-        for key in DataApp.widget_list:
-            if isinstance(DataApp.widget_list[key], Text):
-                DataApp.widget_list[key].delete(1.0, END)
-            else:
-                DataApp.widget_list[key].delete(0, END)
+    def handle_clearing_template(self):
+        self.data_processor.handle_clearing_template(DataApp.widget_list)
+
 
     def build_template(self):
         init_x = 0
