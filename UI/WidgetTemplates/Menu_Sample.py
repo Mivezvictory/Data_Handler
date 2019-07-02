@@ -12,16 +12,14 @@ class Menu_Sample:
     def __init__(self, master, page_identifier, template_list):
         # Master GUI handler
         self.master = master
-        self.page_identifier = page_identifier
-        self.template_list = template_list
-
-        # A frame is an invisible box that we put stuff into. In this case it belongs to self.master
-        self.file_name = ''
+        self.page_identifier = page_identifier  # name of current active page, gotten from DataEntry class
+        self.template_list = template_list  # A list of instances of all pages created on the Application
+        self.file_name = ''  # Name of current file in use by the Application
 
     def build_menu(self):
         menu = tkinter.Menu(self.master)
         self.master.config(menu=menu)
-        if self.page_identifier != "StartPage":
+        if self.page_identifier != "StartPage":  # menu is not built for the start page
             self.build_file_menu(menu)
             self.build_edit_menu(menu)
             self.build_help_menu(menu)
@@ -51,6 +49,11 @@ class Menu_Sample:
         help.add_command(label='Help', command=self.clear_template)
         menu.add_cascade(label='Help', menu=help)
 
+    """
+    This method calls the current active template and clears each entry box
+    0 arguments
+    calls the template class method "handle_clearing_template"
+    """
     def clear_template(self):
         try:
 
@@ -59,6 +62,13 @@ class Menu_Sample:
         except AttributeError:
             traceback.print_exc()
 
+    """
+    This method opens a csv file already saved on users computer and files the entry boxes on the Applications templates
+    with the appropriate entries
+    0 arguments
+    calls the template class method "open_saved_files"
+    upon opening a file not suited to the current template screen, an error message box is shown to the user
+    """
     def open_file(self):
         if os.name == 'nt':
             opened_file_path = askopenfilename(initialdir="C:\\", title="Select file",
@@ -66,7 +76,6 @@ class Menu_Sample:
         else:
             opened_file_path = askopenfilename(initialdir="/", title="Select file",
                                                filetypes=(("csv files", "*.csv"), ("all files", "*.*")))
-            # TODO: upon opening a file, first check the file to see if it is a format we can open, before opening it
 
         if opened_file_path:
             # TODO: make sure only csv files are being passed so as to no have some mad error you cant check for
@@ -81,6 +90,11 @@ class Menu_Sample:
             except AttributeError:
                 traceback.print_exc()
 
+    """
+       This method saves a templates entries as a csv file in the appropriate order
+       0 arguments
+       calls the template class method "save_data_entries"
+    """
     def save_file(self):
         if self.file_name:  # ensures the save as procedure is only executed if a file name is entered and saved.
             try:
@@ -99,6 +113,11 @@ class Menu_Sample:
         else:  # if current changes have not been saved to the device, open the dialogue and get the user to save file
             self.save_file_as()
 
+    """
+         This method saves a templates entries as a csv file in the appropriate order
+         0 arguments
+         calls the template class method "save_data_entries"
+      """
     def save_file_as(self):
         #  opens a dialogue to get the name and file type from the user
         self.file_name = tkFileDialog.asksaveasfilename(initialdir="C:\\", title="Select file",

@@ -2,6 +2,7 @@ import Tkinter as tk
 import tkMessageBox
 from UI.WidgetTemplates import Menu_Sample
 
+
 class StartPage:
     button_width = 0.5
     button_height = 0.05
@@ -53,8 +54,12 @@ class StartPage:
 
         metaHandler_y = init_y + 0.01 + (StartPage.button_height * 2)
         self.build_button("Load Metadata Handler", "MetaHandler_Sample", init_x, metaHandler_y)
-        about_botton_y =  metaHandler_y + 0.01 + StartPage.button_height
+        about_botton_y = metaHandler_y + 0.01 + StartPage.button_height
         self.build_button("Build a template", "CustomPage", init_x, about_botton_y)
+        # TODO:
+        """add a button to allow users open files from the start page, this will open the file and take the user to 
+            appropriate template screen.
+        """
 
     def load_template(self):
         value = self.drop_down_menu.get()

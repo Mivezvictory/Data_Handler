@@ -82,7 +82,6 @@ class DataApp:
 
     def test(self):
         self.handle_clearing_template()
-        # TODO: should clear the current contents of the entry boxes before populating it
         # print DataApp.widget_list
         for key in DataApp.widget_list:
             if isinstance(DataApp.widget_list[key], Text):
@@ -92,12 +91,14 @@ class DataApp:
             else:
                 DataApp.widget_list[key].insert(0, "Waterpen Station")
 
-    def populate_template(self, key, string):
+    # populates the templates data entries with data from a dictionary
+    # accepts 2 parameters, a key, and a dictionary for which the key is valid
+    def populate_template(self, dictionary, key):
         # print DataApp.widget_list
         if isinstance(DataApp.widget_list[key], Text):
-            DataApp.widget_list[key].insert(END, string)
+            DataApp.widget_list[key].insert(END, dictionary[key])
         else:
-            DataApp.widget_list[key].insert(0, string)
+            DataApp.widget_list[key].insert(0, dictionary[key])
 
     def save_data_entries(self, filename):
         test = {}
@@ -113,13 +114,11 @@ class DataApp:
         file_dict = self.data_processor.read_file(csv_file)
         if file_dict:
             for key in file_dict:
-                if isinstance(DataApp.widget_list[key], Text):
-                    DataApp.widget_list[key].insert(END, file_dict[key])
-                else:
-                    DataApp.widget_list[key].insert(0, file_dict[key])
+                self.populate_template(file_dict, key)
             retrun_val = True
         return retrun_val
 
+    # clears the template
     def handle_clearing_template(self):
         self.data_processor.handle_clearing_template(DataApp.widget_list)
 

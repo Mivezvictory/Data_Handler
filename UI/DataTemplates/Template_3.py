@@ -179,6 +179,7 @@ class Template_3:
 
         self.build_data_entry("Analyst Name", init_x, y_axis[21])
         self.build_label("Weather Conditions ", Template_3.label_width, init_x, y_axis[22])
+        # TODO: make all the weather options below (check boxes/radio buttons) can only pick one. do same for other templates
         self.build_data_entry("Mainly Clear(1-4 tenths)", init_x, y_axis[23])
         self.build_data_entry("Mostly Cloudy(5-9 tenths)", init_x, y_axis[24])
         self.build_data_entry("Cloudy(10 tenths)", init_x, y_axis[25])
@@ -232,7 +233,7 @@ class Template_3:
         self.build_data_entry("Longitude", final_column_x, y_axis[2])
 
         # rows of entry of the Y axis
-
+        # TODO: add a culvert name before all of the flow velocity readings
         self.build_label("Flow/Velocity", Template_3.label_width, final_column_x, y_axis[5])
         self.build_data_spec("Length of flow measurement", 0.2, 0.05, final_column_x, y_axis[6])
 
