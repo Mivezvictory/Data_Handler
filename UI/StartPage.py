@@ -6,7 +6,7 @@ class StartPage:
     button_width = 0.5
     button_height = 0.05
     template_identifier = 1
-    def __init__(self, parent, controller):
+    def __init__(self, parent, controller, my_frames):
 
         # The parent will be the main frame of the DataEntry Object (DataEntry.my_containter_frame),
         # which this will be placed into.

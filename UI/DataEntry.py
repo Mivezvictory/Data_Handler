@@ -11,6 +11,7 @@ class DataEntry:
 
     MINIMUM_HEIGHT = 650
     MINIMUM_WIDTH = 1200
+    my_frames = {}
 
     def __init__(self, parent):
         """This Screen will be used to allow switching between screens.
@@ -23,7 +24,7 @@ class DataEntry:
         self.my_container_frame.grid_rowconfigure(0, weight=1)
         self.my_container_frame.grid_columnconfigure(0, weight=1)
 
-        self.frames = {}
+
 
         """Loop through all the screens provided,
            Make an instance of each screen,
@@ -32,8 +33,8 @@ class DataEntry:
 
         for current_screen in self.SCREENS:
             page_name = current_screen.__name__
-            frame = current_screen(parent=self.my_container_frame, controller=self)
-            self.frames[page_name] = frame
+            frame = current_screen(parent=self.my_container_frame, controller=self, my_frames=DataEntry.my_frames)
+            DataEntry.my_frames[page_name] = frame
             frame.my_frame.grid(row=0, column=0, sticky="nsew")
 
         # Show the start page by default.
@@ -41,8 +42,8 @@ class DataEntry:
 
     def show_frame(self, page_name):
         """Given the name of a screen it will show that screen."""
-        frame = self.frames[page_name]
+        frame = self.my_frames[page_name]
         frame.my_frame.tkraise()
-        self.toolMenu = Menu_Sample.Menu_Sample(self.parent, DataEntry.SCREENS, page_name)
+        self.toolMenu = Menu_Sample.Menu_Sample(self.parent, page_name, DataEntry.my_frames)
         self.toolMenu.build_menu()
 

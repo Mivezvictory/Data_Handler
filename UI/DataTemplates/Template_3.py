@@ -27,7 +27,7 @@ class Template_3:
     # helps with collecting information from each UI. And easy use of loop to get all widget entries
     widget_list = {}
 
-    def __init__(self, parent, controller):
+    def __init__(self, parent, controller, my_frames):
         self.master = parent
         self.my_controller = controller
         self.my_frame = tk.Frame(self.master, bg='#d9d9d9')  # creates a frame for this UI
@@ -170,7 +170,8 @@ class Template_3:
 
         fourth_row_x = init_x + (Template_3.label_width / 1.5)
         self.build_data_entry("Analyst Name", init_x, y_axis[15])
-        self.build_label("Phytoplankton Sample: Schinct. Net", Template_3.label_width * 1.5, init_x , y_axis[16])
+        self.build_label("Phytoplankton Sample", Template_3.label_width, init_x, y_axis[16])
+        self.build_drop_down("Phytoplankton Sample", ["Schinct.", "Net"], init_x + Template_3.label_width, y_axis[16], Template_3.entry_width)
 
         self.build_data_entry("Analyst Name", init_x, y_axis[18])
         self.build_label("CBM Sample", Template_3.label_width, init_x, y_axis[19])

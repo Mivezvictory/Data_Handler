@@ -1,8 +1,6 @@
 import Tkinter as tk
 from Tkinter import *
-from pandas import DataFrame
 from DataGenerators import TemplateDataProcessor
-from UI.WidgetTemplates import Menu_Sample
 
 
 #TODO: rename template to match with other templates once constructed
@@ -27,14 +25,13 @@ class DataApp:
     # helps with collecting information from each UI. And easy use of loop to get all widget entries
     widget_list = {}
 
-    def __init__(self, parent, controller):
+    def __init__(self,  parent, controller, my_frames):
         self.master = parent
         self.my_controller = controller
         self.my_frame = tk.Frame(self.master, bg='#d9d9d9')  # creates a frame for this UI
         self.my_frame.place(relwidth=1, relheight=1)
-        self.data_processor = TemplateDataProcessor.TemplateDataProcessor()
-
         self.build_template()  # builds the template
+        self.data_processor = TemplateDataProcessor.TemplateDataProcessor()
 
     # builds both a label and data entry box
     # accepts the label of the entry box, the x and y coordinates
@@ -95,7 +92,6 @@ class DataApp:
             else:
                 DataApp.widget_list[key].insert(0, "Waterpen Station")
 
-    @classmethod
     def populate_template(self, key, string):
         # print DataApp.widget_list
         if isinstance(DataApp.widget_list[key], Text):
@@ -103,27 +99,18 @@ class DataApp:
         else:
             DataApp.widget_list[key].insert(0, string)
 
-    def printV(self):
-        print("this is a test")
-
-
-    """
-    #  a
-    @classmethod
-    def handle_forward_button(cls, filename):
+    def save_data_entries(self, filename):
         test = {}
-        data_processor = DataAppProcessing.DataAppProcessing()
         for key in DataApp.widget_list:
-            test[key] = data_processor.get_widget_entry(DataApp.widget_list[key])
-        data_processor.create_csv_file(test, filename)
+            test[key] = self.data_processor.get_widget_entry(DataApp.widget_list[key])
+        self.data_processor.create_csv_file(test, filename)
         return test
-    
-    @classmethod
-    def handle_loading_template(cls, csv_file):
-        cls.handle_clearing_template()
+
+    def open_saved_files(self, csv_file):
+        self.handle_clearing_template()
         retrun_val = False
-        data_processor = DataAppProcessing.DataAppProcessing()
-        file_dict = data_processor.read_file(csv_file)
+
+        file_dict = self.data_processor.read_file(csv_file)
         if file_dict:
             for key in file_dict:
                 if isinstance(DataApp.widget_list[key], Text):
@@ -132,11 +119,9 @@ class DataApp:
                     DataApp.widget_list[key].insert(0, file_dict[key])
             retrun_val = True
         return retrun_val
-        """
 
     def handle_clearing_template(self):
         self.data_processor.handle_clearing_template(DataApp.widget_list)
-
 
     def build_template(self):
         init_x = 0

@@ -20,7 +20,7 @@ class CustomPage:
     # helps with collecting information from each UI. And easy use of loop to get all widget entries
     widget_list = {}
 
-    def __init__(self, parent, controller):
+    def __init__(self, parent, controller, my_frames):
         self.master = parent
         self.my_controller = controller
         self.my_frame = tk.Frame(self.master, bg='#d9d9d9')  # creates a frame for this UI
@@ -121,7 +121,6 @@ class CustomPage:
             retrun_val = True
         return retrun_val"""
 
-    @classmethod
     def handle_clearing_template(cls):
         for key in CustomPage.widget_list:
             if isinstance(CustomPage.widget_list[key], Text):

@@ -6,7 +6,7 @@ from UI.WidgetTemplates import Menu_Sample, Vertical_ScrollableFrame_Sample
 
 
 class MetaHandler_Sample:
-    def __init__(self, parent, controller):
+    def __init__(self, parent, controller, my_frames):
         # Know your parent GUI handler. (In this case it will be the frame of The DataEntry Object.)
         # The controller is the DataEntry Object itself. This is needed so that the menu bar can be placed in the
         # DataEntry window which is the parent
