@@ -191,7 +191,7 @@ class Template_3:
         self.build_data_entry("Date", middle_row_x, init_y)
 
         self.build_label("Position", Template_3.entry_width, middle_row_x, y_axis[5])
-        postion_text = ["Center", "North", "East", "South", "West"]
+        postion_text = ["Center Culvert", "North Culvert", "East Culvert", "South Culvert", "West Culvert", "Bridge"]
 
         for i in range(1, 4):
             self.build_drop_down("pos_1", postion_text, middle_row_x + (Template_3.entry_width * i), y_axis[5],
@@ -238,8 +238,7 @@ class Template_3:
         self.build_data_spec("Length of flow measurement", 0.2, 0.05, final_column_x, y_axis[6])
 
         self.build_label("Position", ctd_width, final_column_x, y_axis[7])
-        postion_text = ["Center", "North", "East", "South", "West"]
-
+        postion_text = ["Center Culvert", "North Culvert", "East Culvert", "South Culvert", "West Culvert", "Bridge"]
         for i in range(1, 4):
             self.build_drop_down("pos_1", postion_text, final_column_x + (ctd_width * i), y_axis[7], ctd_width)
 
@@ -257,7 +256,7 @@ class Template_3:
 
         ctd_width = 0.1
         self.build_label("Position", ctd_width, final_column_x, y_axis[15])
-        postion_text = ["Center", "North", "East", "South", "West"]
+        postion_text = ["Center Culvert", "North Culvert", "East Culvert", "South Culvert", "West Culvert", "Bridge"]
 
         for i in range(1, 4):
             self.build_drop_down("pos_1", postion_text, final_column_x + (ctd_width * i), y_axis[15], ctd_width)
@@ -276,8 +275,7 @@ class Template_3:
 
         ctd_width = 0.1
         self.build_label("Position", ctd_width, final_column_x, y_axis[23])
-        postion_text = ["Center", "North", "East", "South", "West"]
-
+        postion_text = ["Center Culvert", "North Culvert", "East Culvert", "South Culvert", "West Culvert", "Bridge"]
         for i in range(1, 4):
             self.build_drop_down("pos_1", postion_text, final_column_x + (ctd_width * i), y_axis[23], ctd_width)
 

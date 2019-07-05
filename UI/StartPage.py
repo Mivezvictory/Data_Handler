@@ -1,7 +1,9 @@
 import Tkinter as tk
 import tkMessageBox
-from UI.WidgetTemplates import Menu_Sample
-
+import os
+from tkFileDialog import askopenfilename
+import pandas as pd
+import traceback
 
 class StartPage:
     button_width = 0.5
@@ -12,7 +14,7 @@ class StartPage:
         # The parent will be the main frame of the DataEntry Object (DataEntry.my_containter_frame),
         # which this will be placed into.
         # The controller argument is the DataEntry object itself
-
+        self.template_list = my_frames
         self.parent = parent
         self.my_controller = controller
 
@@ -53,9 +55,13 @@ class StartPage:
                           StartPage.button_height, self.load_template)
 
         metaHandler_y = init_y + 0.01 + (StartPage.button_height * 2)
-        self.build_button("Load Metadata Handler", "MetaHandler_Sample", init_x, metaHandler_y)
+        self.build_open_button("Open a Template", "open_file", init_x, metaHandler_y)
         about_botton_y = metaHandler_y + 0.01 + StartPage.button_height
-        self.build_button("Build a template", "CustomPage", init_x, about_botton_y)
+        self.build_button("Load Metadata Handler", "MetaHandler_Sample", init_x, about_botton_y)
+        open_button_y = about_botton_y + 0.01 + StartPage.button_height
+        self.build_button("Build a template", "CustomPage", init_x, open_button_y)
+
+
         # TODO:
         """add a button to allow users open files from the start page, this will open the file and take the user to 
             appropriate template screen.
@@ -70,6 +76,12 @@ class StartPage:
             template_name = self.template_names[value]
             self.my_controller.show_frame(template_name)
 
+    def build_open_button(self, text, command, x_pos, y_pos):
+        self.load_template_button = tk.Button(self.my_frame, text=text, bg="#C0C0C0", fg="#34495E",
+                                              font=10, command=command)
+        self.load_template_button.place(relx=x_pos, rely=y_pos, relwidth=StartPage.button_width,
+                                        relheight=StartPage.button_height)
+
     def build_button(self, text, command, x_pos, y_pos):
         self.load_template_button = tk.Button(self.my_frame, text=text, bg="#C0C0C0", fg="#34495E",
                                               font=10, command=lambda: self.my_controller.show_frame(command))
@@ -83,3 +95,29 @@ class StartPage:
         self.load_template_button.place(relx=x_pos, rely=y_pos, relwidth=width,
                                         relheight=height)
         #self.load_template_button.config(highlightbackground="black")
+
+    def open_file(self):
+        if os.name == 'nt':
+            opened_file_path = askopenfilename(initialdir="C:\\", title="Select file",
+                                               filetypes=(("csv files", "*.csv"), ("all files", "*.*")))
+        else:
+            opened_file_path = askopenfilename(initialdir="/", title="Select file",
+                                               filetypes=(("csv files", "*.csv"), ("all files", "*.*")))
+
+        if opened_file_path:
+            # TODO: make sure only csv files are being passed so as to no have some mad error you cant check for
+            opened_file_csv = pd.read_csv(opened_file_path)
+            try:
+                """
+                first should check for what template the file being opened should be opened with
+                send an error message if the file does not match any of the available templates on the application
+                if the file matches of the templates available, screen should switch to the screen for the users
+                """
+
+                curr_template = self.template_list[self.page_identifier]
+                if curr_template.open_saved_files(opened_file_csv) == False:
+                    # TODO: have a better message box message for christ sake
+                    tkMessageBox.showinfo("Title", "please load correct file")
+
+            except AttributeError:
+                traceback.print_exc()

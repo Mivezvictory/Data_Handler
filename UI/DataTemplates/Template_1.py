@@ -80,6 +80,27 @@ class DataApp:
         note.place(relx=x_pos, rely=y_pos, relwidth=DataApp.entry_width * 5.25, relheight=DataApp.entry_height * 3)
         DataApp.widget_list.update({"Notes": note})
 
+    def build_drop_down(self, label, options, x_pos, y_pos, width):
+        variable = StringVar(self.master)
+        variable.set(options[0])  # default value
+
+        w = apply(OptionMenu, (self.my_frame, variable) + tuple(options))
+        w.pack()
+
+        w.place(relx=x_pos, rely=y_pos, relwidth=width,
+                relheight=DataApp.entry_height)
+        DataApp.widget_list.update({label: w})
+
+    def build_radiobutton(self, options, x_pos, y_pos):
+        variable = StringVar(master=self.master)
+        variable.set(1)  # default value
+
+        #for text, mode in options:
+
+        r_button = Radiobutton(self.master, text=options, variable=variable, value=3)
+        r_button.place(x=x_pos, y=y_pos) #relwidth=DataApp.label_width, relheight=DataApp.label_height)
+        print "here"
+
     def test(self):
         self.handle_clearing_template()
         # print DataApp.widget_list
@@ -188,10 +209,19 @@ class DataApp:
         self.build_data_entry("Analyst Name", middle_row_x, y_axis[21])
         self.build_label("Weather Conditions ", DataApp.label_width, middle_row_x, y_axis[22])
 
-        self.build_data_entry("Mainly Clear(1-4 tenths)", middle_row_x, y_axis[23])
-        self.build_data_entry("Mostly Cloudy(5-9 tenths)", middle_row_x, y_axis[24])
-        self.build_data_entry("Cloudy(10 tenths)", middle_row_x, y_axis[25])
-        self.build_data_entry("Beaufort Wind Scale", middle_row_x, y_axis[26])
+        weather_labels = [("Monochrome", "1"),
+                          ("Grayscale", "L"),
+                          ("True color", "RGB"),
+                          ("Color separation", "CMYK"),]
+
+
+        self.build_radiobutton("mono", middle_row_x, y_axis[23])
+
+
+        #self.build_data_entry("Mainly Clear(1-4 tenths)", middle_row_x, y_axis[23])
+        #self.build_data_entry("Mostly Cloudy(5-9 tenths)", middle_row_x, y_axis[24])
+        #self.build_data_entry("Cloudy(10 tenths)", middle_row_x, y_axis[25])
+        #self.build_data_entry("Beaufort Wind Scale", middle_row_x, y_axis[26])
 
         # third column
         final_column_x = middle_row_x + DataApp.label_width + DataApp.entry_width + DataApp.label_width / 2

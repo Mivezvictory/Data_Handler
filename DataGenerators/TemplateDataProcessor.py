@@ -10,8 +10,6 @@ import os
 import tkMessageBox
 
 
-
-
 class TemplateDataProcessor:
     template_1_labels = ["Station", "ChemID", "Bottle#", "Date", "Latitude", "Longitude", "Arrival time", "Departure",
                         "Depth(m)", "Lowe depth(m)", "Lowe temp(c)", "Analyst Name", "Flurometer depth(m)", "Time on",
