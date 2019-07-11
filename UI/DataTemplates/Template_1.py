@@ -20,6 +20,7 @@ class DataApp:
     label_color = "white"
     entry_color = "white"
     template_identifier = "DataApp"
+    template_number = 0
 
     # list of all widgets created on each page
     # helps with collecting information from each UI. And easy use of loop to get all widget entries
@@ -92,14 +93,16 @@ class DataApp:
         DataApp.widget_list.update({label: w})
 
     def build_radiobutton(self, options, x_pos, y_pos):
-        variable = StringVar(master=self.master)
-        variable.set(1)  # default value
+        variable = StringVar(self.master)
+        variable.set("L")  # default value
+        count = 0
+        for text in options:
+            r_button = Radiobutton(self.my_frame, text=text, variable=variable, value=text, indicatoron=False)
+            r_button.place(relx=x_pos, rely=y_pos+count,
+                           relwidth=DataApp.entry_width * 2, relheight=DataApp.entry_height)
+            count += DataApp.entry_height
 
-        #for text, mode in options:
-
-        r_button = Radiobutton(self.master, text=options, variable=variable, value=3)
-        r_button.place(x=x_pos, y=y_pos) #relwidth=DataApp.label_width, relheight=DataApp.label_height)
-        print "here"
+        DataApp.widget_list.update({"Weather Conditions": variable})
 
     def test(self):
         self.handle_clearing_template()
@@ -109,6 +112,8 @@ class DataApp:
                 DataApp.widget_list[key].insert(END,
                                                 "This is an actual note that sadly will not be saved to the csv file, "
                                                 "atleast not yet. (SMILLING)while listening to the travelling wilburys")
+            elif isinstance(DataApp.widget_list[key], StringVar):
+                print (" no need to fix this")
             else:
                 DataApp.widget_list[key].insert(0, "Waterpen Station")
 
@@ -125,14 +130,14 @@ class DataApp:
         test = {}
         for key in DataApp.widget_list:
             test[key] = self.data_processor.get_widget_entry(DataApp.widget_list[key])
-        self.data_processor.create_csv_file(test, filename)
+        self.data_processor.create_csv_file(test, filename[0], DataApp.template_number)
         return test
 
     def open_saved_files(self, csv_file):
         self.handle_clearing_template()
         retrun_val = False
 
-        file_dict = self.data_processor.read_file(csv_file)
+        file_dict = self.data_processor.read_file(csv_file, DataApp.template_number)
         if file_dict:
             for key in file_dict:
                 self.populate_template(file_dict, key)
@@ -209,14 +214,10 @@ class DataApp:
         self.build_data_entry("Analyst Name", middle_row_x, y_axis[21])
         self.build_label("Weather Conditions ", DataApp.label_width, middle_row_x, y_axis[22])
 
-        weather_labels = [("Monochrome", "1"),
-                          ("Grayscale", "L"),
-                          ("True color", "RGB"),
-                          ("Color separation", "CMYK"),]
+        weather_labels = ["Mainly Clear(1-4 tenths)", "Mostly Cloudy(5-9 tenths)", "Cloudy(10 tenths)",
+                          "Beaufort Wind Scale"]
 
-
-        self.build_radiobutton("mono", middle_row_x, y_axis[23])
-
+        self.build_radiobutton(weather_labels, middle_row_x, y_axis[23])
 
         #self.build_data_entry("Mainly Clear(1-4 tenths)", middle_row_x, y_axis[23])
         #self.build_data_entry("Mostly Cloudy(5-9 tenths)", middle_row_x, y_axis[24])

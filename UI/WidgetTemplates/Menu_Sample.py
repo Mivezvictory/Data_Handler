@@ -22,7 +22,6 @@ class Menu_Sample:
         if self.page_identifier != "StartPage":  # menu is not built for the start page
             self.build_file_menu(menu)
             self.build_edit_menu(menu)
-            self.build_help_menu(menu)
 
     def build_file_menu(self, menu):
         # Create a menu object for the top of the window
@@ -40,7 +39,6 @@ class Menu_Sample:
         edit = tkinter.Menu(menu)
 
         edit.add_command(label='Clear template', command=self.clear_template)
-        edit.add_command(label='Undo')
         menu.add_cascade(label='Edit', menu=edit)
 
     def build_help_menu(self, menu):
@@ -127,7 +125,16 @@ class Menu_Sample:
             try:
 
                 curr_template = self.template_list[self.page_identifier]
-                curr_template.save_data_entries(self.file_name)
+                file_names = []
+                file_names.append(self.file_name)
+                extension = ".csv"
+
+                split_file = self.file_name.split('.')
+                file_names.append(split_file[0] + "1" + extension)
+                file_names.append(split_file[0] + "2" + extension)
+                file_names.append(split_file[0] + "3" + extension)
+                curr_template.save_data_entries(file_names)
+
             except AttributeError:
                 traceback.print_exc()
 

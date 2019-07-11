@@ -22,6 +22,7 @@ class Template_3:
     label_color = "white"
     entry_color = "white"
     template_identifier = "Template_3"
+    template_number = 2
 
     # list of all widgets created on each page
     # helps with collecting information from each UI. And easy use of loop to get all widget entries
@@ -93,58 +94,64 @@ class Template_3:
 
         w.place(relx=x_pos, rely=y_pos, relwidth=width,
                                relheight=Template_3.entry_height)
-        Template_3.widget_list.update({label: w})
+        Template_3.widget_list.update({label: variable})
+
+    def build_radiobutton(self, options, x_pos, y_pos):
+        variable = StringVar(self.master)
+        variable.set("L")  # default value
+        count = 0
+        for text in options:
+            r_button = Radiobutton(self.my_frame, text=text, variable=variable, value=text, indicatoron=False)
+            r_button.place(relx=x_pos, rely=y_pos + count,
+                           relwidth=Template_3.entry_width * 2, relheight=Template_3.entry_height)
+            count += Template_3.entry_height
+
+        Template_3.widget_list.update({"Weather Conditions": variable})
 
     def test(self):
         self.handle_clearing_template()
-        # TODO: should clear the current contents of the entry boxes before populating it
-        # print Template_3.widget_list
         for key in Template_3.widget_list:
             if isinstance(Template_3.widget_list[key], Text):
                 Template_3.widget_list[key].insert(END,
-                                                   "This is an actual note that sadly will not be saved to the csv file, "
-                                                   "atleast not yet. (SMILLING)while listening to the travelling wilburys")
+                                                "This is an actual note that sadly will not be saved to the csv file, "
+                                                "atleast not yet. (SMILLING)while listening to the travelling wilburys")
+            elif isinstance(Template_3.widget_list[key], StringVar):
+                print (" no need to fix this")
             else:
                 Template_3.widget_list[key].insert(0, "Waterpen Station")
 
-    @classmethod
-    def populate_template(self, key, string):
-        # print Template_3.widget_list
+        # populates the templates data entries with data from a dictionary
+        # accepts 2 parameters, a key, and a dictionary for which the key is valid
+    def populate_template(self, dictionary, key):
+        # print DataApp.widget_list
         if isinstance(Template_3.widget_list[key], Text):
-            Template_3.widget_list[key].insert(END, string)
+            Template_3.widget_list[key].insert(END, dictionary[key])
         else:
-            Template_3.widget_list[key].insert(0, string)
+            Template_3.widget_list[key].insert(0, dictionary[key])
 
-    def printV(self):
-        print("this is a test")
-
-    """
-    #  a
-    @classmethod
-    def handle_forward_button(cls, filename):
+    def save_data_entries(self, filename):
         test = {}
-        data_processor = Template_3Processing.Template_3Processing()
         for key in Template_3.widget_list:
-            test[key] = data_processor.get_widget_entry(Template_3.widget_list[key])
-        data_processor.create_csv_file(test, filename)
+            test[key] = self.data_processor.get_widget_entry(Template_3.widget_list[key])
+
+        self.data_processor.create_csv_file(test, filename[1], 2)
+        self.data_processor.create_csv_file(test, filename[2], 3)
+        self.data_processor.create_csv_file(test, filename[3], 4)
+
         return test
 
-    @classmethod
-    def handle_loading_template(cls, csv_file):
-        cls.handle_clearing_template()
+    def open_saved_files(self, csv_file):
+        self.handle_clearing_template()
         retrun_val = False
-        data_processor = Template_3Processing.Template_3Processing()
-        file_dict = data_processor.read_file(csv_file)
+
+        file_dict = self.data_processor.read_file(csv_file, Template_3.template_number)
         if file_dict:
             for key in file_dict:
-                if isinstance(Template_3.widget_list[key], Text):
-                    Template_3.widget_list[key].insert(END, file_dict[key])
-                else:
-                    Template_3.widget_list[key].insert(0, file_dict[key])
+                self.populate_template(file_dict, key)
             retrun_val = True
         return retrun_val
-        """
 
+        # clears the template
     def handle_clearing_template(self):
         self.data_processor.handle_clearing_template(Template_3.widget_list)
 
@@ -160,31 +167,37 @@ class Template_3:
         self.build_data_entry("Bottle ID", 0, y_axis[2])
 
         self.build_data_entry("Arrival time", 0, y_axis[5])
-        self.build_data_entry("Departure", 0, y_axis[6])
+        self.build_data_entry("Departure time", 0, y_axis[6])
 
         self.build_data_entry("Analyst Name", init_x, y_axis[8])
         self.build_data_entry("CTD Depth(m)", 0, y_axis[9])
         self.build_data_entry("Time On", 0, y_axis[10])
-        self.build_data_entry("Time Off", init_x, y_axis[12])
-        self.build_data_entry("Serial No.", 0, y_axis[13])
+        self.build_data_entry("Time Off", init_x, y_axis[11])
+        self.build_data_entry("Serial No.", 0, y_axis[12])
+        Template_3.widget_list["Serial No."].insert(0, "0306149")
+
+        self.build_data_entry("Analyst Name", init_x, y_axis[14])
+        self.build_data_entry("Air Temperature", 0, y_axis[15])
+        self.build_data_entry("Surface Temperature", 0, y_axis[16])
+        self.build_data_entry("Surface Sample Time", init_x, y_axis[17])
 
         fourth_row_x = init_x + (Template_3.label_width / 1.5)
-        self.build_data_entry("Analyst Name", init_x, y_axis[15])
-        self.build_label("Phytoplankton Sample", Template_3.label_width, init_x, y_axis[16])
-        self.build_drop_down("Phytoplankton Sample", ["Schinct.", "Net"], init_x + Template_3.label_width, y_axis[16], Template_3.entry_width)
+        self.build_data_entry("Analyst Name", init_x, y_axis[19])
+        self.build_label("Phytoplankton Sample", Template_3.label_width, init_x, y_axis[20])
+        self.build_drop_down("Phytoplankton Sample", ["Schinct.", "Net"], init_x + Template_3.label_width, y_axis[20], Template_3.entry_width)
 
-        self.build_data_entry("Analyst Name", init_x, y_axis[18])
-        self.build_label("CBM Sample", Template_3.label_width, init_x, y_axis[19])
-        self.build_drop_down("CBM Sample", ["Yes", "No"], init_x + Template_3.label_width, y_axis[19], Template_3.entry_width)
+        self.build_data_entry("Analyst Name", init_x, y_axis[22])
+        self.build_label("CBM Sample", Template_3.label_width, init_x, y_axis[23])
+        self.build_drop_down("CBM Sample", ["Yes", "No"], init_x + Template_3.label_width, y_axis[23], Template_3.entry_width)
 
-        self.build_data_entry("Analyst Name", init_x, y_axis[21])
-        self.build_label("Weather Conditions ", Template_3.label_width, init_x, y_axis[22])
+        self.build_data_entry("Analyst Name", init_x, y_axis[25])
+        self.build_label("Weather Conditions ", Template_3.label_width, init_x, y_axis[26])
         # TODO: make all the weather options below (check boxes/radio buttons) can only pick one. do same for other templates
-        self.build_data_entry("Mainly Clear(1-4 tenths)", init_x, y_axis[23])
-        self.build_data_entry("Mostly Cloudy(5-9 tenths)", init_x, y_axis[24])
-        self.build_data_entry("Cloudy(10 tenths)", init_x, y_axis[25])
-        self.build_data_entry("Beaufort Wind Scale", init_x, y_axis[26])
 
+        weather_labels = ["Mainly Clear(1-4 tenths)", "Mostly Cloudy(5-9 tenths)", "Cloudy(10 tenths)",
+                          "Beaufort Wind Scale"]
+
+        self.build_radiobutton(weather_labels, init_x + 0.01, y_axis[27])
         # second column
         middle_row_x = Template_3.label_width + Template_3.entry_width + Template_3.label_width / 4
         ctd_width = 0.1
@@ -194,7 +207,7 @@ class Template_3:
         postion_text = ["Center Culvert", "North Culvert", "East Culvert", "South Culvert", "West Culvert", "Bridge"]
 
         for i in range(1, 4):
-            self.build_drop_down("pos_1", postion_text, middle_row_x + (Template_3.entry_width * i), y_axis[5],
+            self.build_drop_down("Position" + str(i), postion_text, middle_row_x + (Template_3.entry_width * i), y_axis[5],
                                  Template_3.entry_width)
 
         self.build_label("DTW", Template_3.entry_width, middle_row_x, y_axis[6])
@@ -204,18 +217,18 @@ class Template_3:
 
         self.build_label("DOW", Template_3.entry_width, middle_row_x, y_axis[8])
         for i in range(1, 4):
-            self.build_entry("DOW1" + str(i), Template_3.entry_width, middle_row_x + (Template_3.entry_width * i),
+            self.build_entry("DOW" + str(i) + "_" + str(1), Template_3.entry_width, middle_row_x + (Template_3.entry_width * i),
                              y_axis[8])
-            self.build_entry("DOW2" + str(i), Template_3.entry_width, middle_row_x + (Template_3.entry_width * i),
+            self.build_entry("DOW" + str(i) + "_" + str(2), Template_3.entry_width, middle_row_x + (Template_3.entry_width * i),
                              y_axis[9])
-            self.build_entry("DOW3" + str(i), Template_3.entry_width, middle_row_x + (Template_3.entry_width * i),
+            self.build_entry("DOW" + str(i) + "_" + str(3), Template_3.entry_width, middle_row_x + (Template_3.entry_width * i),
                              y_axis[10])
 
         self.build_label("Directions", Template_3.entry_width, middle_row_x, y_axis[13])
         postion_text = ["N to S", "S to N", "E to W", "W to E"]
 
         for i in range(1, 4):
-            self.build_drop_down("Directions", postion_text, middle_row_x + (Template_3.entry_width * i), y_axis[13],
+            self.build_drop_down("Directions" + str(i), postion_text, middle_row_x + (Template_3.entry_width * i), y_axis[13],
                                  Template_3.entry_width)
 
         self.build_label("WOW", Template_3.entry_width, middle_row_x, y_axis[16])
@@ -235,58 +248,58 @@ class Template_3:
         # rows of entry of the Y axis
         # TODO: add a culvert name before all of the flow velocity readings
         self.build_label("Flow/Velocity", Template_3.label_width, final_column_x, y_axis[5])
-        self.build_data_spec("Length of flow measurement", 0.2, 0.05, final_column_x, y_axis[6])
+        self.build_data_spec("Length of flow measurement1", 0.2, 0.05, final_column_x, y_axis[6])
 
         self.build_label("Position", ctd_width, final_column_x, y_axis[7])
-        postion_text = ["Center Culvert", "North Culvert", "East Culvert", "South Culvert", "West Culvert", "Bridge"]
+        postion_text = ["Center", "North", "East", "South", "West", "Bridge"]
         for i in range(1, 4):
-            self.build_drop_down("pos_1", postion_text, final_column_x + (ctd_width * i), y_axis[7], ctd_width)
+            self.build_drop_down("Position1_" + str(i), postion_text, final_column_x + (ctd_width * i), y_axis[7], ctd_width)
 
         self.build_label("time 1", ctd_width, final_column_x, y_axis[8])
         self.build_label("time 2", ctd_width, final_column_x, y_axis[9])
         self.build_label("time 3", ctd_width, final_column_x, y_axis[10])
 
         for i in range(1, 4):
-            self.build_entry("time1" + str(i), ctd_width, final_column_x + (ctd_width * i), y_axis[8])
-            self.build_entry("time2" + str(i), ctd_width, final_column_x + (ctd_width * i), y_axis[9])
-            self.build_entry("time3" + str(i), ctd_width, final_column_x + (ctd_width * i), y_axis[10])
+            self.build_entry("time1_" + str(i) + "_" + str(1), ctd_width, final_column_x + (ctd_width * i), y_axis[8])
+            self.build_entry("time1_" + str(i) + "_" + str(2), ctd_width, final_column_x + (ctd_width * i), y_axis[9])
+            self.build_entry("time1_" + str(i) + "_" + str(3), ctd_width, final_column_x + (ctd_width * i), y_axis[10])
 
         self.build_label("Flow/Velocity", Template_3.label_width, final_column_x, y_axis[13])
-        self.build_data_spec("Length of flow measurement", 0.2, 0.05, final_column_x, y_axis[14])
+        self.build_data_spec("Length of flow measurement2", 0.2, 0.05, final_column_x, y_axis[14])
 
         ctd_width = 0.1
         self.build_label("Position", ctd_width, final_column_x, y_axis[15])
-        postion_text = ["Center Culvert", "North Culvert", "East Culvert", "South Culvert", "West Culvert", "Bridge"]
+        postion_text = ["Center", "North", "East", "South", "West", "Bridge"]
 
         for i in range(1, 4):
-            self.build_drop_down("pos_1", postion_text, final_column_x + (ctd_width * i), y_axis[15], ctd_width)
+            self.build_drop_down("Position2_" + str(i), postion_text, final_column_x + (ctd_width * i), y_axis[15], ctd_width)
 
         self.build_label("time 1", ctd_width, final_column_x, y_axis[16])
         self.build_label("time 2", ctd_width, final_column_x, y_axis[17])
         self.build_label("time 3", ctd_width, final_column_x, y_axis[18])
 
         for i in range(1, 4):
-            self.build_entry("time1" + str(i), ctd_width, final_column_x + (ctd_width * i), y_axis[16])
-            self.build_entry("time2" + str(i), ctd_width, final_column_x + (ctd_width * i), y_axis[17])
-            self.build_entry("time3" + str(i), ctd_width, final_column_x + (ctd_width * i), y_axis[18])
+            self.build_entry("time2_" + str(i) + "_" + str(1), ctd_width, final_column_x + (ctd_width * i), y_axis[16])
+            self.build_entry("time2_" + str(i) + "_" +  str(2), ctd_width, final_column_x + (ctd_width * i), y_axis[17])
+            self.build_entry("time2_" + str(i) + "_" +  str(3), ctd_width, final_column_x + (ctd_width * i), y_axis[18])
 
         self.build_label("Flow/Velocity", Template_3.label_width, final_column_x, y_axis[21])
-        self.build_data_spec("Length of flow measurement", 0.2, 0.05, final_column_x, y_axis[22])
+        self.build_data_spec("Length of flow measurement3", 0.2, 0.05, final_column_x, y_axis[22])
 
         ctd_width = 0.1
         self.build_label("Position", ctd_width, final_column_x, y_axis[23])
-        postion_text = ["Center Culvert", "North Culvert", "East Culvert", "South Culvert", "West Culvert", "Bridge"]
+        postion_text = ["Center", "North", "East", "South", "West", "Bridge"]
         for i in range(1, 4):
-            self.build_drop_down("pos_1", postion_text, final_column_x + (ctd_width * i), y_axis[23], ctd_width)
+            self.build_drop_down("Position3_" + str(i), postion_text, final_column_x + (ctd_width * i), y_axis[23], ctd_width)
 
         self.build_label("time 1", ctd_width, final_column_x, y_axis[24])
         self.build_label("time 2", ctd_width, final_column_x, y_axis[25])
         self.build_label("time 3", ctd_width, final_column_x, y_axis[26])
 
         for i in range(1, 4):
-            self.build_entry("time1" + str(i), ctd_width, final_column_x + (ctd_width * i), y_axis[24])
-            self.build_entry("time2" + str(i), ctd_width, final_column_x + (ctd_width * i), y_axis[25])
-            self.build_entry("time3" + str(i), ctd_width, final_column_x + (ctd_width * i), y_axis[26])
+            self.build_entry("time3_" + str(i) + "_" + str(1), ctd_width, final_column_x + (ctd_width * i), y_axis[24])
+            self.build_entry("time3_" + str(i) + "_" + str(2), ctd_width, final_column_x + (ctd_width * i), y_axis[25])
+            self.build_entry("time3_" + str(i) + "_" + str(3), ctd_width, final_column_x + (ctd_width * i), y_axis[26])
 
         button_x = middle_row_x * 1.5
 
