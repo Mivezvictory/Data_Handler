@@ -194,10 +194,13 @@ class Template_3:
         self.build_label("Weather Conditions ", Template_3.label_width, init_x, y_axis[26])
         # TODO: make all the weather options below (check boxes/radio buttons) can only pick one. do same for other templates
 
-        weather_labels = ["Mainly Clear(1-4 tenths)", "Mostly Cloudy(5-9 tenths)", "Cloudy(10 tenths)",
-                          "Beaufort Wind Scale"]
+        weather_labels = ["Clear(0 tenths)", "Mainly Clear(1-4 tenths)", "Mostly Cloudy(5-9 tenths)",
+                          "Cloudy(10 tenths)",
+                          ]
 
         self.build_radiobutton(weather_labels, init_x + 0.01, y_axis[27])
+        self.build_data_entry("Beaufort Wind Scale", init_x, y_axis[31])
+
         # second column
         middle_row_x = Template_3.label_width + Template_3.entry_width + Template_3.label_width / 4
         ctd_width = 0.1

@@ -17,7 +17,8 @@ class TemplateDataProcessor:
                         "Depth(m)", "Lowe depth(m)", "Lowe temp(c)", "Analyst Name", "Flurometer depth(m)", "Time on",
                          "Time off", "Serial No.", "Secchi Depth", "Air temperature", "Surface temperature", "Surface sample time",
                         "Bottle temperature", "Bottle sample depth", "Bottom bottle ID", "Phytoplankton sample",
-                        "Zooplankton depth(m)", "Formalin added", "Vodka added", "Wave Ht(m)", "CBM sample", "Weather Conditions"],
+                        "Zooplankton depth(m)", "Formalin added", "Vodka added", "Wave Ht(m)", "CBM sample", "Weather Conditions",
+                         "Beaufort Wind Scale"],
 
                         ["Station", "ChemID", "Bottle#", "Date", "Latitude", "Longitude", "Arrival time", "Departure",
                          "Depth(m)", "Lowe depth(m)", "Lowe temp(c)", "Analyst Name", "Flurometer depth(m)", "Time on",
@@ -29,7 +30,7 @@ class TemplateDataProcessor:
                         ["Station", "Date", "Latitude", "Longitude", "Arrival time", "Departure time", "Bottle ID",
                          "Surface Sample Time", "Air Temperature", "Surface Temperature",
                          "Time On", "Time Off", "Serial No.",
-                         "CTD Depth(m)", "Phytoplankton Sample", "CBM Sample"],
+                         "CTD Depth(m)", "Phytoplankton Sample", "CBM Sample", "Weather Conditions", "Beaufort Wind Scale", "Notes"],
 
                         ["Station", "Date", "Latitude", "Longitude", "Arrival time", "Position1", "DTW1", "DOW1_1",
                          "DOW1_2", "DOW1_3", "Directions1", "WOW1", "Position2", "DTW2", "DOW2_1",
@@ -51,7 +52,10 @@ class TemplateDataProcessor:
     def get_widget_entry(self, widget):
         if isinstance(widget, Text):
             return widget.get("1.0", "end-1c")
-        return widget.get()
+        if len(widget.get()):
+            return ""
+        else:
+            return widget.get()
 
     # Accepts 2 parameters, a dictionary and the name of a file
     # This function takes a dictionary containing key value pairs and creates a csv file with the provided file name

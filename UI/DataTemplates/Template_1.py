@@ -186,8 +186,8 @@ class DataApp:
         self.build_data_entry("Bottle sample depth", init_x, y_axis[25])
         self.build_data_entry("Bottom bottle ID", init_x, y_axis[26])
 
-        self.build_label("Notes: ", fourth_row_x, init_x, y_axis[28])
-        self.build_note_text(init_x + DataApp.label_width, y_axis[28])
+        self.build_label("Notes: ", fourth_row_x, init_x, y_axis[29])
+        self.build_note_text(init_x + DataApp.label_width, y_axis[29])
 
         # second column
         middle_row_x = DataApp.label_width + DataApp.entry_width + DataApp.label_width/2
@@ -214,10 +214,11 @@ class DataApp:
         self.build_data_entry("Analyst Name", middle_row_x, y_axis[21])
         self.build_label("Weather Conditions ", DataApp.label_width, middle_row_x, y_axis[22])
 
-        weather_labels = ["Mainly Clear(1-4 tenths)", "Mostly Cloudy(5-9 tenths)", "Cloudy(10 tenths)",
-                          "Beaufort Wind Scale"]
+        weather_labels = ["Clear(0 tenths)","Mainly Clear(1-4 tenths)", "Mostly Cloudy(5-9 tenths)", "Cloudy(10 tenths)",
+                          ]
 
         self.build_radiobutton(weather_labels, middle_row_x, y_axis[23])
+        self.build_data_entry("Beaufort Wind Scale", middle_row_x, y_axis[27])
 
         #self.build_data_entry("Mainly Clear(1-4 tenths)", middle_row_x, y_axis[23])
         #self.build_data_entry("Mostly Cloudy(5-9 tenths)", middle_row_x, y_axis[24])

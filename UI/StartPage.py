@@ -27,6 +27,13 @@ class StartPage:
         self.label = tk.Label(self.my_frame, text="Welcome to CEOS's data & metadata collector", font=12)
         self.label.pack(pady=10, padx=10)
 
+        #load = Image.open('pic.png')
+        #render = ImageTk.PhotoImage(load)
+
+        ##img = tk.Label(self, image=render)
+        #img.image = render
+        #img.place(x=0, y=0)
+
         # Make the button in the middle, and assign the command argument to load a different page.
         # my_controller.show_frame loads up the new frame.
         # TODO: See below
@@ -83,14 +90,14 @@ class StartPage:
                                         relheight=StartPage.button_height)
 
     def build_button(self, text, command, x_pos, y_pos):
-        self.load_template_button = tk.Button(self.my_frame, text=text, bg="#C0C0C0", fg="#34495E",
+        self.load_template_button = tk.Button(self.my_frame, text=text, highlightbackground="#000000", fg="#34495E",
                                               font=10, command=lambda: self.my_controller.show_frame(command))
         self.load_template_button.place(relx=x_pos, rely=y_pos, relwidth=StartPage.button_width,
                                         relheight=StartPage.button_height)
         #self.load_template_button.config(highlightbackground="black")
 
     def build_customised_buttons(self, text, x_pos, y_pos, width, height, command):
-        self.load_template_button = tk.Button(self.my_frame, text=text, bg="#EAECEE", fg="#34495E",
+        self.load_template_button = tk.Button(self.my_frame, text=text, highlightbackground="#000000", fg="#34495E",
                                               font=10, command=command)
         self.load_template_button.place(relx=x_pos, rely=y_pos, relwidth=width,
                                         relheight=height)
