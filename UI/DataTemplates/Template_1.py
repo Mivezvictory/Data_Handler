@@ -90,7 +90,7 @@ class DataApp:
 
         w.place(relx=x_pos, rely=y_pos, relwidth=width,
                 relheight=DataApp.entry_height)
-        DataApp.widget_list.update({label: w})
+        DataApp.widget_list.update({label: variable})
 
     def build_radiobutton(self, options, x_pos, y_pos):
         variable = StringVar(self.master)
@@ -99,7 +99,7 @@ class DataApp:
         for text in options:
             r_button = Radiobutton(self.my_frame, text=text, variable=variable, value=text, indicatoron=False)
             r_button.place(relx=x_pos, rely=y_pos+count,
-                           relwidth=DataApp.entry_width * 2, relheight=DataApp.entry_height)
+                           relwidth=DataApp.entry_width * 1.5, relheight=DataApp.entry_height)
             count += DataApp.entry_height
 
         DataApp.widget_list.update({"Weather Conditions": variable})
@@ -123,6 +123,8 @@ class DataApp:
         # print DataApp.widget_list
         if isinstance(DataApp.widget_list[key], Text):
             DataApp.widget_list[key].insert(END, dictionary[key])
+        elif isinstance(DataApp.widget_list[key], StringVar):
+            DataApp.widget_list[key].set(dictionary[key])
         else:
             DataApp.widget_list[key].insert(0, dictionary[key])
 
@@ -157,9 +159,7 @@ class DataApp:
             y_axis[i] = (i - 1) * (init_y + DataApp.entry_height)
 
         self.build_data_entry("Station", init_x, init_y)
-
-        self.build_data_entry("ChemID", 0, y_axis[2])
-        self.build_data_entry("Bottle#", 0, y_axis[3])
+        self.build_data_entry("Bottle#", 0, y_axis[2])
 
         self.build_data_entry("Arrival time", 0, y_axis[5])
         self.build_data_entry("Departure", 0, y_axis[6])
@@ -174,17 +174,18 @@ class DataApp:
         self.build_data_entry("Time on", init_x, y_axis[13])
         self.build_data_entry("Time off", init_x, y_axis[14])
         self.build_data_entry("Serial No.", init_x, y_axis[15])
+        self.build_data_entry("#Casts", init_x, y_axis[16])
 
-        self.build_data_entry("Analyst Name", init_x, y_axis[17])
-        self.build_data_entry("Secchi Depth", init_x, y_axis[18])
+        self.build_data_entry("Analyst Name", init_x, y_axis[18])
+        self.build_data_entry("Secchi Depth", init_x, y_axis[19])
 
-        self.build_data_entry("Analyst Name", init_x, y_axis[20])
-        self.build_data_entry("Air temperature", init_x, y_axis[21])
-        self.build_data_entry("Surface temperature", init_x, y_axis[22])
-        self.build_data_entry("Surface sample time", init_x, y_axis[23])
-        self.build_data_entry("Bottle temperature", init_x, y_axis[24])
-        self.build_data_entry("Bottle sample depth", init_x, y_axis[25])
-        self.build_data_entry("Bottom bottle ID", init_x, y_axis[26])
+        self.build_data_entry("Analyst Name", init_x, y_axis[21])
+        self.build_data_entry("Air temperature", init_x, y_axis[22])
+        self.build_data_entry("Surface temperature", init_x, y_axis[23])
+        self.build_data_entry("Surface sample time", init_x, y_axis[24])
+        self.build_data_entry("Bottle temperature", init_x, y_axis[25])
+        self.build_data_entry("Bottle sample depth", init_x, y_axis[26])
+        self.build_data_entry("Bottom bottle ID", init_x, y_axis[27])
 
         self.build_label("Notes: ", fourth_row_x, init_x, y_axis[29])
         self.build_note_text(init_x + DataApp.label_width, y_axis[29])
@@ -194,12 +195,13 @@ class DataApp:
         self.build_data_entry("Date", middle_row_x, init_y)
 
         self.build_data_entry("Analyst Name", middle_row_x, y_axis[3])
-        self.build_data_entry("Phytoplankton sample", middle_row_x, y_axis[4])
+        self.build_label("Phytoplankton Sample", DataApp.label_width, middle_row_x, y_axis[4])
+        self.build_drop_down("Phytoplankton Sample", ["Schinct.", "Net"], middle_row_x + DataApp.label_width, y_axis[4],
+                             DataApp.entry_width)
 
         self.build_data_entry("Analyst Name", middle_row_x, y_axis[6])
         self.build_data_entry("Zooplankton depth(m)", middle_row_x, y_axis[7])
         self.build_data_entry("Formalin added", middle_row_x, y_axis[8])
-        self.build_data_entry("Vodka added", middle_row_x, y_axis[9])
 
         self.build_data_entry("Analyst Name", middle_row_x, y_axis[11])
         self.build_data_entry("Wave Ht(m)", middle_row_x, y_axis[12])
@@ -216,9 +218,14 @@ class DataApp:
 
         weather_labels = ["Clear(0 tenths)","Mainly Clear(1-4 tenths)", "Mostly Cloudy(5-9 tenths)", "Cloudy(10 tenths)",
                           ]
+        self.build_radiobutton(weather_labels, middle_row_x + DataApp.label_width, y_axis[22])
 
-        self.build_radiobutton(weather_labels, middle_row_x, y_axis[23])
-        self.build_data_entry("Beaufort Wind Scale", middle_row_x, y_axis[27])
+        wind_scale = ["Calm", "Light Air", "Light Breeze", "Gentle Breeze", "Moderate Breeze",
+                      "Fresh Breeze", "Strong Breeze", "Near Gale", "Gale", "Strong Gale", "Storm"]
+
+        self.build_label("Beaufort Wind Scale", DataApp.label_width, middle_row_x, y_axis[27])
+        self.build_drop_down("Beaufort Wind Scale",wind_scale, middle_row_x + DataApp.label_width, y_axis[27],
+                             DataApp.entry_width)
 
         #self.build_data_entry("Mainly Clear(1-4 tenths)", middle_row_x, y_axis[23])
         #self.build_data_entry("Mostly Cloudy(5-9 tenths)", middle_row_x, y_axis[24])

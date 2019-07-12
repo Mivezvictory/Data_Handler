@@ -126,6 +126,8 @@ class Template_3:
         # print DataApp.widget_list
         if isinstance(Template_3.widget_list[key], Text):
             Template_3.widget_list[key].insert(END, dictionary[key])
+        elif isinstance(Template_3.widget_list[key], StringVar):
+            Template_3.widget_list[key].set(dictionary[key])
         else:
             Template_3.widget_list[key].insert(0, dictionary[key])
 
@@ -134,6 +136,7 @@ class Template_3:
         for key in Template_3.widget_list:
             test[key] = self.data_processor.get_widget_entry(Template_3.widget_list[key])
 
+        self.data_processor.create_csv_file(test, filename[0], 5)
         self.data_processor.create_csv_file(test, filename[1], 2)
         self.data_processor.create_csv_file(test, filename[2], 3)
         self.data_processor.create_csv_file(test, filename[3], 4)
@@ -144,7 +147,7 @@ class Template_3:
         self.handle_clearing_template()
         retrun_val = False
 
-        file_dict = self.data_processor.read_file(csv_file, Template_3.template_number)
+        file_dict = self.data_processor.read_file(csv_file, 5)
         if file_dict:
             for key in file_dict:
                 self.populate_template(file_dict, key)

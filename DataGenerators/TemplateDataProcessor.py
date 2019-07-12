@@ -2,6 +2,7 @@ import Tkinter as tk
 from Tkinter import *
 #from UI.DataTemplates import Template_1, Template_2
 import pandas as pd
+import xlsxwriter
 from pandas import DataFrame
 
 from tkFileDialog import askopenfilename
@@ -13,11 +14,11 @@ import tkMessageBox
 class TemplateDataProcessor:
 
     template_labels =[
-                        ["Station", "ChemID", "Bottle#", "Date", "Latitude", "Longitude", "Arrival time", "Departure",
+                        ["Station", "Bottle#", "Date", "Latitude", "Longitude", "Arrival time", "Departure",
                         "Depth(m)", "Lowe depth(m)", "Lowe temp(c)", "Analyst Name", "Flurometer depth(m)", "Time on",
-                         "Time off", "Serial No.", "Secchi Depth", "Air temperature", "Surface temperature", "Surface sample time",
-                        "Bottle temperature", "Bottle sample depth", "Bottom bottle ID", "Phytoplankton sample",
-                        "Zooplankton depth(m)", "Formalin added", "Vodka added", "Wave Ht(m)", "CBM sample", "Weather Conditions",
+                         "Time off", "Serial No.", "#Casts", "Secchi Depth", "Air temperature", "Surface temperature", "Surface sample time",
+                        "Bottle temperature", "Bottle sample depth", "Bottom bottle ID", "Phytoplankton Sample",
+                        "Zooplankton depth(m)", "Formalin added", "Wave Ht(m)", "CBM sample", "Weather Conditions",
                          "Beaufort Wind Scale"],
 
                         ["Station", "ChemID", "Bottle#", "Date", "Latitude", "Longitude", "Arrival time", "Departure",
@@ -46,14 +47,32 @@ class TemplateDataProcessor:
                          "Position2_3", "time2_3_1", "time2_3_2", "time2_3_3", "Length of flow measurement3",
                          "Position3_1", "time3_1_1", "time3_1_2", "time3_1_3",
                          "Position3_2", "time3_2_1", "time3_2_2", "time3_2_3",
+                         "Position3_3", "time3_3_1", "time3_3_2", "time3_3_3", "Notes"],
+
+                        ["Station", "Date", "Latitude", "Longitude", "Arrival time", "Departure time", "Bottle ID",
+                         "Surface Sample Time", "Air Temperature", "Surface Temperature",
+                         "Time On", "Time Off", "Serial No.",
+                         "CTD Depth(m)", "Phytoplankton Sample", "CBM Sample", "Weather Conditions", "Beaufort Wind Scale",
+                         "Position1", "DTW1", "DOW1_1",
+                         "DOW1_2", "DOW1_3", "Directions1", "WOW1", "Position2", "DTW2", "DOW2_1",
+                         "DOW2_2", "DOW2_3", "Directions2", "WOW2", "Position3", "DTW3", "DOW3_1",
+                         "DOW3_2", "DOW3_3", "Directions3", "WOW3", "Length of flow measurement1",
+                         "Position1_1", "time1_1_1", "time1_1_2", "time1_1_3",
+                         "Position1_2", "time1_2_1", "time1_2_2", "time1_2_3",
+                         "Position1_3", "time1_3_1", "time1_3_2", "time1_3_3", "Length of flow measurement2",
+                         "Position2_1", "time2_1_1", "time2_1_2", "time2_1_3",
+                         "Position2_2", "time2_2_1", "time2_2_2", "time2_2_3",
+                         "Position2_3", "time2_3_1", "time2_3_2", "time2_3_3", "Length of flow measurement3",
+                         "Position3_1", "time3_1_1", "time3_1_2", "time3_1_3",
+                         "Position3_2", "time3_2_1", "time3_2_2", "time3_2_3",
                          "Position3_3", "time3_3_1", "time3_3_2", "time3_3_3", "Notes"]
+
+
                     ]
 
     def get_widget_entry(self, widget):
         if isinstance(widget, Text):
             return widget.get("1.0", "end-1c")
-        if len(widget.get()):
-            return ""
         else:
             return widget.get()
 
@@ -65,9 +84,13 @@ class TemplateDataProcessor:
         for i in range(0, len(TemplateDataProcessor.template_labels[template_num])):
             new_list[TemplateDataProcessor.template_labels[template_num][i]] = options[TemplateDataProcessor.template_labels[template_num][i]]
         df = pd.DataFrame(new_list, index=[0])
-
         df = df[TemplateDataProcessor.template_labels[template_num]]  # Re-orders the column of the csv file to match the template labels
         df.to_csv(file_name, index=None, header=True)
+
+    def make_header_format(self, file_name):
+        file_names = file_name.split()
+        xlsx = file_names[0] + "xlsx"
+
 
     """
     Compares the entry labels present in a file to the labels in a list to ensure the file being opened has all the 

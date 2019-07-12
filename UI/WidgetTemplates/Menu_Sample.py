@@ -98,9 +98,9 @@ class Menu_Sample:
             try:
                 f = open(self.file_name, "w+")
                 try:
-
+                    file_names = [self.file_name]
                     curr_template = self.template_list[self.page_identifier]
-                    curr_template.save_data_entries(self.file_name)
+                    curr_template.save_data_entries(file_names)
                 except AttributeError:
                     traceback.print_exc()
 
@@ -126,10 +126,10 @@ class Menu_Sample:
 
                 curr_template = self.template_list[self.page_identifier]
                 file_names = []
-                file_names.append(self.file_name)
                 extension = ".csv"
 
                 split_file = self.file_name.split('.')
+                file_names.append(split_file[0] + extension)
                 file_names.append(split_file[0] + "1" + extension)
                 file_names.append(split_file[0] + "2" + extension)
                 file_names.append(split_file[0] + "3" + extension)
