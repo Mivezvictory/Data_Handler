@@ -21,29 +21,31 @@ class StartPage:
 
         # A frame is an invisible box that we put stuff into.
         # Pack the frame up and place a label
-        self.my_frame = tk.Frame(self.parent, bg="white")
+        self.my_frame = tk.Frame(self.parent, bg="#cccccc", bd=10)
         self.my_frame.pack(fill=tk.BOTH, expand=True)
 
-        self.label = tk.Label(self.my_frame, text="Welcome to CEOS's data & metadata collector", font=12)
+        """
+        background_image = tk.PhotoImage(file='background.jpg')
+        background_label = tk.Label(my_frames, image=background_image)
+        background_label.place(relwidth=1, relheight=1)
+        """
+
+        self.label = tk.Label(self.my_frame, text="Welcome to CEOS's digital fieldnote & metadata collector", font=15)
         self.label.pack(pady=10, padx=10)
-
-        #load = Image.open('pic.png')
-        #render = ImageTk.PhotoImage(load)
-
-        ##img = tk.Label(self, image=render)
-        #img.image = render
-        #img.place(x=0, y=0)
 
         # Make the button in the middle, and assign the command argument to load a different page.
         # my_controller.show_frame loads up the new frame.
         # TODO: See below
         """ TODO: Make this more modular instead of using 'DataApp' and 'MetaDataHandler_Sample' as literals,
             have them as constants in their respective classes and just import them and use class.Variable containing 
-            the name to get it."""
+            the name to get it.
 
-        self.template_names = {"Template 1: Team A field template for lake moon moon tapioca": "DataApp",
+        self.template_names = {"Template 1: Still thinking of a name for this, lets call it nameless": "DataApp",
                                "Template 2: readings from the great pyramid of giza, writtings of Pharaoh Ramseys II":
                                "CustomPage", "Template 3: The joker finally meets the thief": "Template_3"}
+        """
+        self.template_names = {"Template 1: Still thinking of a name for this, lets call it nameless": "DataApp",
+                               "Template 2: The joker finally meets the thief": "Template_3"}
         init_x = 0.25
         init_y = 0.3
 
@@ -51,9 +53,8 @@ class StartPage:
         self.drop_down_menu = tk.StringVar()
         self.drop_down_menu.set('select a template')  # set the default option
 
-        self.set_options = tk.OptionMenu(self.my_frame, self.drop_down_menu, "Template 1: Team A field template for lake moon moon tapioca",
-                                  "Template 2: readings from the great pyramid of giza, writtings of Pharaoh Ramseys II",
-                                         "Template 3: The joker finally meets the thief")
+        self.set_options = tk.OptionMenu(self.my_frame, self.drop_down_menu, "Template 1: Still thinking of a name for this, lets call it nameless",
+                                         "Template 2: The joker finally meets the thief")
         self.set_options.configure(font=("", 12), fg="#34495E")
         self.set_options.place(relx=init_x, rely=set1_y, relwidth=StartPage.button_width,
                                 relheight=StartPage.button_height)
@@ -62,7 +63,7 @@ class StartPage:
                           StartPage.button_height, self.load_template)
 
         metaHandler_y = init_y + 0.01 + (StartPage.button_height * 2)
-        self.build_open_button("Open a Template", "open_file", init_x, metaHandler_y)
+        self.build_open_button("Open a Template", self.open_file, init_x, metaHandler_y)
         about_botton_y = metaHandler_y + 0.01 + StartPage.button_height
         self.build_button("Load Metadata Handler", "MetaHandler_Sample", init_x, about_botton_y)
         open_button_y = about_botton_y + 0.01 + StartPage.button_height
@@ -84,26 +85,27 @@ class StartPage:
             self.my_controller.show_frame(template_name)
 
     def build_open_button(self, text, command, x_pos, y_pos):
-        self.load_template_button = tk.Button(self.my_frame, text=text, bg="#C0C0C0", fg="#34495E",
+        self.load_template_button = tk.Button(self.my_frame, text=text, bg="white", fg="#34495E",
                                               font=10, command=command)
         self.load_template_button.place(relx=x_pos, rely=y_pos, relwidth=StartPage.button_width,
                                         relheight=StartPage.button_height)
 
     def build_button(self, text, command, x_pos, y_pos):
-        self.load_template_button = tk.Button(self.my_frame, text=text, highlightbackground="#000000", fg="#34495E",
+        self.load_template_button = tk.Button(self.my_frame, text=text, highlightbackground="white", fg="#34495E",
                                               font=10, command=lambda: self.my_controller.show_frame(command))
         self.load_template_button.place(relx=x_pos, rely=y_pos, relwidth=StartPage.button_width,
                                         relheight=StartPage.button_height)
         #self.load_template_button.config(highlightbackground="black")
 
     def build_customised_buttons(self, text, x_pos, y_pos, width, height, command):
-        self.load_template_button = tk.Button(self.my_frame, text=text, highlightbackground="#000000", fg="#34495E",
+        self.load_template_button = tk.Button(self.my_frame, text=text, highlightbackground="white", fg="#34495E",
                                               font=10, command=command)
         self.load_template_button.place(relx=x_pos, rely=y_pos, relwidth=width,
                                         relheight=height)
         #self.load_template_button.config(highlightbackground="black")
 
     def open_file(self):
+        print "this is open"
         if os.name == 'nt':
             opened_file_path = askopenfilename(initialdir="C:\\", title="Select file",
                                                filetypes=(("csv files", "*.csv"), ("all files", "*.*")))
@@ -115,11 +117,6 @@ class StartPage:
             # TODO: make sure only csv files are being passed so as to no have some mad error you cant check for
             opened_file_csv = pd.read_csv(opened_file_path)
             try:
-                """
-                first should check for what template the file being opened should be opened with
-                send an error message if the file does not match any of the available templates on the application
-                if the file matches of the templates available, screen should switch to the screen for the users
-                """
 
                 curr_template = self.template_list[self.page_identifier]
                 if curr_template.open_saved_files(opened_file_csv) == False:
