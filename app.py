@@ -1,9 +1,9 @@
-import tkinter
+import Tkinter
 from UI import DataEntry
 
 
 if __name__ == '__main__':
-    root = tkinter.Tk()
-    root.title("Better than Metadata Wizard")
+    root = Tkinter.Tk()
+    root.title("Metadata Witch")
     DataEntry.DataEntry(root)
     root.mainloop()
