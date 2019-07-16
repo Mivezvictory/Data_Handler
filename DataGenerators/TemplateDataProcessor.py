@@ -15,11 +15,14 @@ class TemplateDataProcessor:
 
     template_labels =[
                         ["Station", "Bottle#", "Date", "Latitude", "Longitude", "Arrival time", "Departure",
-                        "Depth(m)", "Lowe depth(m)", "Lowe temp(c)", "Analyst Name", "Flurometer depth(m)", "Time on",
-                         "Time off", "Serial No.", "#Casts", "Secchi Depth", "Air temperature", "Surface temperature", "Surface sample time",
-                        "Bottle temperature", "Bottle sample depth", "Bottom bottle ID", "Phytoplankton Sample",
-                        "Zooplankton depth(m)", "Formalin added", "Wave Ht(m)", "CBM sample", "Weather Conditions",
-                         "Beaufort Wind Scale"],
+                         "Depth(m)", "Lowe depth(m)", "Lowe temp(c)", "Analyst Name 1", "Flurometer depth(m)", "Time on",
+                         "Time off", "Serial No.", "#Casts","Analyst Name 2", "Secchi Depth", "Analyst Name 3",
+                         "Air temperature", "Surface temperature", "Surface sample time", "Bottle temperature",
+                         "Bottle sample depth", "Bottom bottle ID", "Analyst Name 4", "Phytoplankton Sample",
+                         "Analyst Name 5", "Zooplankton depth(m)", "Formalin added", "Analyst Name 6", "Wave Ht(m)",
+                         "Analyst Name 7", "Toxin Sample", "Analyst Name 8", "CBM sample", "Analyst Name 9",
+                         "Weather Conditions", "Beaufort Wind Scale", "CTD data collected", "PAR profiles collected",
+                         "Notes"],
 
                         ["Station", "ChemID", "Bottle#", "Date", "Latitude", "Longitude", "Arrival time", "Departure",
                          "Depth(m)", "Lowe depth(m)", "Lowe temp(c)", "Analyst Name", "Flurometer depth(m)", "Time on",
@@ -65,7 +68,19 @@ class TemplateDataProcessor:
                          "Position2_3", "time2_3_1", "time2_3_2", "time2_3_3", "Length of flow measurement3",
                          "Position3_1", "time3_1_1", "time3_1_2", "time3_1_3",
                          "Position3_2", "time3_2_1", "time3_2_2", "time3_2_3",
-                         "Position3_3", "time3_3_1", "time3_3_2", "time3_3_3", "Notes"]
+                         "Position3_3", "time3_3_1", "time3_3_2", "time3_3_3", "Notes"],
+
+                        ["Station", "Date", "Latitude", "Longitude", "Arrival time", "Departure", "Air Value 1",
+                         "Air Value 2", "0.10 Value 1", "0.10 Value 2", "0.50 Value 1", "0.50 Value 2", "1.00 Value 1",
+                         "1.00 Value 2", "1.50 Value 1", "1.50 Value 2", "2.00 Value 1", "2.00 Value 2", "2.50 Value 1",
+                         "2.50 Value 2", "3.00 Value 1", "3.00 Value 2", "3.50 Value 1", "3.50 Value 2", "4.00 Value 1",
+                         "4.00 Value 2", "4.50 Value 1", "4.50 Value 2", "5.00 Value 1", "5.00 Value 2", "5.50 Value 1",
+                         "5.50 Value 2", "6.00 Value 1", "6.00 Value 2", "6.50 Value 1", "6.50 Value 2", "7.00 Value 1",
+                         "7.00 Value 2", "7.50 Value 1", "7.50 Value 2", "Air2 Value 1", "Air2 Value 2", "Notes"],
+
+                        ["Station", "Date", "Latitude", "Longitude", "Arrival time", "Departure", "Cast1 On",
+                         "Cast1 Off", "Cast1 Depth", "Cast2 On", "Cast2 Off", "Cast2 Depth", "Cast3 On",
+                         "Cast3 Off", "Cast3 Depth", "Notes"]
 
 
                     ]

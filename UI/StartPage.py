@@ -40,12 +40,12 @@ class StartPage:
             have them as constants in their respective classes and just import them and use class.Variable containing 
             the name to get it.
 
-        self.template_names = {"Template 1: Still thinking of a name for this, lets call it nameless": "DataApp",
+        self.template_names = {"Template 1: Claire's field template": "DataApp",
                                "Template 2: readings from the great pyramid of giza, writtings of Pharaoh Ramseys II":
                                "CustomPage", "Template 3: The joker finally meets the thief": "Template_3"}
         """
-        self.template_names = {"Template 1: Still thinking of a name for this, lets call it nameless": "DataApp",
-                               "Template 2: The joker finally meets the thief": "Template_3"}
+        self.template_names = {"Template 1: Claire's field template": "DataApp",
+                               "Template 2: Katelyn's field template": "Template_3"}
         init_x = 0.25
         init_y = 0.3
 
@@ -53,8 +53,8 @@ class StartPage:
         self.drop_down_menu = tk.StringVar()
         self.drop_down_menu.set('select a template')  # set the default option
 
-        self.set_options = tk.OptionMenu(self.my_frame, self.drop_down_menu, "Template 1: Still thinking of a name for this, lets call it nameless",
-                                         "Template 2: The joker finally meets the thief")
+        self.set_options = tk.OptionMenu(self.my_frame, self.drop_down_menu, "Template 1: Claire's field template",
+                                         "Template 2: Katelyn's field template")
         self.set_options.configure(font=("", 12), fg="#34495E")
         self.set_options.place(relx=init_x, rely=set1_y, relwidth=StartPage.button_width,
                                 relheight=StartPage.button_height)
@@ -86,13 +86,16 @@ class StartPage:
 
     def build_open_button(self, text, command, x_pos, y_pos):
         self.load_template_button = tk.Button(self.my_frame, text=text, bg="white", fg="#34495E",
-                                              font=10, command=command)
+                                              font=10, command=self.default_message)
         self.load_template_button.place(relx=x_pos, rely=y_pos, relwidth=StartPage.button_width,
                                         relheight=StartPage.button_height)
 
+    def default_message(self):
+        tkMessageBox.showinfo("Title", "Function currently unavailable on this version of the application")
+
     def build_button(self, text, command, x_pos, y_pos):
         self.load_template_button = tk.Button(self.my_frame, text=text, highlightbackground="white", fg="#34495E",
-                                              font=10, command=lambda: self.my_controller.show_frame(command))
+                                              font=10, command=self.default_message)
         self.load_template_button.place(relx=x_pos, rely=y_pos, relwidth=StartPage.button_width,
                                         relheight=StartPage.button_height)
         #self.load_template_button.config(highlightbackground="black")

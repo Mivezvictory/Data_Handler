@@ -133,12 +133,18 @@ class Menu_Sample:
                 file_names.append(split_file[0] + "1" + extension)
                 file_names.append(split_file[0] + "2" + extension)
                 file_names.append(split_file[0] + "3" + extension)
+                file_names.append(split_file[0] + "_CTD" + extension)
+                file_names.append(split_file[0] + "_PAR_profiles" + extension)
                 curr_template.save_data_entries(file_names)
 
             except AttributeError:
                 traceback.print_exc()
-
-            tkMessageBox.showinfo("Title", "File saved")
+            except IOError:
+                traceback.print_exc()
+                tkMessageBox.showinfo("Title", "Please close " + self.file_name + "before replacing")
+                self.file_name = ""
+            if self.file_name:
+                tkMessageBox.showinfo("Title", "File saved")
 
     def client_exit(self):
         exit()

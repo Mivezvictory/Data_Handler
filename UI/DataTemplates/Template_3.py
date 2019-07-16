@@ -17,7 +17,7 @@ class Template_3:
     entry_height = 0.03
 
     # class variables for UI layout
-    entry_boldness = 1
+    entry_boldness = 2
     label_font = ("", 12)
     label_color = "white"
     entry_color = "white"
@@ -31,7 +31,7 @@ class Template_3:
     def __init__(self, parent, controller, my_frames):
         self.master = parent
         self.my_controller = controller
-        self.my_frame = tk.Frame(self.master, bg='#d9d9d9')  # creates a frame for this UI
+        self.my_frame = tk.Frame(self.master, bg='#ffffff')  # creates a frame for this UI
         self.my_frame.place(relwidth=1, relheight=1)
         self.data_processor = TemplateDataProcessor.TemplateDataProcessor()
 
@@ -80,7 +80,7 @@ class Template_3:
     # accepts the x and y positions of the box
     # This method is used to build text boxes only
     def build_note_text(self, x_pos, y_pos):
-        note = Text(self.my_frame)
+        note = Text(self.my_frame, bd=Template_3.entry_boldness)
         note.place(relx=x_pos, rely=y_pos, relwidth=Template_3.entry_width * 3.25,
                    relheight=Template_3.entry_height * 8)
         Template_3.widget_list.update({"Notes": note})
@@ -309,12 +309,12 @@ class Template_3:
 
         button_x = middle_row_x * 1.5
 
-        back_button = tk.Button(self.my_frame, text="Back", bg="#ff0000", fg="#34495E",
+        back_button = tk.Button(self.my_frame, text="Back", bg="#cccccc", fg="#34495E",
                                 font=10, command=lambda: self.my_controller.show_frame("StartPage"))
         back_button.place(relx=button_x, rely=y_axis[33], relwidth=Template_3.label_width / 2,
                           relheight=Template_3.label_height)
 
-        forward_button = tk.Button(self.my_frame, text="Forward", bg="green", fg="#34495E", font=10,
-                                   command=self.test)
-        forward_button.place(relx=button_x + 0.01 + Template_3.label_width / 2, rely=y_axis[33],
-                             relwidth=Template_3.label_width / 2, relheight=Template_3.label_height)
+        #forward_button = tk.Button(self.my_frame, text="Forward", bg="green", fg="#34495E", font=10,
+                                   #command=self.test)
+        #forward_button.place(relx=button_x + 0.01 + Template_3.label_width / 2, rely=y_axis[33],
+                             #relwidth=Template_3.label_width / 2, relheight=Template_3.label_height)
