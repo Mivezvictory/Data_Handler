@@ -1,4 +1,4 @@
-import tkinter as tk
+import Tkinter as tk
 
 
 class V_ScrollableFrame_Sample(tk.Frame):
