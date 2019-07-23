@@ -96,6 +96,9 @@ class Menu_Sample:
     def save_file(self):
         if self.file_name:  # ensures the save as procedure is only executed if a file name is entered and saved.
             try:
+                file_name_extension = self.file_name.split(".")
+                if len(file_name_extension) == 1:
+                    self.file_name = self.file_name + ".csv"
                 f = open(self.file_name, "w+")
                 try:
                     file_names = [self.file_name]
@@ -122,6 +125,7 @@ class Menu_Sample:
                                                         filetypes=(("csv files", "*.csv"), ("all files", "*.*")))
 
         if self.file_name:  # ensures the save as procedure is only executed if a file name is entered and saved.
+            print self.file_name
             try:
 
                 curr_template = self.template_list[self.page_identifier]

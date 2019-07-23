@@ -99,7 +99,7 @@ class DataApp:
         for text in options:
             r_button = Radiobutton(self.my_frame, text=text, variable=variable, value=text, indicatoron=False)
             r_button.place(relx=x_pos, rely=y_pos+count,
-                           relwidth=DataApp.entry_width * 1.5, relheight=DataApp.entry_height)
+                           relwidth=DataApp.label_width , relheight=DataApp.entry_height)
             count += DataApp.entry_height
 
         DataApp.widget_list.update({label: variable})
@@ -162,17 +162,42 @@ class DataApp:
         for i in range(2, 35):
             y_axis[i] = (i - 1) * (init_y + DataApp.entry_height)
 
-        self.build_data_entry("Station", init_x, init_y)
-        self.build_data_entry("Bottle#", 0, y_axis[2])
+        station_name = ["GL_LWPO16Mooring", "GL_LWPO_M", "GL_LWPO1", "GL_LWPO2", "GL_LWPO3", "GL_LWPO4", "GL_LWPO5",
+                        "GL_LWPO6", "GL_LWPO7", "GL_LWPO8", "GL_LWPO9", "GL_LWPO9_B", "GL_MBMoorA", "GL_LMB16B_Moor",
+                        "GL_LMB_M", "GL_LMB2", "GL_LMB3", "GL_LMB4", "GL_LMB5", "L_LMB6", "GL_LMB7", "GL_LMB8",
+                        "GL_LMB9", "GL_LMB10", "GL_LMB11", "GL_LMB12", "GL_LMB13", "GL_LMB14", "GL_LMB15", "GL_Nar1",
+                        "GL_LWH16Moor", "GL_WH1", "GL_DBW1", "GL_DBW2", "GL_DBW3","GL_DBW4", "GL_DBW5", "GL_BR1",
+                        "GL_FR1", "GL_OFR1", "GL_RDR1", "GL_Shr1", "GL_SR1", "GL_WHR1", "GL_StR1"]
+
+        alt_station_name = ["GL_LWO_M", "GL_LWO_M2", "WO207005", "WO206012", "GL_LWPO3", "WO171986", "WOSB_R2",
+                            "WOSB_R3", "WO182986", "WO284986", "WO308102", "WO291091", "WO292085", "WO221005",
+                            "WO220997", "WO219008", "WO290095", "WO289098", "WO287106", "GL_LMB_M2", "GL_LMB_M",
+                            "MB060864", "MB066840", "MB165947", "MB168935", "MB166947", "MB125861", "MB099881",
+                            "MB116879", "MB070833", "MB027854", "MB139884", "MB030847", "MB137886", "MB145886",
+                            "MB041827", "MB038808", "MB036796", "MB034840", "GL_Nar1", "LMBNB_R1", "LMBNB_R2",
+                            "GL_LWH_M", "WH204957", "GL_DBW1", "GL_DBW2", "GL_DBW3", "GL_DBW4", "GL_DBW5", "GL_FR1",
+                            "GL_OFR1", "GL_RDR1", "GL_Shr1", "GL_SR1", "GL_WHR1", "GL_StR1"]
+
+        #self.build_data_entry("Station Name", init_x, init_y)
+        self.build_label("Station Name", DataApp.label_width, init_x, init_y)
+        self.build_drop_down("Station Name", station_name, init_x + DataApp.label_width, init_y, DataApp.entry_width)
+
+        self.build_label("Alt. Name", DataApp.label_width, init_x, y_axis[2])
+        self.build_drop_down("Alt. Name", alt_station_name, init_x + DataApp.label_width, y_axis[2],
+                             DataApp.entry_width)
+        self.build_data_entry("Bottle#", 0, y_axis[3])
 
         self.build_data_entry("Arrival time", 0, y_axis[5])
         self.build_data_entry("Departure", 0, y_axis[6])
-        self.build_data_entry("Depth(m)", 0, y_axis[7])
+        self.build_data_entry("Station Depth(m)", 0, y_axis[7])
         self.build_data_entry("Lowe depth(m)", 0, y_axis[8])
         self.build_data_entry("Lowe temp(c)", 0, y_axis[9])
 
         fourth_row_x = init_x + (DataApp.label_width / 1.5)
-        self.build_data_entry("Analyst Name 1", init_x, y_axis[11])
+        self.build_label("Analyst Name", DataApp.label_width, init_x, y_axis[11])
+        self.build_drop_down("Analyst Name 1", ["Claire Herbert", "Katelyn Rodgers", "Greg McCullough"],
+                             init_x + DataApp.label_width, y_axis[11], DataApp.entry_width)
+
 
         self.build_data_entry("Flurometer depth(m)", init_x, y_axis[12])
         self.build_data_entry("Time on", init_x, y_axis[13])
@@ -180,15 +205,20 @@ class DataApp:
         self.build_data_entry("Serial No.", init_x, y_axis[15])
         self.build_data_entry("#Casts", init_x, y_axis[16])
 
-        self.build_data_entry("Analyst Name 2", init_x, y_axis[18])
-        self.build_data_entry("Secchi Depth", init_x, y_axis[19])
+        self.build_label("Analyst Name", DataApp.label_width, init_x, y_axis[18])
+        self.build_drop_down("Analyst Name 2", ["Claire Herbert", "Katelyn Rodgers", "Greg McCullough"],
+                             init_x + DataApp.label_width, y_axis[18], DataApp.entry_width)
 
-        self.build_data_entry("Analyst Name 3", init_x, y_axis[21])
-        self.build_data_entry("Air temperature", init_x, y_axis[22])
-        self.build_data_entry("Surface temperature", init_x, y_axis[23])
+        self.build_data_entry("Secchi Depth(m)", init_x, y_axis[19])
+
+        self.build_label("Analyst Name", DataApp.label_width, init_x, y_axis[21])
+        self.build_drop_down("Analyst Name 3", ["Claire Herbert", "Katelyn Rodgers", "Greg McCullough"],
+                             init_x + DataApp.label_width, y_axis[21], DataApp.entry_width)
+        self.build_data_entry("Air temperature(C)", init_x, y_axis[22])
+        self.build_data_entry("Surface temperature(C)", init_x, y_axis[23])
         self.build_data_entry("Surface sample time", init_x, y_axis[24])
-        self.build_data_entry("Bottle temperature", init_x, y_axis[25])
-        self.build_data_entry("Bottle sample depth", init_x, y_axis[26])
+        self.build_data_entry("Bottom temperature(C)", init_x, y_axis[25])
+        self.build_data_entry("Bottom sample depth(m)", init_x, y_axis[26])
         self.build_data_entry("Bottom bottle ID", init_x, y_axis[27])
 
         self.build_label("Notes", fourth_row_x, init_x, y_axis[29])
@@ -198,36 +228,54 @@ class DataApp:
         middle_row_x = DataApp.label_width + DataApp.entry_width + DataApp.label_width/2
         self.build_data_entry("Date", middle_row_x, init_y)
 
-        self.build_data_entry("Analyst Name 4", middle_row_x, y_axis[3])
-        self.build_label("Phytoplankton Sample", DataApp.label_width, middle_row_x, y_axis[4])
-        self.build_drop_down("Phytoplankton Sample", ["Schinct.", "Net"], middle_row_x + DataApp.label_width, y_axis[4],
+        self.build_label("Analyst Name", DataApp.label_width, middle_row_x, y_axis[5])
+        self.build_drop_down("Analyst Name 4", ["Claire Herbert", "Katelyn Rodgers", "Greg McCullough"],
+                             middle_row_x + DataApp.label_width, y_axis[5], DataApp.entry_width)
+        self.build_label("Phytoplankton Sample", DataApp.label_width, middle_row_x, y_axis[6])
+        self.build_drop_down("Phytoplankton Sample", ["None", "Schinct.", "Net"], middle_row_x + DataApp.label_width,
+                             y_axis[6], DataApp.entry_width)
+
+        self.build_label("Analyst Name", DataApp.label_width, middle_row_x, y_axis[8])
+        self.build_drop_down("Analyst Name 5", ["Claire Herbert", "Katelyn Rodgers", "Greg McCullough"],
+                             middle_row_x + DataApp.label_width, y_axis[8], DataApp.entry_width)
+
+        self.build_data_entry("Zooplankton depth(m)", middle_row_x, y_axis[9])
+        self.build_label("Formalin added", DataApp.label_width, middle_row_x, y_axis[10])
+        self.build_drop_down("Formalin added", ["No", "Yes"], middle_row_x + DataApp.label_width, y_axis[10],
                              DataApp.entry_width)
 
-        self.build_data_entry("Analyst Name 5", middle_row_x, y_axis[6])
-        self.build_data_entry("Zooplankton depth(m)", middle_row_x, y_axis[7])
-        self.build_data_entry("Formalin added", middle_row_x, y_axis[8])
-
-        self.build_data_entry("Analyst Name 6", middle_row_x, y_axis[11])
-        self.build_data_entry("Wave Ht(m)", middle_row_x, y_axis[12])
-
-        self.build_data_entry("Analyst Name 7", middle_row_x, y_axis[14])
-        self.build_label("Toxin Sample", DataApp.label_width, middle_row_x, y_axis[15])
-        self.build_drop_down("Toxin Sample", ["Whole Water", "Zoonet"], middle_row_x + DataApp.label_width, y_axis[15],
+        self.build_label("Analyst Name", DataApp.label_width, middle_row_x, y_axis[12])
+        self.build_drop_down("Analyst Name 6", ["Claire Herbert", "Katelyn Rodgers", "Greg McCullough"],
+                             middle_row_x + DataApp.label_width, y_axis[12], DataApp.entry_width)
+        self.build_label("Toxin Sample", DataApp.label_width, middle_row_x, y_axis[13])
+        self.build_drop_down("Toxin Sample", ["None", "Whole Water", "Zoonet"], middle_row_x + DataApp.label_width, y_axis[13],
                              DataApp.entry_width)
 
-        self.build_data_entry("Analyst Name 8", middle_row_x, y_axis[18])
-        self.build_data_entry("CBM sample", middle_row_x, y_axis[19])
+        self.build_label("Analyst Name", DataApp.label_width, middle_row_x, y_axis[15])
+        self.build_drop_down("Analyst Name 7", ["Claire Herbert", "Katelyn Rodgers", "Greg McCullough"],
+                             middle_row_x + DataApp.label_width, y_axis[15], DataApp.entry_width)
+        self.build_label("CBM sample", DataApp.label_width, middle_row_x, y_axis[16])
+        self.build_drop_down("CBM sample", ["No", "Yes"], middle_row_x + DataApp.label_width, y_axis[16],
+                             DataApp.entry_width)
 
-        self.build_data_entry("Analyst Name 9", middle_row_x, y_axis[21])
-        self.build_label("Weather Conditions ", DataApp.label_width, middle_row_x, y_axis[22])
+        self.build_label("MBProv-AIS taken", DataApp.label_width, middle_row_x, y_axis[18])
+        self.build_drop_down("MBProv-AIS taken", ["No", "Yes"], middle_row_x + DataApp.label_width, y_axis[18],
+                             DataApp.entry_width)
 
-        weather_labels = ["Clear(0 tenths)","Mainly Clear(1-4 tenths)", "Mostly Cloudy(5-9 tenths)", "Cloudy(10 tenths)"
+        self.build_label("Analyst Name", DataApp.label_width, middle_row_x, y_axis[20])
+        self.build_drop_down("Analyst Name 8", ["Claire Herbert", "Katelyn Rodgers", "Greg McCullough"],
+                             middle_row_x + DataApp.label_width, y_axis[20], DataApp.entry_width)
+        self.build_label("Weather Conditions ", DataApp.label_width, middle_row_x, y_axis[21])
+
+        weather_labels = ["Clear(0 tenths)", "Mainly Clear(1-4 tenths)", "Mostly Cloudy(5-9 tenths)","Cloudy(10 tenths)"
                           ]
-        self.build_radiobutton("Weather Conditions", weather_labels, middle_row_x + DataApp.label_width, y_axis[22])
+        self.build_radiobutton("Weather Conditions", weather_labels, middle_row_x , y_axis[22])
 
-        wind_scale = ["Calm", "Light Air", "Light Breeze", "Gentle Breeze", "Moderate Breeze",
-                      "Fresh Breeze", "Strong Breeze", "Near Gale", "Gale", "Strong Gale", "Storm"]
+        wind_scale = ["Calm, 0", "Light Air, 1", "Light Breeze, 2", "Gentle Breeze, 3", "Moderate Breeze, 4",
+                      "Fresh Breeze, 5", "Strong Breeze, 6", "Near Gale, 7", "Gale, 8", "Strong Gale, 9", "Storm, 10",
+                      "Violent Storm, 11", "Hurricane, 12"]
 
+        self.build_data_entry("Wave Ht(m)", middle_row_x, y_axis[26])
         self.build_label("Beaufort Wind Scale", DataApp.label_width, middle_row_x, y_axis[27])
         self.build_drop_down("Beaufort Wind Scale", wind_scale, middle_row_x + DataApp.label_width, y_axis[27],
                              DataApp.entry_width)
@@ -245,13 +293,14 @@ class DataApp:
 
         # rows of entry of the Y axis
         ctd_width = 0.1
+        on_off_width = ctd_width/2
         self.build_label("CTD data collected", DataApp.label_width, final_column_x, y_axis[4])
-        self.build_drop_down("CTD data collected", ["No", "Yes"], DataApp.label_width + final_column_x, y_axis[4],
+        self.build_drop_down("CTD data collected", ["Yes", "No"], DataApp.label_width + final_column_x, y_axis[4],
                              DataApp.label_width/2)
         self.build_data_spec("CTD (Idronaut) profiles. Serial No.", 0.2, 0.05, final_column_x, y_axis[5])
         self.build_data_spec("Depth", 0.2, 0.05, final_column_x, y_axis[6])
 
-        label_text = ["Cast#", " On ", " Off ", " m "]
+        label_text = ["Cast#", " On ", " Off ", " Comments "]
         label_text_entry = ["Cast#", "On", "Off", "Depth"]
         for i in range(0, 4):
             self.build_label(label_text[i], ctd_width, final_column_x + (ctd_width * i), y_axis[7])
@@ -267,7 +316,7 @@ class DataApp:
 
         par_width = ctd_width * 4.25
         self.build_label("PAR profiles collected", DataApp.label_width, final_column_x, y_axis[12])
-        self.build_drop_down("PAR profiles collected", ["No", "Yes"], DataApp.label_width + final_column_x, y_axis[12],
+        self.build_drop_down("PAR profiles collected", ["Yes", "No"], DataApp.label_width + final_column_x, y_axis[12],
                              DataApp.label_width / 2)
         #self.build_label("PAR profiles", par_width, final_column_x, y_axis[12])
         self.build_label("Depth(m)", ctd_width, final_column_x, y_axis[13])
@@ -290,7 +339,7 @@ class DataApp:
         back_button.place(relx=button_x, rely=y_axis[33], relwidth=DataApp.label_width / 2,
                           relheight=DataApp.label_height)
 
-        #forward_button = tk.Button(self.my_frame, text="Forward", bg="green", fg="#34495E", font=10,
-                                   #command=self.test)
-        #forward_button.place(relx=button_x + 0.01 + DataApp.label_width / 2, rely=y_axis[33],
-                             #relwidth=DataApp.label_width / 2, relheight=DataApp.label_height)
+        forward_button = tk.Button(self.my_frame, text="Forward", bg="green", fg="#34495E", font=10,
+                                   command=self.test)
+        forward_button.place(relx=button_x + 0.01 + DataApp.label_width / 2, rely=y_axis[33],
+                             relwidth=DataApp.label_width / 2, relheight=DataApp.label_height)
