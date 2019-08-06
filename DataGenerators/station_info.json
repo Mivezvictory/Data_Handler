@@ -1,0 +1,356 @@
+[
+    {
+        "New_Station_ID": "GL_LWO_M", 
+        "Station": "GL_LWPO16Mooring", 
+        "Latitude_DD": "51.66683", 
+        "Longitude_DD": "-99.71313"
+    }, 
+    {
+        "New_Station_ID": "GL_LWO_M2", 
+        "Station": "GL_LWPO_M", 
+        "Latitude_DD": "51.66751", 
+        "Longitude_DD": "-99.7077"
+    }, 
+    {
+        "New_Station_ID": "WO207005", 
+        "Station": "GL_LWPO1", 
+        "Latitude_DD": "52.06611", 
+        "Longitude_DD": "-100.05395"
+    }, 
+    {
+        "New_Station_ID": "WO206012", 
+        "Station": "GL_LWPO2", 
+        "Latitude_DD": "52.06232", 
+        "Longitude_DD": "-100.12189"
+    }, 
+    {
+        "New_Station_ID": "GL_LWPO3", 
+        "Station": "GL_LWPO3", 
+        "Latitude_DD": "", 
+        "Longitude_DD": ""
+    }, 
+    {
+        "New_Station_ID": "WO171986", 
+        "Station": "GL_LWPO4", 
+        "Latitude_DD": "51.70568", 
+        "Longitude_DD": "-99.8639"
+    }, 
+    {
+        "New_Station_ID": "WOSB_R2", 
+        "Station": "", 
+        "Latitude_DD": "", 
+        "Longitude_DD": ""
+    }, 
+    {
+        "New_Station_ID": "WOSB_R3", 
+        "Station": "", 
+        "Latitude_DD": "", 
+        "Longitude_DD": ""
+    }, 
+    {
+        "New_Station_ID": "", 
+        "Station": "", 
+        "Latitude_DD": "", 
+        "Longitude_DD": ""
+    }, 
+    {
+        "New_Station_ID": "WO182986", 
+        "Station": "GL_LWPO5", 
+        "Latitude_DD": "51.82093", 
+        "Longitude_DD": "-99.86375"
+    }, 
+    {
+        "New_Station_ID": "WO284986", 
+        "Station": "GL_LWPO6", 
+        "Latitude_DD": "52.83771", 
+        "Longitude_DD": "-99.85767"
+    }, 
+    {
+        "New_Station_ID": "WO308102", 
+        "Station": "GL_LWPO7", 
+        "Latitude_DD": "53.08167", 
+        "Longitude_DD": "-101.01596"
+    }, 
+    {
+        "New_Station_ID": "WO291091", 
+        "Station": "GL_LWPO8", 
+        "Latitude_DD": "52.9109", 
+        "Longitude_DD": "-100.90706"
+    }, 
+    {
+        "New_Station_ID": "WO292085", 
+        "Station": "", 
+        "Latitude_DD": "52.92332", 
+        "Longitude_DD": "-100.84969"
+    }, 
+    {
+        "New_Station_ID": "WO221005", 
+        "Station": "GL_LWPO9", 
+        "Latitude_DD": "52.20713", 
+        "Longitude_DD": "-100.04901"
+    }, 
+    {
+        "New_Station_ID": "WO220997", 
+        "Station": "GL_LWPO9_B", 
+        "Latitude_DD": "52.20235", 
+        "Longitude_DD": "-99.97162"
+    }, 
+    {
+        "New_Station_ID": "WO219008", 
+        "Station": "", 
+        "Latitude_DD": "52.19241", 
+        "Longitude_DD": "-100.0774"
+    }, 
+    {
+        "New_Station_ID": "WO290095", 
+        "Station": "", 
+        "Latitude_DD": "52.9039", 
+        "Longitude_DD": "-100.95063"
+    }, 
+    {
+        "New_Station_ID": "WO289098", 
+        "Station": "", 
+        "Latitude_DD": "52.89349", 
+        "Longitude_DD": "-100.97797"
+    }, 
+    {
+        "New_Station_ID": "WO287106", 
+        "Station": "", 
+        "Latitude_DD": "52.86773", 
+        "Longitude_DD": "-101.05906"
+    }, 
+    {
+        "New_Station_ID": "", 
+        "Station": "GL_MBMoorA", 
+        "Latitude_DD": "51.74142", 
+        "Longitude_DD": "-99.47723"
+    }, 
+    {
+        "New_Station_ID": "GL_LMB_M2", 
+        "Station": "GL_LMB16B_Moor", 
+        "Latitude_DD": "51.73412", 
+        "Longitude_DD": "-99.44858"
+    }, 
+    {
+        "New_Station_ID": "GL_LMB_M", 
+        "Station": "GL_LMB_M", 
+        "Latitude_DD": "51.73412", 
+        "Longitude_DD": "-99.44858"
+    }, 
+    {
+        "New_Station_ID": "MB060864", 
+        "Station": "GL_LMB2", 
+        "Latitude_DD": "50.59524", 
+        "Longitude_DD": "-98.63508"
+    }, 
+    {
+        "New_Station_ID": "MB066840", 
+        "Station": "", 
+        "Latitude_DD": "50.65848", 
+        "Longitude_DD": "-98.40141"
+    }, 
+    {
+        "New_Station_ID": "MB165947", 
+        "Station": "", 
+        "Latitude_DD": "51.65656", 
+        "Longitude_DD": "-99.47073"
+    }, 
+    {
+        "New_Station_ID": "MB168935", 
+        "Station": "GL_LMB3", 
+        "Latitude_DD": "51.6845", 
+        "Longitude_DD": "-99.34542"
+    }, 
+    {
+        "New_Station_ID": "MB166947", 
+        "Station": "GL_LMB4", 
+        "Latitude_DD": "51.65679", 
+        "Longitude_DD": "-99.47031"
+    }, 
+    {
+        "New_Station_ID": "MB125861", 
+        "Station": "GL_LMB5", 
+        "Latitude_DD": "51.24839", 
+        "Longitude_DD": "-98.61368"
+    }, 
+    {
+        "New_Station_ID": "MB099881", 
+        "Station": "GL_LMB6", 
+        "Latitude_DD": "50.9902", 
+        "Longitude_DD": "-98.80984"
+    }, 
+    {
+        "New_Station_ID": "MB116879", 
+        "Station": "GL_LMB7", 
+        "Latitude_DD": "51.16287", 
+        "Longitude_DD": "-98.78974"
+    }, 
+    {
+        "New_Station_ID": "MB070833", 
+        "Station": "GL_LMB8", 
+        "Latitude_DD": "50.70197", 
+        "Longitude_DD": "-98.33441"
+    }, 
+    {
+        "New_Station_ID": "MB027854", 
+        "Station": "GL_LMB9", 
+        "Latitude_DD": "50.27289", 
+        "Longitude_DD": "-98.54079"
+    }, 
+    {
+        "New_Station_ID": "MB139884", 
+        "Station": "", 
+        "Latitude_DD": "51.39201", 
+        "Longitude_DD": "-98.84696"
+    }, 
+    {
+        "New_Station_ID": "MB030847", 
+        "Station": "", 
+        "Latitude_DD": "50.30809", 
+        "Longitude_DD": "-98.47503"
+    }, 
+    {
+        "New_Station_ID": "MB137886", 
+        "Station": "GL_LMB10", 
+        "Latitude_DD": "51.37347", 
+        "Longitude_DD": "-98.85562"
+    }, 
+    {
+        "New_Station_ID": "MB145886", 
+        "Station": "GL_LMB11", 
+        "Latitude_DD": "51.4533", 
+        "Longitude_DD": "-98.85673"
+    }, 
+    {
+        "New_Station_ID": "MB041827", 
+        "Station": "GL_LMB12", 
+        "Latitude_DD": "50.40502", 
+        "Longitude_DD": "-98.25905"
+    }, 
+    {
+        "New_Station_ID": "MB038808", 
+        "Station": "GL_LMB13", 
+        "Latitude_DD": "50.38232", 
+        "Longitude_DD": "-98.08292"
+    }, 
+    {
+        "New_Station_ID": "MB036796", 
+        "Station": "GL_LMB14", 
+        "Latitude_DD": "50.35509", 
+        "Longitude_DD": "-97.96092"
+    }, 
+    {
+        "New_Station_ID": "MB034840", 
+        "Station": "GL_LMB15", 
+        "Latitude_DD": "50.3389", 
+        "Longitude_DD": "-98.40052"
+    }, 
+    {
+        "New_Station_ID": "GL_Nar1", 
+        "Station": "GL_Nar1", 
+        "Latitude_DD": "51.08447", 
+        "Longitude_DD": "-98.78416"
+    }, 
+    {
+        "New_Station_ID": "LMBNB_R1", 
+        "Station": "", 
+        "Latitude_DD": "", 
+        "Longitude_DD": ""
+    }, 
+    {
+        "New_Station_ID": "LMBNB_R2", 
+        "Station": "", 
+        "Latitude_DD": "", 
+        "Longitude_DD": ""
+    }, 
+    {
+        "New_Station_ID": "GL_LWH_M", 
+        "Station": "GL_LWH16Moor", 
+        "Latitude_DD": "52.04428", 
+        "Longitude_DD": "-99.57032"
+    }, 
+    {
+        "New_Station_ID": "WH204957", 
+        "Station": "GL_WH1", 
+        "Latitude_DD": "52.04428", 
+        "Longitude_DD": "-99.57032"
+    }, 
+    {
+        "New_Station_ID": "GL_DBW1", 
+        "Station": "GL_DBW1", 
+        "Latitude_DD": "51.88594", 
+        "Longitude_DD": "-99.50464"
+    }, 
+    {
+        "New_Station_ID": "GL_DBW2", 
+        "Station": "GL_DBW2", 
+        "Latitude_DD": "51.8658", 
+        "Longitude_DD": "-99.52505"
+    }, 
+    {
+        "New_Station_ID": "GL_DBW3", 
+        "Station": "GL_DBW3", 
+        "Latitude_DD": "51.88592", 
+        "Longitude_DD": "-99.49181"
+    }, 
+    {
+        "New_Station_ID": "GL_DBW4", 
+        "Station": "GL_DBW4", 
+        "Latitude_DD": "51.88597", 
+        "Longitude_DD": "-99.52402"
+    }, 
+    {
+        "New_Station_ID": "GL_DBW5", 
+        "Station": "GL_DBW5", 
+        "Latitude_DD": "51.85684", 
+        "Longitude_DD": "-99.52502"
+    }, 
+    {
+        "New_Station_ID": "", 
+        "Station": "GL_BR1", 
+        "Latitude_DD": "", 
+        "Longitude_DD": ""
+    }, 
+    {
+        "New_Station_ID": "GL_FR1", 
+        "Station": "GL_FR1", 
+        "Latitude_DD": "51.58837", 
+        "Longitude_DD": "-98.72832"
+    }, 
+    {
+        "New_Station_ID": "GL_OFR1", 
+        "Station": "GL_OFR1", 
+        "Latitude_DD": "53.142185", 
+        "Longitude_DD": "-101.099836"
+    }, 
+    {
+        "New_Station_ID": "GL_RDR1", 
+        "Station": "GL_RDR1", 
+        "Latitude_DD": "52.876078", 
+        "Longitude_DD": "-101.04949"
+    }, 
+    {
+        "New_Station_ID": "GL_Shr1", 
+        "Station": "GL_Shr1", 
+        "Latitude_DD": "52.746664", 
+        "Longitude_DD": "-100.683278"
+    }, 
+    {
+        "New_Station_ID": "GL_SR1", 
+        "Station": "GL_SR1", 
+        "Latitude_DD": "52.196397", 
+        "Longitude_DD": "-101.061037"
+    }, 
+    {
+        "New_Station_ID": "GL_WHR1", 
+        "Station": "GL_WHR1", 
+        "Latitude_DD": "51.82965", 
+        "Longitude_DD": "-99.5476"
+    }, 
+    {
+        "New_Station_ID": "GL_StR1", 
+        "Station": "GL_StR1", 
+        "Latitude_DD": "", 
+        "Longitude_DD": ""
+    }
+]

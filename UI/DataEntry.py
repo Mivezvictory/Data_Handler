@@ -1,13 +1,13 @@
 import Tkinter as tk
 from UI import StartPage
-from UI.DataTemplates import Template_1, Template_2, Template_3
+from UI.DataTemplates import Template_1, Template_2, Template_3, Template_4
 from UI import MetaHandler_Sample
 from UI.WidgetTemplates import Menu_Sample
 
 
 class DataEntry:
     SCREENS = (StartPage.StartPage, Template_1.DataApp, MetaHandler_Sample.MetaHandler_Sample, Template_2.CustomPage,
-               Template_3.Template_3)
+               Template_3.Template_3, Template_4.Template_4)
 
     MINIMUM_HEIGHT = 650
     MINIMUM_WIDTH = 1200

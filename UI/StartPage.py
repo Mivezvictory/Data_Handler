@@ -63,7 +63,7 @@ class StartPage:
                           StartPage.button_height, self.load_template)
 
         metaHandler_y = init_y + 0.01 + (StartPage.button_height * 2)
-        self.build_open_button("Open a Template", self.open_file, init_x, metaHandler_y)
+        self.build_open_button("Open a Template", self.default_message, init_x, metaHandler_y)
         about_botton_y = metaHandler_y + 0.01 + StartPage.button_height
         self.build_button("Load Metadata Handler", "MetaHandler_Sample", init_x, about_botton_y)
         open_button_y = about_botton_y + 0.01 + StartPage.button_height
@@ -86,7 +86,7 @@ class StartPage:
 
     def build_open_button(self, text, command, x_pos, y_pos):
         self.load_template_button = tk.Button(self.my_frame, text=text, bg="white", fg="#34495E",
-                                              font=10, command=self.default_message)
+                                              font=10, command=command)
         self.load_template_button.place(relx=x_pos, rely=y_pos, relwidth=StartPage.button_width,
                                         relheight=StartPage.button_height)
 
@@ -95,7 +95,7 @@ class StartPage:
 
     def build_button(self, text, command, x_pos, y_pos):
         self.load_template_button = tk.Button(self.my_frame, text=text, highlightbackground="white", fg="#34495E",
-                                              font=10, command=self.default_message)
+                                              font=10, command=lambda: self.my_controller.show_frame(command))
         self.load_template_button.place(relx=x_pos, rely=y_pos, relwidth=StartPage.button_width,
                                         relheight=StartPage.button_height)
         #self.load_template_button.config(highlightbackground="black")
@@ -107,24 +107,3 @@ class StartPage:
                                         relheight=height)
         #self.load_template_button.config(highlightbackground="black")
 
-    def open_file(self):
-        print "this is open"
-        if os.name == 'nt':
-            opened_file_path = askopenfilename(initialdir="C:\\", title="Select file",
-                                               filetypes=(("csv files", "*.csv"), ("all files", "*.*")))
-        else:
-            opened_file_path = askopenfilename(initialdir="/", title="Select file",
-                                               filetypes=(("csv files", "*.csv"), ("all files", "*.*")))
-
-        if opened_file_path:
-            # TODO: make sure only csv files are being passed so as to no have some mad error you cant check for
-            opened_file_csv = pd.read_csv(opened_file_path)
-            try:
-
-                curr_template = self.template_list[self.page_identifier]
-                if curr_template.open_saved_files(opened_file_csv) == False:
-                    # TODO: have a better message box message for christ sake
-                    tkMessageBox.showinfo("Title", "please load correct file")
-
-            except AttributeError:
-                traceback.print_exc()

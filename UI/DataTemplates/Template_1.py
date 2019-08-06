@@ -1,6 +1,10 @@
 import Tkinter as tk
 from Tkinter import *
 from DataGenerators import TemplateDataProcessor
+import tkMessageBox
+import csv
+import json
+
 
 
 #TODO: rename template to match with other templates once constructed
@@ -30,9 +34,11 @@ class DataApp:
         self.master = parent
         self.my_controller = controller
         self.my_frame = tk.Frame(self.master, bg='#ffffff')  # creates a frame for this UI
+
         self.my_frame.place(relwidth=1, relheight=1)
         self.build_template()  # builds the template
         self.data_processor = TemplateDataProcessor.TemplateDataProcessor()
+        self.load_station_info()
 
     # builds both a label and data entry box
     # accepts the label of the entry box, the x and y coordinates
@@ -128,6 +134,73 @@ class DataApp:
         else:
             DataApp.widget_list[key].insert(0, dictionary[key])
 
+    def load_station_info(self):
+        #open the csv file
+        csv_file = open('C:\Users\Miyen-Ebi Iyakoregha\Desktop\work\Data_collector_info_files\station_data.csv','rU')
+        #parse the csv file into json
+        reader = csv.DictReader(csv_file)#, fieldnames=("Station", "New_Station_ID", "Latitude", "Longitude"))
+        out = json.dumps([row for row in reader], indent=4)
+        csv_file = open('C:\Users\Miyen-Ebi Iyakoregha\PycharmProjects\Data_Handler\DataGenerators\station_info.json',
+                        'w')
+        csv_file.write(out)
+
+    def open_json(self):
+        with open("C:\Users\Miyen-Ebi Iyakoregha\PycharmProjects\Data_Handler\DataGenerators\station_info.json", "r")\
+                as data_file:
+            return json.load(data_file)
+
+
+
+    def load_lat_long(self):
+        json_file = self.open_json()
+
+        station_name = self.data_processor.get_widget_entry(DataApp.widget_list["Station Name"])
+        alternate_name = self.data_processor.get_widget_entry(DataApp.widget_list["Alt. Name"])
+        if station_name == "None" and alternate_name == "None":
+            tkMessageBox.showinfo("Title", "Please select a valid station name and try again")
+            DataApp.widget_list["Latitude"].delete(0, END)
+            DataApp.widget_list["Longitude"].delete(0, END)
+        elif station_name != "None" and alternate_name != "None":
+            tkMessageBox.showinfo("Title", "Please select a either a station name or an alternate station name, you "
+                                           "cannot select both")
+            DataApp.widget_list["Latitude"].delete(0, END)
+            DataApp.widget_list["Longitude"].delete(0, END)
+        elif station_name == "None" and alternate_name != "None":
+            for i in range(0, len(json_file)):
+                item = json_file[i]
+                if item["New_Station_ID"] == alternate_name:
+                    if len(item["Latitude_DD"]) != 0 and len(item["Longitude_DD"]) != 0:
+                        print "found"
+                        DataApp.widget_list["Latitude"].delete(0, END)
+                        DataApp.widget_list["Longitude"].delete(0, END)
+                        DataApp.widget_list["Latitude"].insert(0, item["Latitude_DD"])
+                        DataApp.widget_list["Longitude"].insert(0, item["Longitude_DD"])
+
+                    else:
+                        DataApp.widget_list["Latitude"].delete(0, END)
+                        DataApp.widget_list["Longitude"].delete(0, END)
+                        tkMessageBox.showinfo("Title",
+                                              "This station's Latitude and Longitude are not available")
+
+        elif station_name != "None" and alternate_name == "None":
+            for i in range(0, len(json_file)):
+                item = json_file[i]
+                if item["Station"] == station_name:
+                    print "found"
+                    if len(item["Latitude_DD"]) != 0 and len(item["Longitude_DD"]) != 0:
+
+                        DataApp.widget_list["Latitude"].delete(0, END)
+                        DataApp.widget_list["Longitude"].delete(0, END)
+                        DataApp.widget_list["Latitude"].insert(0, item["Latitude_DD"])
+                        DataApp.widget_list["Longitude"].insert(0, item["Longitude_DD"])
+                    else:
+                        DataApp.widget_list["Latitude"].delete(0, END)
+                        DataApp.widget_list["Longitude"].delete(0, END)
+                        tkMessageBox.showinfo("Title",
+                                              "This station's Latitude and Longitude are not available")
+
+        #TODO: complete this method
+
     def save_data_entries(self, filename):
         test = {}
         for key in DataApp.widget_list:
@@ -153,6 +226,7 @@ class DataApp:
     # clears the template
     def handle_clearing_template(self):
         self.data_processor.handle_clearing_template(DataApp.widget_list)
+        self.build_template()
 
     def build_template(self):
         init_x = 0
@@ -162,21 +236,18 @@ class DataApp:
         for i in range(2, 35):
             y_axis[i] = (i - 1) * (init_y + DataApp.entry_height)
 
-        station_name = ["GL_LWPO16Mooring", "GL_LWPO_M", "GL_LWPO1", "GL_LWPO2", "GL_LWPO3", "GL_LWPO4", "GL_LWPO5",
-                        "GL_LWPO6", "GL_LWPO7", "GL_LWPO8", "GL_LWPO9", "GL_LWPO9_B", "GL_MBMoorA", "GL_LMB16B_Moor",
-                        "GL_LMB_M", "GL_LMB2", "GL_LMB3", "GL_LMB4", "GL_LMB5", "L_LMB6", "GL_LMB7", "GL_LMB8",
-                        "GL_LMB9", "GL_LMB10", "GL_LMB11", "GL_LMB12", "GL_LMB13", "GL_LMB14", "GL_LMB15", "GL_Nar1",
-                        "GL_LWH16Moor", "GL_WH1", "GL_DBW1", "GL_DBW2", "GL_DBW3","GL_DBW4", "GL_DBW5", "GL_BR1",
-                        "GL_FR1", "GL_OFR1", "GL_RDR1", "GL_Shr1", "GL_SR1", "GL_WHR1", "GL_StR1"]
+        station_name = ["None"]
+        alt_station_name = ["None"]
 
-        alt_station_name = ["GL_LWO_M", "GL_LWO_M2", "WO207005", "WO206012", "GL_LWPO3", "WO171986", "WOSB_R2",
-                            "WOSB_R3", "WO182986", "WO284986", "WO308102", "WO291091", "WO292085", "WO221005",
-                            "WO220997", "WO219008", "WO290095", "WO289098", "WO287106", "GL_LMB_M2", "GL_LMB_M",
-                            "MB060864", "MB066840", "MB165947", "MB168935", "MB166947", "MB125861", "MB099881",
-                            "MB116879", "MB070833", "MB027854", "MB139884", "MB030847", "MB137886", "MB145886",
-                            "MB041827", "MB038808", "MB036796", "MB034840", "GL_Nar1", "LMBNB_R1", "LMBNB_R2",
-                            "GL_LWH_M", "WH204957", "GL_DBW1", "GL_DBW2", "GL_DBW3", "GL_DBW4", "GL_DBW5", "GL_FR1",
-                            "GL_OFR1", "GL_RDR1", "GL_Shr1", "GL_SR1", "GL_WHR1", "GL_StR1"]
+        json_file = self.open_json()
+        for i in range(0, len(json_file)):
+            if len(json_file[i]["Station"]) != 0 and len(json_file[i]["New_Station_ID"]) != 0:
+                station_name.append(json_file[i]["Station"])
+                alt_station_name.append(json_file[i]["New_Station_ID"])
+            elif len(json_file[i]["Station"]) != 0 and len(json_file[i]["New_Station_ID"]) == 0:
+                station_name.append(json_file[i]["Station"])
+            elif len(json_file[i]["Station"]) != 0 and len(json_file[i]["New_Station_ID"]) == 0:
+                alt_station_name.append(json_file[i]["New_Station_ID"])
 
         #self.build_data_entry("Station Name", init_x, init_y)
         self.build_label("Station Name", DataApp.label_width, init_x, init_y)
@@ -228,6 +299,8 @@ class DataApp:
         middle_row_x = DataApp.label_width + DataApp.entry_width + DataApp.label_width/2
         self.build_data_entry("Date", middle_row_x, init_y)
 
+        #self.build_data_entry("Seabird Zmax(m)", middle_row_x, y_axis[3])
+
         self.build_label("Analyst Name", DataApp.label_width, middle_row_x, y_axis[5])
         self.build_drop_down("Analyst Name 4", ["Claire Herbert", "Katelyn Rodgers", "Greg McCullough"],
                              middle_row_x + DataApp.label_width, y_axis[5], DataApp.entry_width)
@@ -271,9 +344,10 @@ class DataApp:
                           ]
         self.build_radiobutton("Weather Conditions", weather_labels, middle_row_x , y_axis[22])
 
-        wind_scale = ["Calm, 0", "Light Air, 1", "Light Breeze, 2", "Gentle Breeze, 3", "Moderate Breeze, 4",
-                      "Fresh Breeze, 5", "Strong Breeze, 6", "Near Gale, 7", "Gale, 8", "Strong Gale, 9", "Storm, 10",
-                      "Violent Storm, 11", "Hurricane, 12"]
+        wind_scale = ["0, Calm, Less than 1", "1, Light Air, 1-3", "2, Light Breeze, 4-6", "3, Gentle Breeze, 7-10",
+                      "4, Moderate Breeze, 11-16", "5, Fresh Breeze, 17-21", "6, Strong Breeze, 22-27",
+                      "7, Near Gale, 28-33", "8, Gale, 34-40", "9, Strong Gale, 41-47", "10, Storm, 48-55",
+                      "11, Violent Storm, 56-63", "12, Hurricane, 64+"]
 
         self.build_data_entry("Wave Ht(m)", middle_row_x, y_axis[26])
         self.build_label("Beaufort Wind Scale", DataApp.label_width, middle_row_x, y_axis[27])
@@ -300,10 +374,9 @@ class DataApp:
         self.build_data_spec("CTD (Idronaut) profiles. Serial No.", 0.2, 0.05, final_column_x, y_axis[5])
         self.build_data_spec("Depth", 0.2, 0.05, final_column_x, y_axis[6])
 
-        label_text = ["Cast#", " On ", " Off ", " Comments "]
-        label_text_entry = ["Cast#", "On", "Off", "Depth"]
+        label_text_entry = ["Cast#", " On ", " Off ", " Comments "]
         for i in range(0, 4):
-            self.build_label(label_text[i], ctd_width, final_column_x + (ctd_width * i), y_axis[7])
+            self.build_label(label_text_entry[i], ctd_width, final_column_x + (ctd_width * i), y_axis[7])
 
         self.build_label("1.", ctd_width, final_column_x, y_axis[8])
         self.build_label("2.", ctd_width, final_column_x, y_axis[9])

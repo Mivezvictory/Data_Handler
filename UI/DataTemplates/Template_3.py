@@ -79,10 +79,10 @@ class Template_3:
     # builds an text box for user notes
     # accepts the x and y positions of the box
     # This method is used to build text boxes only
-    def build_note_text(self, x_pos, y_pos):
+    def build_note_text(self, x_pos, y_pos, width, height):
         note = Text(self.my_frame, bd=Template_3.entry_boldness)
-        note.place(relx=x_pos, rely=y_pos, relwidth=Template_3.entry_width * 3.25,
-                   relheight=Template_3.entry_height * 8)
+        note.place(relx=x_pos, rely=y_pos, relwidth=width,
+                   relheight=height)
         Template_3.widget_list.update({"Notes": note})
 
     def build_drop_down(self, label, options, x_pos, y_pos, width):
@@ -243,7 +243,8 @@ class Template_3:
                              y_axis[16])
 
         self.build_label("Notes: ", fourth_row_x, middle_row_x - 0.01, y_axis[19])
-        self.build_note_text(middle_row_x + Template_3.entry_width, y_axis[19])
+        self.build_note_text(middle_row_x + Template_3.entry_width, y_axis[19], Template_3.entry_width * 3.25,
+                             Template_3.entry_height * 8)
 
         # third column
         final_column_x = middle_row_x + Template_3.label_width + Template_3.entry_width + Template_3.label_width / 1.5
@@ -254,6 +255,11 @@ class Template_3:
         # rows of entry of the Y axis
         # TODO: add a culvert name before all of the flow velocity readings
         self.build_label("Flow/Velocity", Template_3.label_width, final_column_x, y_axis[5])
+        postion_text = ["Center Culvert", "North Culvert", "East Culvert", "South Culvert", "West Culvert", "Bridge"]
+
+        self.build_drop_down("Flow/Velocity1", postion_text, final_column_x + (Template_3.label_width), y_axis[5],
+                             Template_3.entry_width)
+
         self.build_data_spec("Length of flow measurement1", 0.2, 0.05, final_column_x, y_axis[6])
 
         self.build_label("Position", ctd_width, final_column_x, y_axis[7])
@@ -271,6 +277,11 @@ class Template_3:
             self.build_entry("time1_" + str(i) + "_" + str(3), ctd_width, final_column_x + (ctd_width * i), y_axis[10])
 
         self.build_label("Flow/Velocity", Template_3.label_width, final_column_x, y_axis[13])
+        postion_text = ["Center Culvert", "North Culvert", "East Culvert", "South Culvert", "West Culvert", "Bridge"]
+
+        self.build_drop_down("Flow/Velocity2", postion_text, final_column_x + (Template_3.label_width), y_axis[13],
+                             Template_3.entry_width)
+
         self.build_data_spec("Length of flow measurement2", 0.2, 0.05, final_column_x, y_axis[14])
 
         ctd_width = 0.1
@@ -290,6 +301,11 @@ class Template_3:
             self.build_entry("time2_" + str(i) + "_" +  str(3), ctd_width, final_column_x + (ctd_width * i), y_axis[18])
 
         self.build_label("Flow/Velocity", Template_3.label_width, final_column_x, y_axis[21])
+        postion_text = ["Center Culvert", "North Culvert", "East Culvert", "South Culvert", "West Culvert", "Bridge"]
+
+        self.build_drop_down("Flow/Velocity3", postion_text, final_column_x + (Template_3.label_width), y_axis[21],
+                             Template_3.entry_width)
+
         self.build_data_spec("Length of flow measurement3", 0.2, 0.05, final_column_x, y_axis[22])
 
         ctd_width = 0.1
@@ -306,6 +322,10 @@ class Template_3:
             self.build_entry("time3_" + str(i) + "_" + str(1), ctd_width, final_column_x + (ctd_width * i), y_axis[24])
             self.build_entry("time3_" + str(i) + "_" + str(2), ctd_width, final_column_x + (ctd_width * i), y_axis[25])
             self.build_entry("time3_" + str(i) + "_" + str(3), ctd_width, final_column_x + (ctd_width * i), y_axis[26])
+
+        self.build_label("Flow notes: ", fourth_row_x, final_column_x, y_axis[28])
+        self.build_note_text(final_column_x + fourth_row_x, y_axis[28], Template_3.entry_width * 4.25,
+                             Template_3.entry_height * 4)
 
         button_x = middle_row_x * 1.5
 

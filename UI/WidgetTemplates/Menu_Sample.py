@@ -21,7 +21,7 @@ class Menu_Sample:
         self.master.config(menu=menu)
         if self.page_identifier != "StartPage":  # menu is not built for the start page
             self.build_file_menu(menu)
-            self.build_edit_menu(menu)
+            self.build_tools_menu(menu)
 
     def build_file_menu(self, menu):
         # Create a menu object for the top of the window
@@ -35,11 +35,12 @@ class Menu_Sample:
         menu.add_cascade(label="File", menu=file_menu)
         return
 
-    def build_edit_menu(self, menu):
+    def build_tools_menu(self, menu):
         edit = tkinter.Menu(menu)
 
+        edit.add_command(label='Load Lat & Long', command=self.load_lat_long)
         edit.add_command(label='Clear template', command=self.clear_template)
-        menu.add_cascade(label='Edit', menu=edit)
+        menu.add_cascade(label='Tools', menu=edit)
 
     def build_help_menu(self, menu):
         help = tkinter.Menu(menu)
@@ -57,6 +58,14 @@ class Menu_Sample:
 
             curr_template = self.template_list[self.page_identifier]
             curr_template.handle_clearing_template()
+        except AttributeError:
+            traceback.print_exc()
+
+
+    def load_lat_long(self):
+        try:
+            curr_template = self.template_list[self.page_identifier]
+            curr_template.load_lat_long()
         except AttributeError:
             traceback.print_exc()
 

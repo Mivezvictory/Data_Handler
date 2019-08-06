@@ -29,7 +29,7 @@ class MetaHandler_Sample:
         # Set background color to blue and height and width at 100
         # Pack the mainframe in, the fill argument will make it take up the entire window.
         # Remember its invisible at this point, so it will not necessarily show anything besides a blue background.
-        self.mainframe = Tkinter.Frame(self.scrollable.interior_frame, bg="blue", height=100, width=100)
+        self.mainframe = Tkinter.Frame(self.scrollable.interior_frame, bg="blue", height=300, width=300)
         self.mainframe.pack(fill=Tkinter.BOTH, expand=True)
 
         # Build the grid
