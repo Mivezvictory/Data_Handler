@@ -81,13 +81,11 @@ class TemplateDataProcessor:
                          "7.00 Value 2", "7.50 Value 1", "7.50 Value 2", "Air2 Value 1", "Air2 Value 2", "Notes"],
 
                         ["Station Name", "Alt. Name", "Date", "Latitude", "Longitude", "Arrival time", "Departure", "Cast1 On",
-                         "Cast1 Off", "Cast1 Depth", "Cast2 On", "Cast2 Off", "Cast2 Depth", "Cast3 On",
-                         "Cast3 Off", "Cast3 Depth", "Notes"],
+                         "Cast1 Off", "Cast1 Comments", "Cast2 On", "Cast2 Off", "Cast2 Comments", "Cast3 On",
+                         "Cast3 Off", "Cast3 Comments", "Notes"],
 
                         ["Station Name", "Alt. Name", "Date", "Latitude", "Longitude", "Arrival time",
-                         "Departure", "value_1", "value_2"]
-
-                    ]
+                         "Departure", "value_1", "value_2"]]
 
     def get_widget_entry(self, widget):
         if isinstance(widget, Text):
@@ -190,8 +188,9 @@ class TemplateDataProcessor:
 
     def remake_csv(self, string):
         new_string = ""
+        print (string)
         split_string = []
-        line = string.split("\n")
+        line = string.splitlines()
         for each_line in range(len(line)):
             word = line[each_line].split(",")
             split_string.append(word)
@@ -200,9 +199,9 @@ class TemplateDataProcessor:
         new_string += "\n"
 
         new_string += split_string[0][8] + "," + split_string[0][9]
-        for i in range(1, 9):
-            new_string += split_string[i][8] + "," + split_string[i][9]
         new_string += "\n"
+        for i in range(1, 18):
+            new_string += split_string[i][8] + "," + split_string[i][9] + "\n"
         return new_string
 
 

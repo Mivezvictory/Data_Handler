@@ -4,12 +4,13 @@ from DataGenerators import TemplateDataProcessor
 import tkMessageBox
 import csv
 import json
+import os
 
-
+my_path = os.path.dirname(__file__)
+STATION_FILE = "station_info.json"
 
 #TODO: rename template to match with other templates once constructed
 #TODO: give each template a unique ID, for identification when opening files
-
 
 class DataApp:
     # class variables for building UI labels and entry boxes
@@ -145,8 +146,8 @@ class DataApp:
         csv_file.write(out)
 
     def open_json(self):
-        with open("C:\Users\Miyen-Ebi Iyakoregha\PycharmProjects\Data_Handler\DataGenerators\station_info.json", "r")\
-                as data_file:
+        station_file_path = os.path.join(my_path, STATION_FILE)
+        with open(station_file_path, "r") as data_file:
             return json.load(data_file)
 
 
@@ -374,7 +375,7 @@ class DataApp:
         self.build_data_spec("CTD (Idronaut) profiles. Serial No.", 0.2, 0.05, final_column_x, y_axis[5])
         self.build_data_spec("Depth", 0.2, 0.05, final_column_x, y_axis[6])
 
-        label_text_entry = ["Cast#", " On ", " Off ", " Comments "]
+        label_text_entry = ["Cast#", " On", " Off", " Comments"]
         for i in range(0, 4):
             self.build_label(label_text_entry[i], ctd_width, final_column_x + (ctd_width * i), y_axis[7])
 
@@ -383,9 +384,9 @@ class DataApp:
         self.build_label("3.", ctd_width, final_column_x, y_axis[10])
 
         for i in range(1, 4):
-            self.build_entry("Cast1 " + label_text_entry[i], ctd_width, final_column_x + (ctd_width * i), y_axis[8])
-            self.build_entry("Cast2 " + label_text_entry[i], ctd_width, final_column_x + (ctd_width * i), y_axis[9])
-            self.build_entry("Cast3 " + label_text_entry[i], ctd_width, final_column_x + (ctd_width * i), y_axis[10])
+            self.build_entry("Cast1" + label_text_entry[i], ctd_width, final_column_x + (ctd_width * i), y_axis[8])
+            self.build_entry("Cast2" + label_text_entry[i], ctd_width, final_column_x + (ctd_width * i), y_axis[9])
+            self.build_entry("Cast3" + label_text_entry[i], ctd_width, final_column_x + (ctd_width * i), y_axis[10])
 
         par_width = ctd_width * 4.25
         self.build_label("PAR profiles collected", DataApp.label_width, final_column_x, y_axis[12])
