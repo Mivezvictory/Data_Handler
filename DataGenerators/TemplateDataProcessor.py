@@ -36,12 +36,12 @@ class TemplateDataProcessor:
                          "Time On", "Time Off", "Serial No.",
                          "CTD Depth(m)", "Phytoplankton Sample", "CBM Sample", "Weather Conditions", "Beaufort Wind Scale", "Notes"],
 
-                        ["Station", "Date", "Latitude", "Longitude", "Arrival time", "Position1", "DTW1", "DOW1_1",
+                        ["Station", "Date", "Latitude", "Longitude", "Position1", "DTW1", "DOW1_1",
                          "DOW1_2", "DOW1_3", "Directions1", "WOW1", "Position2", "DTW2", "DOW2_1",
                          "DOW2_2", "DOW2_3", "Directions2", "WOW2", "Position3", "DTW3", "DOW3_1",
                          "DOW3_2", "DOW3_3", "Directions3", "WOW3", "Notes"],
 
-                        ["Station", "Date", "Latitude", "Longitude", "Arrival time", "Length of flow measurement1",
+                        ["Station", "Date", "Latitude", "Longitude", "Length of flow measurement1",
                          "Position1_1", "time1_1_1", "time1_1_2", "time1_1_3",
                          "Position1_2", "time1_2_1", "time1_2_2", "time1_2_3",
                          "Position1_3", "time1_3_1", "time1_3_2", "time1_3_3", "Length of flow measurement2",
@@ -201,7 +201,8 @@ class TemplateDataProcessor:
         new_string += split_string[0][8] + "," + split_string[0][9]
         new_string += "\n"
         for i in range(1, 18):
-            new_string += split_string[i][8] + "," + split_string[i][9] + "\n"
+            new_string += split_string[i][8] + "," + split_string[i][9] + "\n" \
+                                                                          ""
         return new_string
 
 

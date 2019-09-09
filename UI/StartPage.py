@@ -95,7 +95,8 @@ class StartPage:
 
     def build_button(self, text, command, x_pos, y_pos):
         self.load_template_button = tk.Button(self.my_frame, text=text, highlightbackground="white", fg="#34495E",
-                                              font=10, command=lambda: self.my_controller.show_frame(command))
+                                              font=10, command=self.default_message)
+                                              # command=lambda: self.my_controller.show_frame(command))
         self.load_template_button.place(relx=x_pos, rely=y_pos, relwidth=StartPage.button_width,
                                         relheight=StartPage.button_height)
         #self.load_template_button.config(highlightbackground="black")

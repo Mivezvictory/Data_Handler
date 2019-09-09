@@ -38,7 +38,7 @@ class Menu_Sample:
     def build_tools_menu(self, menu):
         edit = tkinter.Menu(menu)
 
-        edit.add_command(label='Load Lat & Long', command=self.load_lat_long)
+        #edit.add_command(label='Load Lat & Long', command=self.load_lat_long)
         edit.add_command(label='Clear template', command=self.clear_template)
         menu.add_cascade(label='Tools', menu=edit)
 
@@ -142,10 +142,10 @@ class Menu_Sample:
                 extension = ".csv"
 
                 split_file = self.file_name.split('.')
-                file_names.append(split_file[0] + extension)
-                file_names.append(split_file[0] + "1" + extension)
-                file_names.append(split_file[0] + "2" + extension)
-                file_names.append(split_file[0] + "3" + extension)
+                file_names.append(split_file[0] + "_All" + extension)
+                file_names.append(split_file[0] + "_General" + extension)
+                file_names.append(split_file[0] + "_Depth" + extension)
+                file_names.append(split_file[0] + "_Flow" + extension)
                 file_names.append(split_file[0] + "_CTD" + extension)
                 file_names.append(split_file[0] + "_PAR_profiles" + extension)
                 curr_template.save_data_entries(file_names)

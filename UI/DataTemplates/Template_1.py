@@ -39,7 +39,7 @@ class DataApp:
         self.my_frame.place(relwidth=1, relheight=1)
         self.build_template()  # builds the template
         self.data_processor = TemplateDataProcessor.TemplateDataProcessor()
-        self.load_station_info()
+        #self.load_station_info()
 
     # builds both a label and data entry box
     # accepts the label of the entry box, the x and y coordinates
@@ -137,7 +137,7 @@ class DataApp:
 
     def load_station_info(self):
         #open the csv file
-        csv_file = open('C:\Users\Miyen-Ebi Iyakoregha\Desktop\work\Data_collector_info_files\station_data.csv','rU')
+        csv_file = open('C:\Users\Miyen-Ebi Iyakoregha\Desktop\work\Data_collector_info_files\station_data.csv','r')
         #parse the csv file into json
         reader = csv.DictReader(csv_file)#, fieldnames=("Station", "New_Station_ID", "Latitude", "Longitude"))
         out = json.dumps([row for row in reader], indent=4)
@@ -145,9 +145,21 @@ class DataApp:
                         'w')
         csv_file.write(out)
 
+
+    """
+    def resource_path(self, relative_path):
+        base_path = getattr(sys, '_MEIPASS', os.path.dirname(os.path.abspath(__file__)))
+        return os.path.join(base_path, relative_path)
+
     def open_json(self):
-        station_file_path = os.path.join(my_path, STATION_FILE)
-        with open(station_file_path, "r") as data_file:
+        #filename = STATION_FILE
+        #if '_MEIPASS2' in os.environ:
+            #print "in here"
+            #filename = os.path.join(os.environ['_MEIPASS2'], filename)
+       # else:
+           # station_file_path = os.path.join(my_path, STATION_FILE)
+        filename = self.resource_path(STATION_FILE)
+        with open(filename, "r") as data_file:
             return json.load(data_file)
 
 
@@ -201,6 +213,7 @@ class DataApp:
                                               "This station's Latitude and Longitude are not available")
 
         #TODO: complete this method
+    """
 
     def save_data_entries(self, filename):
         test = {}
@@ -240,6 +253,7 @@ class DataApp:
         station_name = ["None"]
         alt_station_name = ["None"]
 
+        """
         json_file = self.open_json()
         for i in range(0, len(json_file)):
             if len(json_file[i]["Station"]) != 0 and len(json_file[i]["New_Station_ID"]) != 0:
@@ -249,14 +263,12 @@ class DataApp:
                 station_name.append(json_file[i]["Station"])
             elif len(json_file[i]["Station"]) != 0 and len(json_file[i]["New_Station_ID"]) == 0:
                 alt_station_name.append(json_file[i]["New_Station_ID"])
+        """
 
         #self.build_data_entry("Station Name", init_x, init_y)
-        self.build_label("Station Name", DataApp.label_width, init_x, init_y)
-        self.build_drop_down("Station Name", station_name, init_x + DataApp.label_width, init_y, DataApp.entry_width)
+        self.build_data_entry("Station Name", 0, 0)
+        self.build_data_entry("Alt. Name", 0, DataApp.entry_height)
 
-        self.build_label("Alt. Name", DataApp.label_width, init_x, y_axis[2])
-        self.build_drop_down("Alt. Name", alt_station_name, init_x + DataApp.label_width, y_axis[2],
-                             DataApp.entry_width)
         self.build_data_entry("Bottle#", 0, y_axis[3])
 
         self.build_data_entry("Arrival time", 0, y_axis[5])
@@ -412,8 +424,11 @@ class DataApp:
                                 font=10, command=lambda: self.my_controller.show_frame("StartPage"))
         back_button.place(relx=button_x, rely=y_axis[33], relwidth=DataApp.label_width / 2,
                           relheight=DataApp.label_height)
-
+        """
+        Removing this from the current deployment of the application
+        was added for testing purposes
         forward_button = tk.Button(self.my_frame, text="Forward", bg="green", fg="#34495E", font=10,
                                    command=self.test)
         forward_button.place(relx=button_x + 0.01 + DataApp.label_width / 2, rely=y_axis[33],
                              relwidth=DataApp.label_width / 2, relheight=DataApp.label_height)
+        """

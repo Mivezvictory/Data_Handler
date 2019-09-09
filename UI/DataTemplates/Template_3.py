@@ -216,31 +216,53 @@ class Template_3:
             self.build_drop_down("Position" + str(i), postion_text, middle_row_x + (Template_3.entry_width * i), y_axis[5],
                                  Template_3.entry_width)
 
-        self.build_label("DTW", Template_3.entry_width, middle_row_x, y_axis[6])
+        self.build_label("DTW Unit", Template_3.entry_width, middle_row_x, y_axis[6])
+        for i in range(1, 4):
+            self.build_entry("DTW Unit" + str(i), Template_3.entry_width,
+                              middle_row_x + (Template_3.entry_width * i), y_axis[6])
+        for i in range(1, 4):
+            Template_3.widget_list["DTW Unit" + str(i)].insert(0, "CM")
+
+        self.build_label("DTW", Template_3.entry_width, middle_row_x, y_axis[7])
         for i in range(1, 4):
             self.build_entry("DTW" + str(i), Template_3.entry_width, middle_row_x + (Template_3.entry_width * i),
-                             y_axis[6])
+                                 y_axis[7])
 
-        self.build_label("DOW", Template_3.entry_width, middle_row_x, y_axis[8])
+        self.build_label("DOW Unit", Template_3.entry_width, middle_row_x, y_axis[9])
         for i in range(1, 4):
-            self.build_entry("DOW" + str(i) + "_" + str(1), Template_3.entry_width, middle_row_x + (Template_3.entry_width * i),
-                             y_axis[8])
-            self.build_entry("DOW" + str(i) + "_" + str(2), Template_3.entry_width, middle_row_x + (Template_3.entry_width * i),
-                             y_axis[9])
-            self.build_entry("DOW" + str(i) + "_" + str(3), Template_3.entry_width, middle_row_x + (Template_3.entry_width * i),
-                             y_axis[10])
+            self.build_entry("DOW Unit" + str(i), Template_3.entry_width,
+                              middle_row_x + (Template_3.entry_width * i), y_axis[9])
+        for i in range(1, 4):
+            Template_3.widget_list["DOW Unit" + str(i)].insert(0, "CM")
 
-        self.build_label("Directions", Template_3.entry_width, middle_row_x, y_axis[13])
+        self.build_label("DOW", Template_3.entry_width, middle_row_x, y_axis[10])
+        for i in range(1, 4):
+            self.build_entry("DOW" + str(i) + "_" + str(1), Template_3.entry_width,
+                             middle_row_x + (Template_3.entry_width * i), y_axis[10])
+            self.build_entry("DOW" + str(i) + "_" + str(2), Template_3.entry_width,
+                                 middle_row_x + (Template_3.entry_width * i),
+                                 y_axis[11])
+            self.build_entry("DOW" + str(i) + "_" + str(3), Template_3.entry_width,
+                                 middle_row_x + (Template_3.entry_width * i),
+                                 y_axis[12])
+
+        self.build_label("Directions", Template_3.entry_width, middle_row_x, y_axis[14])
         postion_text = ["N to S", "S to N", "E to W", "W to E"]
 
         for i in range(1, 4):
-            self.build_drop_down("Directions" + str(i), postion_text, middle_row_x + (Template_3.entry_width * i), y_axis[13],
-                                 Template_3.entry_width)
+            self.build_drop_down("Directions" + str(i), postion_text, middle_row_x + (Template_3.entry_width * i),
+                                  y_axis[14], Template_3.entry_width)
 
-        self.build_label("WOW", Template_3.entry_width, middle_row_x, y_axis[16])
+        self.build_label("WOW Unit", Template_3.entry_width, middle_row_x, y_axis[16])
+        for i in range(1, 4):
+            self.build_entry("WOW Unit" + str(i), Template_3.entry_width,
+                             middle_row_x + (Template_3.entry_width * i), y_axis[16])
+        for i in range(1, 4):
+            Template_3.widget_list["WOW Unit" + str(i)].insert(0, "CM")
+        self.build_label("WOW", Template_3.entry_width, middle_row_x, y_axis[17])
         for i in range(1, 4):
             self.build_entry("WOW" + str(i), Template_3.entry_width, middle_row_x + (Template_3.entry_width * i),
-                             y_axis[16])
+                                 y_axis[17])
 
         self.build_label("Notes: ", fourth_row_x, middle_row_x - 0.01, y_axis[19])
         self.build_note_text(middle_row_x + Template_3.entry_width, y_axis[19], Template_3.entry_width * 3.25,
